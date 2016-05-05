@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>wait-for-connection.qml</file>
+        <file>device-connected.qml</file>
+        <file>ConnectionDelegate.qml</file>
+    </qresource>
+</RCC>
