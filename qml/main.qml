@@ -55,19 +55,17 @@ ApplicationWindow {
 		}
 	}
 
-
 	ListModel {
-		id:dupak
+		id: broadcastClientList
 	}
-
 
 	ListView {
+		id: broadcastClientView
 		anchors.fill: parent
 		clip: true
-		model: dupak
+		model: broadcastClientList
 		delegate: ConnectionDelegate {}
 	}
-
 
 	StackView {
 		id: defaultView
@@ -75,8 +73,8 @@ ApplicationWindow {
 		initialItem: "qrc:/wait-for-connection.qml"
 	}
 
-	function deviceConnected() {
-		defaultView.replace("")
-		dupak.insert(0, {name: "alfa"})
+	function broadcastClientAdded(arg) {
+		defaultView.visible = false
+		broadcastClientList.insert(0, arg)
 	}
 }

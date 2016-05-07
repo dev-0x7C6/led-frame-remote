@@ -1,5 +1,6 @@
 #include <core/networking/broadcast-monitor.h>
 
+#include <QJsonDocument>
 #include <QUdpSocket>
 
 using namespace Network;
@@ -13,14 +14,13 @@ BroadcastMonitor::BroadcastMonitor(QObject *parent)
 	connect(m_socket, &QUdpSocket::readyRead, this, &BroadcastMonitor::readPendingDatagrams);
 }
 
-#include <QDebug>
-
 void BroadcastMonitor::readPendingDatagrams() {
 	while (m_socket->hasPendingDatagrams()) {
 		QByteArray datagram;
 		datagram.resize(static_cast<int>(m_socket->pendingDatagramSize()));
 		m_socket->readDatagram(datagram.data(), datagram.size());
-		emit signalDeviceAvailable();
+		auto document = QJsonDocument::fromJson(datagram);
+		emit signalDeviceAvailable(document.toVariant());
 		qDebug() << datagram;
 	}
 }
