@@ -33,6 +33,35 @@ ApplicationWindow {
 				Layout.fillWidth: true
 			}
 
+			ToolButton {
+				label: Image {
+					anchors.centerIn: parent
+					source: "qrc:/menu.png"
+				}
+				onClicked: optionsMenu.open()
+
+				Menu {
+					id: optionsMenu
+					x: parent.width - width
+					transformOrigin: Menu.TopRight
+
+					MenuItem {
+						id: mainMenuShowDeviceList
+						enabled: false
+						text: "Device list"
+						onTriggered: mainStackView.pop(deviceListPage)
+					}
+
+					MenuItem {
+						id: mainMenuQuit
+						text: "Quit"
+						onTriggered: Qt.quit();
+					}
+
+				}
+
+			}
+
 		}
 	}
 
@@ -55,10 +84,14 @@ ApplicationWindow {
 			visible: false
 		}
 
+		onCurrentItemChanged: {
+			mainMenuShowDeviceList.enabled = (currentItem != deviceWaitPage && currentItem != deviceListPage)
+		}
+
 	}
 
 	function broadcastClientAdded(arg) {
-		mainStackView.push(deviceListPage);
+		mainStackView.push(deviceListPage)
 		deviceListPage.insert(arg)
 	}
 }

@@ -1,11 +1,12 @@
 import QtQuick 2.6
-import QtQuick.Controls 1.4
 import QtQuick.Layouts 1.3
+import Qt.labs.controls 1.0
+import QtQuick.Controls.Styles 1.4
 
 Rectangle {
-	width: parent.width;
+	width: parent.width
 	height: 160
-	color: "#dddddd"
+	color: "darkOrange"
 
 	Image {
 		id: imageItem

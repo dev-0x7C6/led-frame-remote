@@ -7,6 +7,6 @@
         <file>DeviceControlPage.qml</file>
         <file>qtlabscontrols.conf</file>
         <file>DeviceCorrectorPage.qml</file>
-        <file>components/CustomSliderStyle.qml</file>
+        <file>CustomSliderStyle.qml</file>
     </qresource>
 </RCC>

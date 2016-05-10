@@ -16,6 +16,10 @@ Item {
 		delegate: DeviceItem {}
 	}
 
+	function count() {
+		return broadcastClientList.count();
+	}
+
 	function insert(arg) {
 		broadcastClientList.insert(0, arg);
 	}
