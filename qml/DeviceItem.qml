@@ -1,9 +1,8 @@
+import Qt.labs.controls 1.0
 import QtQuick 2.6
 import QtQuick.Layouts 1.3
-import Qt.labs.controls 1.0
 
 Rectangle {
-	id: connectionDelegate
 	width: parent.width;
 	height: 160
 	color: "#dddddd"
@@ -38,6 +37,8 @@ Rectangle {
 
 	MouseArea {
 		anchors.fill: parent
-		onClicked: { parent.color = 'red' }
+		onClicked: {
+			mainStackView.push(deviceControlPage);
+		}
 	}
 }

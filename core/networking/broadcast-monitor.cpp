@@ -19,8 +19,11 @@ void BroadcastMonitor::readPendingDatagrams() {
 		QByteArray datagram;
 		datagram.resize(static_cast<int>(m_socket->pendingDatagramSize()));
 		m_socket->readDatagram(datagram.data(), datagram.size());
-		auto document = QJsonDocument::fromJson(datagram);
-		emit signalDeviceAvailable(document.toVariant());
-		qDebug() << datagram;
+		auto device = QJsonDocument::fromJson(datagram).toVariant();
+
+		if (!m_devices.contains(device)) {
+			emit signalDeviceAvailable(device);
+			m_devices.append(device);
+		}
 	}
 }

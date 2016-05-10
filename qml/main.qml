@@ -7,21 +7,12 @@ ApplicationWindow {
 	width: 360
 	height: 520
 	visible: true
-	title: "Qt Labs Controls"
 
 
 	header: ToolBar {
 		RowLayout {
 			spacing: 20
 			anchors.fill: parent
-
-			ToolButton {
-				label: Image {
-					anchors.centerIn: parent
-					source: "qrc:/drawer.png"
-				}
-				onClicked: drawer.open()
-			}
 
 			Label {
 				id: titleLabel
@@ -33,48 +24,32 @@ ApplicationWindow {
 				Layout.fillWidth: true
 			}
 
-			ToolButton {
-				label: Image {
-					anchors.centerIn: parent
-					source: "qrc:/menu.png"
-				}
-				onClicked: optionsMenu.open()
-
-				Menu {
-					id: optionsMenu
-					x: parent.width - width
-					transformOrigin: Menu.TopRight
-
-					MenuItem {
-						text: "Replace"
-						onTriggered: stackView.replace("qrc:/ConnectedDevice.qml")
-					}
-
-				}
-			}
 		}
 	}
 
-	ListModel {
-		id: broadcastClientList
-	}
-
-	ListView {
-		id: broadcastClientView
-		anchors.fill: parent
-		clip: true
-		model: broadcastClientList
-		delegate: ConnectionDelegate {}
-	}
-
 	StackView {
-		id: defaultView
+		id: mainStackView
 		anchors.fill: parent
-		initialItem: "qrc:/wait-for-connection.qml"
+		initialItem: deviceWaitPage
+
+		DeviceWaitPage {
+			id: deviceWaitPage
+		}
+
+		DeviceListPage {
+			id: deviceListPage
+			visible: false
+		}
+
+		DeviceControlPage {
+			id: deviceControlPage
+			visible: false
+		}
+
 	}
 
 	function broadcastClientAdded(arg) {
-		defaultView.visible = false
-		broadcastClientList.insert(0, arg)
+		mainStackView.push(deviceListPage);
+		deviceListPage.insert(arg)
 	}
 }

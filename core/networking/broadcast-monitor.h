@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QObject>
-#include <QSet>
+#include <QVariant>
 
 class QUdpSocket;
 
@@ -18,6 +18,7 @@ namespace Network {
 
 	private:
 		QUdpSocket *m_socket;
+		QList<QVariant> m_devices;
 
 	signals:
 		void signalDeviceAvailable(const QVariant &arg);

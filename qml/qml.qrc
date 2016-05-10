@@ -1,8 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>wait-for-connection.qml</file>
-        <file>device-connected.qml</file>
-        <file>ConnectionDelegate.qml</file>
+        <file>DeviceListPage.qml</file>
+        <file>DeviceWaitPage.qml</file>
+        <file>DeviceItem.qml</file>
+        <file>DeviceControlPage.qml</file>
     </qresource>
 </RCC>
