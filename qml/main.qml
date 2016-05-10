@@ -1,12 +1,21 @@
 import QtQuick 2.6
 import QtQuick.Layouts 1.3
 import Qt.labs.controls 1.0
+import Qt.labs.controls.material 1.0
+import Qt.labs.controls.universal 1.0
+import Qt.labs.settings 1.0
+import QtQuick.Controls.Styles 1.4
 
 ApplicationWindow {
 	id: window
 	width: 360
 	height: 520
 	visible: true
+
+	Settings {
+		id: settings
+		property string style: "Universal"
+	}
 
 
 	header: ToolBar {

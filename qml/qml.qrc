@@ -5,5 +5,8 @@
         <file>DeviceWaitPage.qml</file>
         <file>DeviceItem.qml</file>
         <file>DeviceControlPage.qml</file>
+        <file>qtlabscontrols.conf</file>
+        <file>DeviceCorrectorPage.qml</file>
+        <file>components/CustomSliderStyle.qml</file>
     </qresource>
 </RCC>

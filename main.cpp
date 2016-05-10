@@ -1,6 +1,7 @@
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlComponent>
+#include <QSettings>
 
 #include <core/networking/broadcast-monitor.h>
 
@@ -9,7 +10,8 @@ int main(int argc, char *argv[]) {
 	QGuiApplication::setOrganizationName("LedFrame");
 	QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 	QApplication app(argc, argv);
-	qputenv("QT_LABS_CONTROLS_STYLE", "flat");
+	QSettings settings;
+	qputenv("QT_LABS_CONTROLS_STYLE", settings.value("style").toByteArray());
 	Network::BroadcastMonitor monitor;
 	QQmlApplicationEngine engine;
 	QQmlComponent component(&engine, QUrl(QStringLiteral("qrc:/main.qml")));

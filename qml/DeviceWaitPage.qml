@@ -1,21 +1,28 @@
-import QtQuick 2.4
+import QtQuick 2.6
 import QtQuick.Controls 1.3
 import QtQuick.Layouts 1.1
+import QtQuick 2.6
+import Qt.labs.controls 1.0
 
-Item {
-	anchors.centerIn: parent
+Pane {
+	id: pane
 
-	ColumnLayout {
+	Column {
+		spacing: 40
 		anchors.centerIn: parent
 
+
 		BusyIndicator {
-			anchors.horizontalCenter: waitingLabel.horizontalCenter
-			running: image.status === Image.Loading
+			readonly property int size: Math.min(pane.availableWidth, pane.availableHeight) / 5
+			width: size
+			height: size
+			anchors.horizontalCenter: parent.horizontalCenter
 		}
 
 		Label {
-			id: waitingLabel
-			text: "Waiting for devices...";
+			width: parent.width
+			horizontalAlignment: Qt.AlignHCenter
+			text: "Waiting for devices..."
 		}
 	}
 }
