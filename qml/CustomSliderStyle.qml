@@ -16,9 +16,9 @@ Slider {
 			color: control.pressed ? "orange" : "black"
 			border.color: "#df6c00"
 			border.width: 2
-			implicitWidth: 24
-			implicitHeight: 24
-			radius: 12
+			implicitWidth: 36
+			implicitHeight: 36
+			radius: 18
 		}
 	}
 }
