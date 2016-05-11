@@ -22,16 +22,22 @@ Rectangle {
 		anchors.verticalCenter: parent.verticalCenter
 
 		Text {
-			id: itexItem2
 			font.pixelSize: 32
 			font.bold: true
 			text: computer
 		}
 
 		Text {
-			id: itexItem
-			font.pixelSize: 12
+			font.pixelSize: 10
 			text: host + ":" + port
+		}
+
+		ProgressBar {
+			id: itemConnectionIndicator
+			indeterminate: true
+			width: itemWidth
+			anchors.horizontalCenter: parent.horizontalCenter
+			visible: false
 		}
 
 	}
@@ -39,7 +45,11 @@ Rectangle {
 	MouseArea {
 		anchors.fill: parent
 		onClicked: {
-			mainStackView.push(deviceControlPage);
+			itemConnectionIndicator.visible = true
+			deviceControlPage.hostName = host
+			deviceControlPage.hostPort = port
+			deviceControlPage.updateSocketConfiguration()
 		}
 	}
+
 }
