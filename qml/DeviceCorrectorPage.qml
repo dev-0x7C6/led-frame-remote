@@ -21,6 +21,11 @@ Pane {
 		CustomSliderStyle {
 			value: 0.5
 			anchors.horizontalCenter: parent.horizontalCenter
+			sliderColor: "lightGray"
+			onValueChanged: {
+				protocol.data.brightness = value;
+				protocol.send();
+			}
 		}
 
 		Label {
@@ -36,6 +41,7 @@ Pane {
 		CustomSliderStyle {
 			value: 0.5
 			anchors.horizontalCenter: parent.horizontalCenter
+			sliderColor: "tomato"
 		}
 
 		Label {
@@ -51,6 +57,7 @@ Pane {
 		CustomSliderStyle {
 			value: 0.5
 			anchors.horizontalCenter: parent.horizontalCenter
+			sliderColor: "lightGreen"
 		}
 
 		Label {
@@ -66,6 +73,7 @@ Pane {
 		CustomSliderStyle {
 			value: 0.5
 			anchors.horizontalCenter: parent.horizontalCenter
+			sliderColor: "lightBlue"
 		}
 	}
 }

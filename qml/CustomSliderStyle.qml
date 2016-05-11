@@ -3,11 +3,13 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 
 Slider {
+	property color sliderColor: "darkOrange"
+
 	style: SliderStyle {
 		groove: Rectangle {
 			implicitWidth: 200
 			implicitHeight: 8
-			color: "darkOrange"
+			color: sliderColor
 			radius: 8
 		}
 

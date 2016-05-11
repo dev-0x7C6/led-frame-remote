@@ -29,13 +29,13 @@ Rectangle {
 
 		Text {
 			font.pixelSize: 10
+			font.italic: true
 			text: host + ":" + port
 		}
 
 		ProgressBar {
 			id: itemConnectionIndicator
 			indeterminate: true
-			width: itemWidth
 			anchors.horizontalCenter: parent.horizontalCenter
 			visible: false
 		}
@@ -46,9 +46,9 @@ Rectangle {
 		anchors.fill: parent
 		onClicked: {
 			itemConnectionIndicator.visible = true
-			deviceControlPage.hostName = host
-			deviceControlPage.hostPort = port
-			deviceControlPage.updateSocketConfiguration()
+			var address = "ws://"
+			address = address.concat(host, ":", port);
+			webSocketClient.url = address
 		}
 	}
 

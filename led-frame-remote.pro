@@ -10,6 +10,11 @@ SOURCES += main.cpp \
 RESOURCES += qml/qml.qrc \
     resources/resources.qrc
 
+
+OTHER_FILES += \
+	qml/CustomSliderStyle.qml
+
+
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
 

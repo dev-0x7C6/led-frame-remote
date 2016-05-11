@@ -5,12 +5,44 @@ import Qt.labs.controls.material 1.0
 import Qt.labs.controls.universal 1.0
 import Qt.labs.settings 1.0
 import QtQuick.Controls.Styles 1.4
+import QtWebSockets 1.0
 
 ApplicationWindow {
 	id: window
 	width: 360
 	height: 520
 	visible: true
+
+	WebSocket {
+		id: webSocketClient
+
+		onTextMessageReceived: {
+		}
+
+		onStatusChanged:  {
+			console.log(webSocketClient.status)
+			if (webSocketClient.status == WebSocket.Error)
+				mainStackView.pop(deviceListPage)
+
+			if (webSocketClient.status == WebSocket.Open)
+				mainStackView.push(deviceControlPage)
+		}
+	}
+
+	Item {
+		id: protocol
+
+		property variant data : {
+			'brightness': 0.5,
+			'rcorrector': 0.5,
+			'gcorrector': 0.5,
+			'bcorrector': 0.5
+		}
+
+		function send() {
+			webSocketClient.sendTextMessage(JSON.stringify(data))
+		}
+	}
 
 	Settings {
 		id: settings
@@ -49,7 +81,10 @@ ApplicationWindow {
 						id: mainMenuShowDeviceList
 						enabled: false
 						text: "Device list"
-						onTriggered: mainStackView.pop(deviceListPage)
+						onTriggered: {
+							mainStackView.pop(deviceListPage)
+
+						}
 					}
 
 					MenuItem {
@@ -86,6 +121,11 @@ ApplicationWindow {
 
 		onCurrentItemChanged: {
 			mainMenuShowDeviceList.enabled = (currentItem != deviceWaitPage && currentItem != deviceListPage)
+
+			if (currentItem == deviceListPage) {
+				if (webSocketClient.status == WebSocket.Open)
+					webSocketClient.active = false;
+			}
 		}
 
 	}
