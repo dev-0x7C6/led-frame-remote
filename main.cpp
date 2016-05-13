@@ -15,10 +15,14 @@ int main(int argc, char *argv[]) {
 	Network::BroadcastMonitor monitor;
 	QQmlApplicationEngine engine;
 	QQmlComponent component(&engine, QUrl(QStringLiteral("qrc:/main.qml")));
-	QObject *qml = component.create();
-	QObject::connect(&monitor, &Network::BroadcastMonitor::signalDeviceAvailable, [qml](const QVariant & arg) {
+	QObject *rootObject = component.create();
+
+	if (!rootObject)
+		return 1;
+
+	QObject::connect(&monitor, &Network::BroadcastMonitor::signalDeviceAvailable, [rootObject](const QVariant & arg) {
 		QVariant returnedValue;
-		QMetaObject::invokeMethod(qml, "broadcastClientAdded",
+		QMetaObject::invokeMethod(rootObject, "broadcastClientAdded",
 		                          Q_RETURN_ARG(QVariant, returnedValue), Q_ARG(QVariant, arg));
 	});
 	return app.exec();

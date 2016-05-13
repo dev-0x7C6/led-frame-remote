@@ -1,11 +1,11 @@
 import QtQuick 2.6
 import QtQuick.Layouts 1.3
+import QtQuick.Controls.Styles 1.4
+import QtWebSockets 1.0
 import Qt.labs.controls 1.0
 import Qt.labs.controls.material 1.0
 import Qt.labs.controls.universal 1.0
 import Qt.labs.settings 1.0
-import QtQuick.Controls.Styles 1.4
-import QtWebSockets 1.0
 
 ApplicationWindow {
 	id: window
@@ -16,8 +16,7 @@ ApplicationWindow {
 	WebSocket {
 		id: webSocketClient
 
-		onTextMessageReceived: {
-		}
+		onTextMessageReceived: configuration.recv(message)
 
 		onStatusChanged:  {
 			console.log(webSocketClient.status)
@@ -29,26 +28,46 @@ ApplicationWindow {
 		}
 	}
 
-	Item {
-		id: protocol
+	LedFrameConfiguration {
+		id: configuration
 
-		property variant data : {
-			'brightness': 0.5,
-			'rcorrector': 0.5,
-			'gcorrector': 0.5,
-			'bcorrector': 0.5
+
+		function setBrightness(arg) {
+			data.brightness = arg;
+			send()
+		}
+
+		function setRedFactor(arg) {
+			data.rcorrector = arg;
+			send()
+		}
+
+		function setGreenFactor(arg) {
+			data.gcorrector = arg;
+			send()
+		}
+
+		function setBlueFactor(arg) {
+			data.bcorrector = arg;
+			send()
 		}
 
 		function send() {
-			webSocketClient.sendTextMessage(JSON.stringify(data))
+			if (webSocketClient.status == WebSocket.Open)
+				webSocketClient.sendTextMessage(JSON.stringify(data))
 		}
+
+		function recv(arg) {
+			data = JSON.parse(arg)
+			deviceControlPage.configurationUpdated();
+		}
+
 	}
 
 	Settings {
 		id: settings
 		property string style: "Universal"
 	}
-
 
 	header: ToolBar {
 		RowLayout {

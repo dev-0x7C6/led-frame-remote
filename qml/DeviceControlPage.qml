@@ -12,7 +12,9 @@ Item {
 		currentIndex: 0
 		anchors.fill: parent
 
-		DeviceCorrectorPage {}
+		DeviceCorrectorPage {
+			id: deviceCorrectorPage
+		}
 
 	}
 
@@ -24,6 +26,10 @@ Item {
 
 		anchors.bottom: view.bottom
 		anchors.horizontalCenter: parent.horizontalCenter
+	}
+
+	function configurationUpdated() {
+		deviceCorrectorPage.configurationUpdated();
 	}
 
 }
