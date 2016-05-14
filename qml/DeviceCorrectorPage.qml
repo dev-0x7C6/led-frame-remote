@@ -8,77 +8,62 @@ Pane {
 		spacing: 20
 		anchors.fill: parent
 
-		Label {
+		GroupBox {
+			title: "Brightness"
 			width: parent.width
-			color: "gray"
-			wrapMode: Label.Wrap
-			horizontalAlignment: Qt.AlignLeft
-			text: "Brightness"
-			font.pixelSize: 18
-			font.bold: true
+			CustomSliderStyle {
+				id: brightnessSlider
+				width: parent.width
+				value: configuration.data.brightness
+				anchors.horizontalCenter: parent.horizontalCenter
+				sliderColor: "white"
+				handleColor: "white"
+				handleBorderColor: "black"
+				onValueChanged: configuration.setBrightness(value)
+			}
 		}
 
-		CustomSliderStyle {
-			id: brightnessSlider
-			value: configuration.data.brightness
+		GroupBox {
+			title: "RGB Correction"
 			anchors.horizontalCenter: parent.horizontalCenter
-			sliderColor: "lightGray"
-			onValueChanged: configuration.setBrightness(value)
-		}
-
-		Label {
-			color: "gray"
 			width: parent.width
-			wrapMode: Label.Wrap
-			horizontalAlignment: Qt.AlignLeft
-			text: "Red correction"
-			font.pixelSize: 18
-			font.bold: true
-		}
+			Column {
+				spacing: 20
+				anchors.fill: parent
 
-		CustomSliderStyle {
-			id: redSlider
-			value: configuration.data.rcorrector
-			anchors.horizontalCenter: parent.horizontalCenter
-			sliderColor: "tomato"
-			onValueChanged: configuration.setRedFactor(value)
-		}
+			CustomSliderStyle {
+				id: redSlider
+				width: parent.width
+				value: configuration.data.rcorrector
+				anchors.horizontalCenter: parent.horizontalCenter
+				sliderColor: "tomato"
+				handleColor: "tomato"
+				handleBorderColor: "black"
+				onValueChanged: configuration.setRedFactor(value)
+			}
 
-		Label {
-			color: "gray"
-			width: parent.width
-			wrapMode: Label.Wrap
-			horizontalAlignment: Qt.AlignLeft
-			text: "Green correction"
-			font.pixelSize: 18
-			font.bold: true
-		}
+			CustomSliderStyle {
+				id: greenSlider
+				width: parent.width
+				value: configuration.data.gcorrector
+				anchors.horizontalCenter: parent.horizontalCenter
+				sliderColor: "lightGreen"
+				handleColor: "lightGreen"
+				handleBorderColor: "black"
+				onValueChanged: configuration.setGreenFactor(value)
+			}
 
-		CustomSliderStyle {
-			id: greenSlider
-			value: configuration.data.gcorrector
-			anchors.horizontalCenter: parent.horizontalCenter
-			sliderColor: "lightGreen"
-			onValueChanged: configuration.setGreenFactor(value)
-		}
-
-		Label {
-			color: "gray"
-			width: parent.width
-			wrapMode: Label.Wrap
-			horizontalAlignment: Qt.AlignLeft
-			text: "Blue correction"
-			font.pixelSize: 18
-			font.bold: true
-		}
-
-		CustomSliderStyle {
-			id: blueSlider
-			value: configuration.data.bcorrector
-			anchors.horizontalCenter: parent.horizontalCenter
-			sliderColor: "lightBlue"
-			onValueChanged: configuration.setBlueFactor(value)
-		}
+			CustomSliderStyle {
+				id: blueSlider
+				width: parent.width
+				value: configuration.data.bcorrector
+				anchors.horizontalCenter: parent.horizontalCenter
+				sliderColor: "lightBlue"
+				handleColor: "lightBlue"
+				handleBorderColor: "black"
+				onValueChanged: configuration.setBlueFactor(value)
+			}
+		}}
 	}
 
 	function configurationUpdated() {
