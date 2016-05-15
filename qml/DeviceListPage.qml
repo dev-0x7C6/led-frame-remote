@@ -11,7 +11,7 @@ Item {
 	ListView {
 		id: broadcastClientView
 		anchors.fill: parent
-		clip: true
+		//clip: true
 		model: broadcastClientList
 		delegate: DeviceItem {}
 	}
@@ -21,7 +21,8 @@ Item {
 	}
 
 	function insert(arg) {
-		broadcastClientList.insert(0, arg);
+		broadcastClientList.append(arg);
+		console.log(arg)
 	}
 
 }

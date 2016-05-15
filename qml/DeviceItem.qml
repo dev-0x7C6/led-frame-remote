@@ -4,9 +4,17 @@ import Qt.labs.controls 1.0
 import QtQuick.Controls.Styles 1.4
 
 Rectangle {
+	id: item
 	width: parent.width
 	height: 160
 	color: "darkOrange"
+
+	Rectangle {
+		anchors.bottom: parent.bottom
+		width: parent.width
+		height: 2
+		color: Qt.darker(item.color, 1.2)
+	}
 
 	Image {
 		id: imageItem
@@ -24,8 +32,15 @@ Rectangle {
 		Text {
 			font.pixelSize: 32
 			font.bold: true
-			text: computer
+			text: device
 		}
+
+		Text {
+			font.pixelSize: 16
+			font.bold: true
+			text: "name: " + computer
+		}
+
 
 		Text {
 			font.pixelSize: 10

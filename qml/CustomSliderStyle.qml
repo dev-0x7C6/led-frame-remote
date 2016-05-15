@@ -11,19 +11,27 @@ Slider {
 	style: SliderStyle {
 		groove: Rectangle {
 			implicitWidth: 200
-			implicitHeight: 8
-			color: sliderColor
-			radius: 8
+			implicitHeight: 6
+			radius: 6
+
+			gradient: Gradient {
+						GradientStop { position: 0.0; color: sliderColor }
+						GradientStop { position: 1.0; color: Qt.darker(sliderColor, 3.0) }
+			}
 		}
 
 		handle: Rectangle {
 			anchors.centerIn: parent
-			color: control.pressed ? handleColorPressed : handleColor
 			border.color: handleBorderColor
 			border.width: 2
 			implicitWidth: 32
 			implicitHeight: 32
 			radius: 16
+
+			gradient: Gradient {
+						GradientStop { position: 0.0; color: control.pressed ? handleColorPressed : handleColor }
+						GradientStop { position: 1.0; color: Qt.darker(control.pressed ? handleColorPressed : handleColor, 3.0) }
+			}
 		}
 	}
 }

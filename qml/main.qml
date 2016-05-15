@@ -150,7 +150,8 @@ ApplicationWindow {
 	}
 
 	function broadcastClientAdded(arg) {
-		mainStackView.push(deviceListPage)
+		if (mainStackView.currentItem != deviceListPage)
+			mainStackView.push(deviceListPage)
 		deviceListPage.insert(arg)
 	}
 }

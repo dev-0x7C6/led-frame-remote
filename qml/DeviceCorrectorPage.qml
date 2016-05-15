@@ -19,7 +19,10 @@ Pane {
 				sliderColor: "white"
 				handleColor: "white"
 				handleBorderColor: "black"
-				onValueChanged: configuration.setBrightness(value)
+				onValueChanged: {
+					console.log(value)
+					configuration.setBrightness(value)
+				}
 			}
 		}
 
@@ -67,9 +70,16 @@ Pane {
 	}
 
 	function configurationUpdated() {
-		brightnessSlider.value = configuration.data.brightness
-		redSlider.value = configuration.data.rcorrector
-		greenSlider.value = configuration.data.gcorrector
-		blueSlider.value = configuration.data.bcorrector
+		if (!brightnessSlider.pressed)
+			brightnessSlider.value = configuration.data.brightness
+
+		if (!redSlider.pressed)
+			redSlider.value = configuration.data.rcorrector
+
+		if (!greenSlider.pressed)
+			greenSlider.value = configuration.data.gcorrector
+
+		if (!blueSlider.pressed)
+			blueSlider.value = configuration.data.bcorrector
 	}
 }
