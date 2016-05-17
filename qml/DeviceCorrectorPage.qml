@@ -1,72 +1,68 @@
 import QtQuick 2.6
 import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
-import Qt.labs.controls 1.0
 
-Pane {
+Item {
 	Column {
-		spacing: 20
+		spacing: 25
 		anchors.fill: parent
 
-		GroupBox {
-			title: "Brightness"
-			width: parent.width
-			CustomSliderStyle {
-				id: brightnessSlider
-				width: parent.width
-				value: configuration.data.brightness
-				anchors.horizontalCenter: parent.horizontalCenter
-				sliderColor: "white"
-				handleColor: "white"
-				handleBorderColor: "black"
-				onValueChanged: {
-					console.log(value)
-					configuration.setBrightness(value)
-				}
-			}
+		Label {
+			text: "Brightness:"
+			color: "orange"
+			font.bold: true
+			font.pixelSize: 16
 		}
 
-		GroupBox {
-			title: "RGB Correction"
+		CustomSliderStyle {
+			id: brightnessSlider
+			width: parent.width * 0.9
+			value: configuration.data.brightness
 			anchors.horizontalCenter: parent.horizontalCenter
-			width: parent.width
-			Column {
-				spacing: 20
-				anchors.fill: parent
+			sliderColor: "white"
+			handleColor: "white"
+			handleBorderColor: "black"
+			onValueChanged: configuration.setBrightness(value)
+		}
 
-			CustomSliderStyle {
-				id: redSlider
-				width: parent.width
-				value: configuration.data.rcorrector
-				anchors.horizontalCenter: parent.horizontalCenter
-				sliderColor: "tomato"
-				handleColor: "tomato"
-				handleBorderColor: "black"
-				onValueChanged: configuration.setRedFactor(value)
-			}
+		Label {
+			text: "Correction:"
+			color: "orange"
+			font.bold: true
+			font.pixelSize: 16
+		}
 
-			CustomSliderStyle {
-				id: greenSlider
-				width: parent.width
-				value: configuration.data.gcorrector
-				anchors.horizontalCenter: parent.horizontalCenter
-				sliderColor: "lightGreen"
-				handleColor: "lightGreen"
-				handleBorderColor: "black"
-				onValueChanged: configuration.setGreenFactor(value)
-			}
+		CustomSliderStyle {
+			id: redSlider
+			width: parent.width * 0.9
+			value: configuration.data.rcorrector
+			anchors.horizontalCenter: parent.horizontalCenter
+			sliderColor: "tomato"
+			handleColor: "tomato"
+			handleBorderColor: "black"
+			onValueChanged: configuration.setRedFactor(value)
+		}
 
-			CustomSliderStyle {
-				id: blueSlider
-				width: parent.width
-				value: configuration.data.bcorrector
-				anchors.horizontalCenter: parent.horizontalCenter
-				sliderColor: "lightBlue"
-				handleColor: "lightBlue"
-				handleBorderColor: "black"
-				onValueChanged: configuration.setBlueFactor(value)
-			}
-		}}
+		CustomSliderStyle {
+			id: greenSlider
+			width: parent.width * 0.9
+			value: configuration.data.gcorrector
+			anchors.horizontalCenter: parent.horizontalCenter
+			sliderColor: "lightGreen"
+			handleColor: "lightGreen"
+			handleBorderColor: "black"
+			onValueChanged: configuration.setGreenFactor(value)
+		}
+
+		CustomSliderStyle {
+			id: blueSlider
+			width: parent.width * 0.9
+			value: configuration.data.bcorrector
+			anchors.horizontalCenter: parent.horizontalCenter
+			sliderColor: "lightBlue"
+			handleColor: "lightBlue"
+			handleBorderColor: "black"
+			onValueChanged: configuration.setBlueFactor(value)
+		}
 	}
 
 	function configurationUpdated() {

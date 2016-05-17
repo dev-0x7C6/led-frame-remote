@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlComponent>
@@ -17,8 +19,10 @@ int main(int argc, char *argv[]) {
 	QQmlComponent component(&engine, QUrl(QStringLiteral("qrc:/main.qml")));
 	QObject *rootObject = component.create();
 
-	if (!rootObject)
+	if (!rootObject) {
+		std::cout << component.errorString().toStdString() << std::endl;
 		return 1;
+	}
 
 	QObject::connect(&monitor, &Network::BroadcastMonitor::signalDeviceAvailable, [rootObject](const QVariant & arg) {
 		QVariant returnedValue;

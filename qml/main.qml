@@ -1,11 +1,9 @@
 import QtQuick 2.6
-import QtQuick.Layouts 1.3
+import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
+import QtQuick.Layouts 1.3
 import QtWebSockets 1.0
-import Qt.labs.controls 1.0
-import Qt.labs.controls.material 1.0
-import Qt.labs.controls.universal 1.0
-import Qt.labs.settings 1.0
+
 
 ApplicationWindow {
 	id: window
@@ -13,8 +11,15 @@ ApplicationWindow {
 	height: 520
 	visible: true
 
+	Rectangle {
+		color: "#111111"
+		anchors.fill: parent
+	}
+
 	WebSocket {
 		id: webSocketClient
+
+		property string device: "none"
 
 		onTextMessageReceived: configuration.recv(message)
 
@@ -25,6 +30,10 @@ ApplicationWindow {
 
 			if (webSocketClient.status == WebSocket.Open)
 				mainStackView.push(deviceControlPage)
+		}
+
+		onActiveChanged: {
+			console.log("active: " + active)
 		}
 	}
 
@@ -64,58 +73,51 @@ ApplicationWindow {
 
 	}
 
-	Settings {
-		id: settings
-		property string style: "Universal"
-	}
+	toolBar: BorderImage {
+		border.bottom: 8
+		source: "qrc:/images/toolbar.png"
+		width: parent.width
+		height: 80
 
-	header: ToolBar {
-		RowLayout {
-			spacing: 20
-			anchors.fill: parent
-
-			Label {
-				id: titleLabel
-				text: "LedFrame Remote"
-				font.pixelSize: 20
-				elide: Label.ElideRight
-				horizontalAlignment: Qt.AlignHCenter
-				verticalAlignment: Qt.AlignVCenter
-				Layout.fillWidth: true
+		Rectangle {
+			id: backButton
+			width: opacity ? image.width : 0
+			anchors.left: parent.left
+			anchors.leftMargin: 20
+			opacity: mainStackView.depth > 2 ? 1 : 0
+			anchors.verticalCenter: parent.verticalCenter
+			antialiasing: true
+			height: 60
+			radius: 4
+			color: backmouse.pressed ? "#222" : "transparent"
+			Behavior on opacity { NumberAnimation{} }
+			Image {
+				id: image
+				anchors.verticalCenter: parent.verticalCenter
+				source: "qrc:/images/navigation_previous_item.png"
 			}
-
-			ToolButton {
-				label: Image {
-					anchors.centerIn: parent
-					source: "qrc:/menu.png"
+			MouseArea {
+				id: backmouse
+				anchors.fill: parent
+				anchors.margins: -10
+				onClicked: {
+					webSocketClient.url = ""
+					mainStackView.pop(deviceListPage)
 				}
-				onClicked: optionsMenu.open()
-
-				Menu {
-					id: optionsMenu
-					x: parent.width - width
-					transformOrigin: Menu.TopRight
-
-					MenuItem {
-						id: mainMenuShowDeviceList
-						enabled: false
-						text: "Device list"
-						onTriggered: {
-							mainStackView.pop(deviceListPage)
-
-						}
-					}
-
-					MenuItem {
-						id: mainMenuQuit
-						text: "Quit"
-						onTriggered: Qt.quit();
-					}
-
-				}
-
 			}
+		}
 
+		Text {
+			id: title
+			font.bold: true
+			font.pixelSize: 28
+			Behavior on x { NumberAnimation{ easing.type: Easing.OutCubic} }
+			Behavior on font.pixelSize { NumberAnimation{ easing.type: Easing.OutCubic} }
+			x: backButton.x + backButton.width + 20
+			property bool r: false
+			anchors.verticalCenter: parent.verticalCenter
+			color: "white"
+			text: ""
 		}
 	}
 
@@ -139,7 +141,20 @@ ApplicationWindow {
 		}
 
 		onCurrentItemChanged: {
-			mainMenuShowDeviceList.enabled = (currentItem != deviceWaitPage && currentItem != deviceListPage)
+			if (currentItem == deviceListPage) {
+				title.text = "Devices"
+				title.font.pixelSize = 20
+			}
+
+			if (currentItem == deviceControlPage) {
+				title.text = "Control Panel: " + webSocketClient.device
+				title.font.pixelSize = 20
+			}
+
+			if (currentItem == deviceWaitPage) {
+				title.text = "Searching..."
+				title.font.pixelSize = 20
+			}
 
 			if (currentItem == deviceListPage) {
 				if (webSocketClient.status == WebSocket.Open)
@@ -150,7 +165,7 @@ ApplicationWindow {
 	}
 
 	function broadcastClientAdded(arg) {
-		if (mainStackView.currentItem != deviceListPage)
+		if (mainStackView.currentItem == deviceWaitPage)
 			mainStackView.push(deviceListPage)
 		deviceListPage.insert(arg)
 	}

@@ -1,15 +1,15 @@
 import QtQuick 2.6
 import Qt.labs.controls 1.0
 
-Pane {
-	id: pane
+Item {
+	id: canvas
 
 	Column {
 		spacing: 40
 		anchors.centerIn: parent
 
 		BusyIndicator {
-			readonly property int size: Math.min(pane.availableWidth, pane.availableHeight) / 4
+			readonly property int size: Math.min(canvas.width, canvas.height) / 3
 			width: size
 			height: size
 			anchors.horizontalCenter: parent.horizontalCenter

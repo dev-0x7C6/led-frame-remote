@@ -48,22 +48,15 @@ Rectangle {
 			text: host + ":" + port
 		}
 
-		ProgressBar {
-			id: itemConnectionIndicator
-			indeterminate: true
-			anchors.horizontalCenter: parent.horizontalCenter
-			visible: false
-		}
-
 	}
 
 	MouseArea {
 		anchors.fill: parent
 		onClicked: {
-			itemConnectionIndicator.visible = true
 			var address = "ws://"
 			address = address.concat(host, ":", port);
 			webSocketClient.url = address
+			webSocketClient.device = device
 		}
 	}
 
