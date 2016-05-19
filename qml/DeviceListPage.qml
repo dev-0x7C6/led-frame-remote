@@ -27,7 +27,6 @@ Item {
 				}
 			}
 		}
-
 	}
 
 	function reset() {
@@ -40,9 +39,6 @@ Item {
 
 	function insert(arg) {
 		broadcastClientList.append(arg)
-		console.log(arg)
 	}
-
-
 
 }

@@ -41,7 +41,6 @@ Rectangle {
 			text: "name: " + computer
 		}
 
-
 		Text {
 			font.pixelSize: 10
 			font.italic: true
@@ -55,8 +54,8 @@ Rectangle {
 		onClicked: {
 			var address = "ws://"
 			address = address.concat(host, ":", port);
-			webSocketClient.url = address
-			webSocketClient.device = device
+			webSocket.url = address
+			configuration.device = device
 		}
 	}
 

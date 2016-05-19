@@ -4,73 +4,43 @@ import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.3
 import QtWebSockets 1.0
 
-
 ApplicationWindow {
 	id: window
-	width: 360
 	height: 520
+	width: 360
 	visible: true
 
 	Rectangle {
-		color: "#111111"
+		color: "#101010"
 		anchors.fill: parent
 	}
 
 	WebSocket {
-		id: webSocketClient
-
-		property string device: "none"
+		id: webSocket
 
 		onTextMessageReceived: configuration.recv(message)
 
-		onStatusChanged:  {
-			console.log(webSocketClient.status)
-			if (webSocketClient.status == WebSocket.Error)
+		onStatusChanged: {
+			if (webSocket.status == WebSocket.Error)
 				mainStackView.pop(deviceListPage)
 
-			if (webSocketClient.status == WebSocket.Open)
+			if (webSocket.status == WebSocket.Open)
 				mainStackView.push(deviceControlPage)
-		}
-
-		onActiveChanged: {
-			console.log("active: " + active)
 		}
 	}
 
-	LedFrameConfiguration {
+	Configuration {
 		id: configuration
 
-
-		function setBrightness(arg) {
-			data.brightness = arg;
-			send()
-		}
-
-		function setRedFactor(arg) {
-			data.rcorrector = arg;
-			send()
-		}
-
-		function setGreenFactor(arg) {
-			data.gcorrector = arg;
-			send()
-		}
-
-		function setBlueFactor(arg) {
-			data.bcorrector = arg;
-			send()
-		}
-
 		function send() {
-			if (webSocketClient.status == WebSocket.Open)
-				webSocketClient.sendTextMessage(JSON.stringify(data))
+			if (webSocket.status == WebSocket.Open)
+				webSocket.sendTextMessage(JSON.stringify(data))
 		}
 
 		function recv(arg) {
 			data = JSON.parse(arg)
 			deviceControlPage.configurationUpdated();
 		}
-
 	}
 
 	toolBar: BorderImage {
@@ -101,7 +71,7 @@ ApplicationWindow {
 				anchors.fill: parent
 				anchors.margins: -10
 				onClicked: {
-					webSocketClient.url = ""
+					webSocket.url = ""
 					mainStackView.pop(deviceListPage)
 				}
 			}
@@ -147,7 +117,7 @@ ApplicationWindow {
 			}
 
 			if (currentItem == deviceControlPage) {
-				title.text = "Control Panel: " + webSocketClient.device
+				title.text = "Control Panel: " + configuration.device
 				title.font.pixelSize = 20
 			}
 
@@ -157,8 +127,8 @@ ApplicationWindow {
 			}
 
 			if (currentItem == deviceListPage) {
-				if (webSocketClient.status == WebSocket.Open)
-					webSocketClient.active = false;
+				if (webSocket.status == WebSocket.Open)
+					webSocket.active = false;
 			}
 		}
 

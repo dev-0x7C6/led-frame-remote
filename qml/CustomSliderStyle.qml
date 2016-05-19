@@ -15,8 +15,8 @@ Slider {
 			radius: 6
 
 			gradient: Gradient {
-						GradientStop { position: 0.0; color: sliderColor }
-						GradientStop { position: 1.0; color: Qt.darker(sliderColor, 3.0) }
+				GradientStop { position: 0.0; color: sliderColor }
+				GradientStop { position: 1.0; color: Qt.darker(sliderColor, 3.0) }
 			}
 		}
 
@@ -29,8 +29,8 @@ Slider {
 			radius: 16
 
 			gradient: Gradient {
-						GradientStop { position: 0.0; color: control.pressed ? handleColorPressed : handleColor }
-						GradientStop { position: 1.0; color: Qt.darker(control.pressed ? handleColorPressed : handleColor, 3.0) }
+				GradientStop { position: 0.0; color: control.pressed ? handleColorPressed : handleColor }
+				GradientStop { position: 1.0; color: Qt.darker(control.pressed ? handleColorPressed : handleColor, 3.0) }
 			}
 		}
 	}

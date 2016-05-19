@@ -8,7 +8,7 @@ Item {
 
 		Label {
 			text: "Brightness:"
-			color: "orange"
+			color: "white"
 			font.bold: true
 			font.pixelSize: 16
 		}
@@ -26,7 +26,7 @@ Item {
 
 		Label {
 			text: "Correction:"
-			color: "orange"
+			color: "white"
 			font.bold: true
 			font.pixelSize: 16
 		}

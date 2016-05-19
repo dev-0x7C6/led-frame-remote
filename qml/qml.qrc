@@ -8,6 +8,6 @@
         <file>qtlabscontrols.conf</file>
         <file>DeviceCorrectorPage.qml</file>
         <file>CustomSliderStyle.qml</file>
-        <file>LedFrameConfiguration.qml</file>
+        <file>Configuration.qml</file>
     </qresource>
 </RCC>
