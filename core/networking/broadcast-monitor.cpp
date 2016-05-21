@@ -6,8 +6,8 @@
 using namespace Network;
 
 BroadcastMonitor::BroadcastMonitor(QObject *parent)
-	: QObject(parent)
-	, m_socket(new QUdpSocket(this))
+		: QObject(parent)
+		, m_socket(new QUdpSocket(this))
 
 {
 	m_socket->bind(45454, QUdpSocket::ShareAddress);

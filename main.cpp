@@ -24,10 +24,10 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 
-	QObject::connect(&monitor, &Network::BroadcastMonitor::signalDeviceAvailable, [rootObject](const QVariant & arg) {
+	QObject::connect(&monitor, &Network::BroadcastMonitor::signalDeviceAvailable, [rootObject](const QVariant &arg) {
 		QVariant returnedValue;
 		QMetaObject::invokeMethod(rootObject, "broadcastClientAdded",
-		                          Q_RETURN_ARG(QVariant, returnedValue), Q_ARG(QVariant, arg));
+			Q_RETURN_ARG(QVariant, returnedValue), Q_ARG(QVariant, arg));
 	});
 	return app.exec();
 }

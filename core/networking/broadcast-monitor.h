@@ -7,21 +7,20 @@ class QUdpSocket;
 
 namespace Network {
 
-	class BroadcastMonitor final : public QObject {
-		Q_OBJECT
-	public:
-		explicit BroadcastMonitor(QObject *parent = nullptr);
-		virtual ~BroadcastMonitor() = default;
+class BroadcastMonitor final : public QObject {
+	Q_OBJECT
+public:
+	explicit BroadcastMonitor(QObject *parent = nullptr);
+	virtual ~BroadcastMonitor() = default;
 
-	protected:
-		void readPendingDatagrams();
+protected:
+	void readPendingDatagrams();
 
-	private:
-		QUdpSocket *m_socket;
-		QList<QVariant> m_devices;
+private:
+	QUdpSocket *m_socket;
+	QList<QVariant> m_devices;
 
-	signals:
-		void signalDeviceAvailable(const QVariant &arg);
-	};
-
+signals:
+	void signalDeviceAvailable(const QVariant &arg);
+};
 }
