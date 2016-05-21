@@ -1,17 +1,29 @@
 import QtQuick 2.6
 import QtQuick.Controls 1.4
 
+import "components"
+
 Item {
 	Column {
-		spacing: 25
-		anchors.fill: parent
+		spacing: 5
+		anchors.centerIn: parent
+		width: parent.width * 0.95
 
-		Label {
-			text: "Brightness:"
-			color: "white"
-			font.bold: true
-			font.pixelSize: 16
+		DisplayIcon {
+			id: icon
+			width: 196
+			height: 196
+			borderColor: "#00000000"
+			anchors.horizontalCenter: parent.horizontalCenter
+			radius: 64
 		}
+
+//		Label {
+//			text: "Brightness:"
+//			color: "white"
+//			font.bold: true
+//			font.pixelSize: 16
+//		}
 
 		CustomSliderStyle {
 			id: brightnessSlider
@@ -21,15 +33,18 @@ Item {
 			sliderColor: "white"
 			handleColor: "white"
 			handleBorderColor: "black"
-			onValueChanged: configuration.setBrightness(value)
+			onValueChanged: {
+				configuration.setBrightness(value)
+				icon.color.a = value;
+			}
 		}
 
-		Label {
-			text: "Correction:"
-			color: "white"
-			font.bold: true
-			font.pixelSize: 16
-		}
+//		Label {
+//			text: "Correction:"
+//			color: "white"
+//			font.bold: true
+//			font.pixelSize: 16
+//		}
 
 		CustomSliderStyle {
 			id: redSlider
@@ -39,7 +54,10 @@ Item {
 			sliderColor: "tomato"
 			handleColor: "tomato"
 			handleBorderColor: "black"
-			onValueChanged: configuration.setRedFactor(value)
+			onValueChanged: {
+				configuration.setRedFactor(value)
+				icon.color.r = value;
+			}
 		}
 
 		CustomSliderStyle {
@@ -50,7 +68,10 @@ Item {
 			sliderColor: "lightGreen"
 			handleColor: "lightGreen"
 			handleBorderColor: "black"
-			onValueChanged: configuration.setGreenFactor(value)
+			onValueChanged: {
+				configuration.setGreenFactor(value)
+				icon.color.g = value;
+			}
 		}
 
 		CustomSliderStyle {
@@ -61,7 +82,10 @@ Item {
 			sliderColor: "lightBlue"
 			handleColor: "lightBlue"
 			handleBorderColor: "black"
-			onValueChanged: configuration.setBlueFactor(value)
+			onValueChanged: {
+				configuration.setBlueFactor(value)
+				icon.color.b = value;
+			}
 		}
 	}
 

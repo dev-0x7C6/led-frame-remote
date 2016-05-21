@@ -13,19 +13,9 @@ Item {
 		id: broadcastClientView
 		anchors.fill: parent
 		model: broadcastClientList
-		delegate: DeviceItem {}
-
-		add: Transition {
-			NumberAnimation { properties: "x,y"; from: 0; duration: 100 }
-		}
-
-		function reset() {
-			if (count > 0) {
-				for (var i = 0; i < count; ++i)
-				{
-					model.get(i).progressVisible = false;
-				}
-			}
+		delegate: DeviceItem {
+			width: parent.width
+			height: 128
 		}
 	}
 

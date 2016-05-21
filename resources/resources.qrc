@@ -10,5 +10,6 @@
         <file>images/tabs_standard.png</file>
         <file>images/textinput.png</file>
         <file>images/toolbar.png</file>
+        <file>lcd256-without-glow.png</file>
     </qresource>
 </RCC>

@@ -3,6 +3,7 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 import QtQuick.Layouts 1.3
 import QtWebSockets 1.0
+import QtGraphicalEffects 1.0
 
 ApplicationWindow {
 	id: window
@@ -11,7 +12,7 @@ ApplicationWindow {
 	visible: true
 
 	Rectangle {
-		color: "#101010"
+		color: Qt.darker("#101020", 2)
 		anchors.fill: parent
 	}
 

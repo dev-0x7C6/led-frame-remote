@@ -1,23 +1,25 @@
 import Qt.labs.controls 1.0
 import QtQuick 2.6
 import QtQuick.Controls 1.4
+import "emitters"
 
 Item {
 	id: canvas
-	anchors.margins: 100
 
 	SwipeView {
 		id: view
+		anchors.fill: parent
 
 		currentIndex: 0
-		x: parent.x + 10
-		y: parent.y + 20
-		width: parent.width - 20
-		height: parent.height - 20
 
 		DeviceCorrectorPage {
 			id: deviceCorrectorPage
 		}
+
+//		EmitterControlPage {
+//		}
+
+
 	}
 
 	PageIndicator {

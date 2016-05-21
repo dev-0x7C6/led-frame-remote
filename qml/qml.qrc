@@ -9,5 +9,8 @@
         <file>DeviceCorrectorPage.qml</file>
         <file>CustomSliderStyle.qml</file>
         <file>Configuration.qml</file>
+        <file>emitters/EmitterControlPage.qml</file>
+        <file>style/StyleSettings.qml</file>
+        <file>components/DisplayIcon.qml</file>
     </qresource>
 </RCC>
