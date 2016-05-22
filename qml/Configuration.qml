@@ -3,17 +3,19 @@ import QtQuick 2.6
 Item {
 	property string device: "led#2";
 	property string emitter: ""
-	property double brightness : 0.5
-	property double redCorrection : 0.5
-	property double greenCorrection : 0.5
-	property double blueCorrection: 0.5
+	property string corrector: ""
+	property double globalBrightness : 0.5
+	property double globalRedCorrection : 0.5
+	property double globalGreenCorrection : 0.5
+	property double globalBlueCorrection: 0.5
 	property bool disableUpdate : false
 
-	onBrightnessChanged: changeCorrection()
-	onRedCorrectionChanged: changeCorrection()
-	onGreenCorrectionChanged: changeCorrection()
-	onBlueCorrectionChanged: changeCorrection()
+	onGlobalBrightnessChanged: changeCorrection()
+	onGlobalRedCorrectionChanged: changeCorrection()
+	onGlobalGreenCorrectionChanged: changeCorrection()
+	onGlobalBlueCorrectionChanged: changeCorrection()
 	onEmitterChanged: changeEmitter()
+	onCorrectorChanged: changeCorrector()
 
 	function changeCorrection() {
 		if (disableUpdate)
@@ -21,10 +23,10 @@ Item {
 
 		var command = {
 			'command' : 'set_correction',
-			'l' : brightness,
-			'r' : redCorrection,
-			'g' : greenCorrection,
-			'b' : blueCorrection
+			'l' : globalBrightness,
+			'r' : globalRedCorrection,
+			'g' : globalGreenCorrection,
+			'b' : globalBlueCorrection
 		}
 		commit(command)
 	}
@@ -38,6 +40,20 @@ Item {
 			'device' : device,
 			'emitter' : emitter
 		}
+
+		commit(command)
+	}
+
+	function changeCorrector() {
+		if (disableUpdate)
+			return
+
+		var command = {
+			'command' : 'set_corrector',
+			'device' : device,
+			'corrector' : corrector
+		}
+
 		commit(command)
 	}
 

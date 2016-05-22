@@ -82,7 +82,6 @@ Item {
 				onCurrentIndexChanged: {
 					configuration.device = "led#2"
 					configuration.emitter = test.get(currentIndex).name
-					console.log(currentIndex)
 				}
 			}
 		}

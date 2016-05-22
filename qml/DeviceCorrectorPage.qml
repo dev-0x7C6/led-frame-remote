@@ -30,7 +30,8 @@ Item {
 			handleBorderColor: "black"
 			stepSize: 0.01
 			onValueChanged: {
-				configuration.brightness = value
+				if (pressed)
+					configuration.globalBrightness = value
 				icon.color.a = value;
 			}
 		}
@@ -45,7 +46,8 @@ Item {
 			handleBorderColor: "black"
 			stepSize: 0.01
 			onValueChanged: {
-				configuration.redCorrection = value
+				if (pressed)
+					configuration.globalRedCorrection = value
 				icon.color.r = value;
 			}
 		}
@@ -60,7 +62,8 @@ Item {
 			handleBorderColor: "black"
 			stepSize: 0.01
 			onValueChanged: {
-				configuration.greenCorrection = value
+				if (pressed)
+					configuration.globalGreenCorrection = value
 				icon.color.g = value;
 			}
 		}
@@ -75,7 +78,8 @@ Item {
 			handleBorderColor: "black"
 			stepSize: 0.01
 			onValueChanged: {
-				configuration.blueCorrection = value
+				if (pressed)
+					configuration.globalBlueCorrection = value
 				icon.color.b = value;
 			}
 		}

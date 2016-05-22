@@ -46,10 +46,10 @@ ApplicationWindow {
 			var b = notify.global.corrector.b
 
 			configuration.disableUpdate = true
-			configuration.brightness = l
-			configuration.redCorrection =  r
-			configuration.greenCorrection = g
-			configuration.blueCorrection = b
+			configuration.globalBrightness = l
+			configuration.globalRedCorrection =  r
+			configuration.globalGreenCorrection = g
+			configuration.globalBlueCorrection = b
 			configuration.disableUpdate = false
 
 			deviceControlPage.updateCorrection(l, r, g, b);
