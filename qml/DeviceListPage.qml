@@ -1,6 +1,7 @@
 import QtQuick 2.4
 import QtQuick.Controls 1.4
-import QtQuick.Layouts 1.2
+
+import "delegates"
 
 Item {
 
@@ -13,9 +14,19 @@ Item {
 		id: broadcastClientView
 		anchors.fill: parent
 		model: broadcastClientList
-		delegate: DeviceItem {
+		delegate: DeviceDelegate {
 			width: parent.width
 			height: 128
+
+			MouseArea {
+				anchors.fill: parent
+				onClicked: {
+					var address = "ws://"
+					address = address.concat(host, ":", port);
+					webSocket.url = address
+					configuration.device = device
+				}
+			}
 		}
 	}
 

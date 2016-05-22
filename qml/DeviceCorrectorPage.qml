@@ -1,61 +1,51 @@
 import QtQuick 2.6
 import QtQuick.Controls 1.4
+import Qt.labs.controls 1.0
 
 import "components"
 
 Item {
 	Column {
-		spacing: 5
-		anchors.centerIn: parent
-		width: parent.width * 0.95
+		spacing: 10
+		anchors.topMargin: 10
+		width: parent.width
 
 		DisplayIcon {
 			id: icon
 			width: 196
 			height: 196
-			borderColor: "#00000000"
+			borderColor: "white"
 			anchors.horizontalCenter: parent.horizontalCenter
-			radius: 64
+			borderRadius: 4
+			ambientRadius: 32
 		}
-
-//		Label {
-//			text: "Brightness:"
-//			color: "white"
-//			font.bold: true
-//			font.pixelSize: 16
-//		}
 
 		CustomSliderStyle {
 			id: brightnessSlider
 			width: parent.width * 0.9
-			value: configuration.data.brightness
+			value: 0.5
 			anchors.horizontalCenter: parent.horizontalCenter
 			sliderColor: "white"
 			handleColor: "white"
 			handleBorderColor: "black"
+			stepSize: 0.01
 			onValueChanged: {
-				configuration.setBrightness(value)
+				configuration.brightness = value
 				icon.color.a = value;
 			}
 		}
 
-//		Label {
-//			text: "Correction:"
-//			color: "white"
-//			font.bold: true
-//			font.pixelSize: 16
-//		}
-
 		CustomSliderStyle {
 			id: redSlider
 			width: parent.width * 0.9
-			value: configuration.data.rcorrector
+			value: 0.5
 			anchors.horizontalCenter: parent.horizontalCenter
 			sliderColor: "tomato"
 			handleColor: "tomato"
 			handleBorderColor: "black"
+			stepSize: 0.01
 			onValueChanged: {
-				configuration.setRedFactor(value)
+				configuration.redCorrection = value
 				icon.color.r = value;
 			}
 		}
@@ -63,13 +53,14 @@ Item {
 		CustomSliderStyle {
 			id: greenSlider
 			width: parent.width * 0.9
-			value: configuration.data.gcorrector
+			value: 0.5
 			anchors.horizontalCenter: parent.horizontalCenter
 			sliderColor: "lightGreen"
 			handleColor: "lightGreen"
 			handleBorderColor: "black"
+			stepSize: 0.01
 			onValueChanged: {
-				configuration.setGreenFactor(value)
+				configuration.greenCorrection = value
 				icon.color.g = value;
 			}
 		}
@@ -77,29 +68,33 @@ Item {
 		CustomSliderStyle {
 			id: blueSlider
 			width: parent.width * 0.9
-			value: configuration.data.bcorrector
+			value: 0.5
 			anchors.horizontalCenter: parent.horizontalCenter
 			sliderColor: "lightBlue"
 			handleColor: "lightBlue"
 			handleBorderColor: "black"
+			stepSize: 0.01
 			onValueChanged: {
-				configuration.setBlueFactor(value)
+				configuration.blueCorrection = value
 				icon.color.b = value;
 			}
 		}
 	}
 
-	function configurationUpdated() {
+
+	function update(l, r, g, b) {
 		if (!brightnessSlider.pressed)
-			brightnessSlider.value = configuration.data.brightness
+			brightnessSlider.value = l
 
 		if (!redSlider.pressed)
-			redSlider.value = configuration.data.rcorrector
+			redSlider.value = r
 
 		if (!greenSlider.pressed)
-			greenSlider.value = configuration.data.gcorrector
+			greenSlider.value = g
 
 		if (!blueSlider.pressed)
-			blueSlider.value = configuration.data.bcorrector
+			blueSlider.value = b
 	}
 }
+
+

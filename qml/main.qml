@@ -33,14 +33,26 @@ ApplicationWindow {
 	Configuration {
 		id: configuration
 
-		function send() {
+		function commit(arg) {
 			if (webSocket.status == WebSocket.Open)
-				webSocket.sendTextMessage(JSON.stringify(data))
+				webSocket.sendTextMessage(JSON.stringify(arg))
 		}
 
 		function recv(arg) {
-			data = JSON.parse(arg)
-			deviceControlPage.configurationUpdated();
+			var notify = JSON.parse(arg)
+			var l = notify.global.corrector.l
+			var r = notify.global.corrector.r
+			var g = notify.global.corrector.g
+			var b = notify.global.corrector.b
+
+			configuration.disableUpdate = true
+			configuration.brightness = l
+			configuration.redCorrection =  r
+			configuration.greenCorrection = g
+			configuration.blueCorrection = b
+			configuration.disableUpdate = false
+
+			deviceControlPage.updateCorrection(l, r, g, b);
 		}
 	}
 

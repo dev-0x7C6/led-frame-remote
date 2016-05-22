@@ -1,34 +1,46 @@
 import QtQuick 2.6
 
 Item {
-	property string device: "none";
-	property variant data : {
-		'brightness': 0.5,
-		'rcorrector': 0.5,
-		'gcorrector': 0.5,
-		'bcorrector': 0.5
+	property string device: "led#2";
+	property string emitter: ""
+	property double brightness : 0.5
+	property double redCorrection : 0.5
+	property double greenCorrection : 0.5
+	property double blueCorrection: 0.5
+	property bool disableUpdate : false
+
+	onBrightnessChanged: changeCorrection()
+	onRedCorrectionChanged: changeCorrection()
+	onGreenCorrectionChanged: changeCorrection()
+	onBlueCorrectionChanged: changeCorrection()
+	onEmitterChanged: changeEmitter()
+
+	function changeCorrection() {
+		if (disableUpdate)
+			return
+
+		var command = {
+			'command' : 'set_correction',
+			'l' : brightness,
+			'r' : redCorrection,
+			'g' : greenCorrection,
+			'b' : blueCorrection
+		}
+		commit(command)
 	}
 
-	function setBrightness(arg) {
-		data.brightness = arg;
-		send()
+	function changeEmitter() {
+		if (disableUpdate)
+			return
+
+		var command = {
+			'command' : 'set_emitter',
+			'device' : device,
+			'emitter' : emitter
+		}
+		commit(command)
 	}
 
-	function setRedFactor(arg) {
-		data.rcorrector = arg;
-		send()
-	}
-
-	function setGreenFactor(arg) {
-		data.gcorrector = arg;
-		send()
-	}
-
-	function setBlueFactor(arg) {
-		data.bcorrector = arg;
-		send()
-	}
-
-	function send() {
+	function commit(arg) {
 	}
 }

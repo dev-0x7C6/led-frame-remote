@@ -6,7 +6,7 @@ Slider {
 	property color sliderColor: "darkOrange"
 	property color handleColor: "black"
 	property color handleColorPressed: "orange"
-	property color handleBorderColor: "#df6c00"
+	property color handleBorderColor: "#101020"
 
 	style: SliderStyle {
 		groove: Rectangle {
@@ -24,9 +24,9 @@ Slider {
 			anchors.centerIn: parent
 			border.color: handleBorderColor
 			border.width: 2
-			implicitWidth: 32
-			implicitHeight: 32
-			radius: 16
+			implicitWidth: 42
+			implicitHeight: 42
+			radius: implicitWidth / 2
 
 			gradient: Gradient {
 				GradientStop { position: 0.0; color: control.pressed ? handleColorPressed : handleColor }

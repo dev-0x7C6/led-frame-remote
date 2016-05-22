@@ -7,29 +7,17 @@ import "../components"
 
 Item {
 	Column {
-		spacing: 5
-		anchors.centerIn: parent
+//		spacing: 10
+//		anchors.topMargin: 10
+//		width: parent.width
 
 		DisplayIcon {
-
+			id: icon
+			//source: "qrc:/device.png"
+			borderRadius: 8
+			height: parent.height;
+			width: parent.height
 		}
-
-
-//			Image {
-//				id: bug
-//				source: "qrc:/lcd256-without-glow.png"
-//				sourceSize: Qt.size(parent.width, parent.height)
-//				smooth: true
-//				visible: false
-//			}
-
-//			GaussianBlur {
-//				anchors.fill: bug
-//				source: bug
-//				radius: 16
-//				samples: 32
-//			}
-
 
 
 		Label {
