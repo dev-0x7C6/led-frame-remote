@@ -8,7 +8,7 @@ Item {
 	id: canvas
 
 	SwipeView {
-		id: view
+		id: emitterView
 
 		currentIndex: 0
 		anchors.fill: parent
@@ -18,48 +18,10 @@ Item {
 		}
 
 		Item {
-			ListModel {
-				id: test
-				property bool progressVisible : false
-
-				ListElement {
-					name: "DVI-I-1"
-					description: "Screen capture"
-					parameters: "1920x1080"
-					selected: false
-				}
-
-				ListElement {
-					name: "Animation #1"
-					description: "Animation"
-					parameters: "color rotation"
-					selected: false
-				}
-
-				ListElement {
-					name: "Animation #2"
-					description: "Animation"
-					parameters: "color rotation"
-				}
-
-				ListElement {
-					name: "Color #1"
-					description: "Color"
-					parameters: "green"
-				}
-
-				ListElement {
-					name: "Color #2"
-					description: "Color"
-					parameters: "green"
-				}
-			}
-
-
 			ListView {
-				id: test2
+				id: emitterListView
 				anchors.fill: parent
-				model: test
+				model: emitterModel
 				delegate: EmitterDelegate {
 					id: delegate
 					width: parent.width
@@ -69,20 +31,17 @@ Item {
 					MouseArea {
 						anchors.fill: parent
 						onClicked: {
-							if (test2.currentIndex == -1)
+							if (emitterListView.currentIndex == -1)
 								return
 
-							test.setProperty(test2.currentIndex, "selected", false)
-							test.setProperty(index, "selected", true)
-							test2.currentIndex = index
+							emitterModel.setProperty(emitterListView.currentIndex, "selected", false)
+							emitterModel.setProperty(index, "selected", true)
+							emitterListView.currentIndex = index
 						}
 					}
 				}
 
-				onCurrentIndexChanged: {
-					configuration.device = "led#2"
-					configuration.emitter = test.get(currentIndex).name
-				}
+				onCurrentIndexChanged: configuration.emitter = emitterModel.get(currentIndex).name
 			}
 		}
 	}
@@ -90,15 +49,15 @@ Item {
 	PageIndicator {
 		id: indicator
 
-		count: view.count
-		currentIndex: view.currentIndex
+		count: emitterView.count
+		currentIndex: emitterView.currentIndex
 
-		anchors.bottom: view.bottom
+		anchors.bottom: emitterView.bottom
 		anchors.horizontalCenter: parent.horizontalCenter
 	}
 
-	function updateCorrection(l, r, g, b) {
-		deviceCorrectorPage.update(l, r, g ,b);
+	function update() {
+		deviceCorrectorPage.update();
 	}
 
 }

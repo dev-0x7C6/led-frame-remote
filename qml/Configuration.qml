@@ -1,4 +1,5 @@
 import QtQuick 2.6
+import QtQml.Models 2.2
 
 Item {
 	property string device: "led#2";
@@ -17,10 +18,28 @@ Item {
 	onEmitterChanged: changeEmitter()
 	onCorrectorChanged: changeCorrector()
 
-	function changeCorrection() {
-		if (disableUpdate)
-			return
+	function fetch(arg) {
+		var json = JSON.parse(arg)
 
+		disableUpdate = true
+
+		if (json.command === "set_global_correction") {
+			globalBrightness = json.l
+			globalRedCorrection = json.r
+			globalGreenCorrection = json.g
+			globalBlueCorrection = json.b
+		}
+
+		if (json.command === "emitter_attached")
+			emitterAttached(json)
+
+		if (json.command === "emitter_detached")
+			emitterDetached(json)
+
+		disableUpdate = false
+	}
+
+	function changeCorrection() {
 		var command = {
 			'command' : 'set_correction',
 			'l' : globalBrightness,
@@ -28,35 +47,38 @@ Item {
 			'g' : globalGreenCorrection,
 			'b' : globalBlueCorrection
 		}
-		commit(command)
+		precommit(command)
 	}
 
 	function changeEmitter() {
-		if (disableUpdate)
-			return
-
 		var command = {
 			'command' : 'set_emitter',
 			'device' : device,
 			'emitter' : emitter
 		}
 
-		commit(command)
+		precommit(command)
 	}
 
 	function changeCorrector() {
-		if (disableUpdate)
-			return
-
 		var command = {
 			'command' : 'set_corrector',
 			'device' : device,
 			'corrector' : corrector
 		}
 
+		precommit(command)
+	}
+
+	function precommit(command) {
+		if (disableUpdate)
+			return
+
 		commit(command)
 	}
 
-	function commit(arg) {
-	}
+	function emitterAttached(arg) {}
+	function emitterDetached(arg) {}
+
+	function commit(command) {}
 }

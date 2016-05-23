@@ -34,6 +34,7 @@ Item {
 					configuration.globalBrightness = value
 				icon.color.a = value;
 			}
+
 		}
 
 		CustomSliderStyle {
@@ -86,18 +87,18 @@ Item {
 	}
 
 
-	function update(l, r, g, b) {
+	function update() {
 		if (!brightnessSlider.pressed)
-			brightnessSlider.value = l
+			brightnessSlider.value = configuration.globalBrightness
 
 		if (!redSlider.pressed)
-			redSlider.value = r
+			redSlider.value = configuration.globalRedCorrection
 
 		if (!greenSlider.pressed)
-			greenSlider.value = g
+			greenSlider.value = configuration.globalGreenCorrection
 
 		if (!blueSlider.pressed)
-			blueSlider.value = b
+			blueSlider.value = configuration.globalBlueCorrection
 	}
 }
 

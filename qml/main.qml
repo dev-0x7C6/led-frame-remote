@@ -26,33 +26,42 @@ ApplicationWindow {
 				mainStackView.pop(deviceListPage)
 
 			if (webSocket.status == WebSocket.Open)
+			{
 				mainStackView.push(deviceControlPage)
+				emitterModel.clear()
+			}
 		}
 	}
+
+	ListModel {
+		id: emitterModel
+	}
+
 
 	Configuration {
 		id: configuration
 
-		function commit(arg) {
+		function commit(command) {
 			if (webSocket.status == WebSocket.Open)
-				webSocket.sendTextMessage(JSON.stringify(arg))
+				webSocket.sendTextMessage(JSON.stringify(command))
+		}
+
+		function emitterAttached(arg) {
+			var values = {
+				"name": arg.name,
+				"description": arg.description,
+				"parameters": arg.parameters,
+				"selected": false
+			}
+			emitterModel.append(values)
+		}
+
+		function emitterDetached(arg) {
 		}
 
 		function recv(arg) {
-			var notify = JSON.parse(arg)
-			var l = notify.global.corrector.l
-			var r = notify.global.corrector.r
-			var g = notify.global.corrector.g
-			var b = notify.global.corrector.b
-
-			configuration.disableUpdate = true
-			configuration.globalBrightness = l
-			configuration.globalRedCorrection =  r
-			configuration.globalGreenCorrection = g
-			configuration.globalBlueCorrection = b
-			configuration.disableUpdate = false
-
-			deviceControlPage.updateCorrection(l, r, g, b);
+			fetch(arg)
+			deviceControlPage.update();
 		}
 	}
 
