@@ -13,11 +13,8 @@ Item {
 		currentIndex: 0
 		anchors.fill: parent
 
-		DeviceCorrectorPage {
-			id: deviceCorrectorPage
-		}
-
 		Item {
+			id: emitterManager
 			ListView {
 				id: emitterListView
 				anchors.fill: parent
@@ -25,7 +22,7 @@ Item {
 				delegate: EmitterDelegate {
 					id: delegate
 					width: parent.width
-					height: 90
+					implicitHeight: 80
 					iconVisible: false
 
 					MouseArea {
@@ -43,6 +40,20 @@ Item {
 
 				onCurrentIndexChanged: configuration.emitter = emitterModel.get(currentIndex).name
 			}
+		}
+
+		DeviceCorrectorPage {
+			id: deviceCorrectorPage
+		}
+
+
+		onCurrentIndexChanged: {
+			subtitle.text = configuration.device
+			if (currentItem == deviceCorrectorPage)
+				title.text = "Color correction"
+
+			if (currentItem == emitterManager)
+				title.text = "Emitters"
 		}
 	}
 

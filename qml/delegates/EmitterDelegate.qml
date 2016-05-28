@@ -9,6 +9,9 @@ import "../components"
 BaseDelegate {
 
 	color: selected ? selectedBackgroundColor : backgroundColor
+	height: selected ? implicitHeight * 2 : implicitHeight
+
+	Behavior on height { NumberAnimation{ duration: 200; } }
 
 
 	ColumnLayout {
@@ -50,6 +53,7 @@ BaseDelegate {
 			font.italic: true
 			text: parameters
 			color: thirdLabelColor
+			visible: selected
 		}
 	}
 }

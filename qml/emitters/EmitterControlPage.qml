@@ -34,9 +34,7 @@ Item {
 			width: parent.width * 0.9
 			value: 1.0
 			anchors.horizontalCenter: parent.horizontalCenter
-			sliderColor: "tomato"
-			handleColor: "tomato"
-			handleBorderColor: "black"
+			color: "tomato"
 		}
 
 		CustomSliderStyle {
@@ -44,9 +42,7 @@ Item {
 			width: parent.width * 0.9
 			value: 1.0
 			anchors.horizontalCenter: parent.horizontalCenter
-			sliderColor: "lightGreen"
-			handleColor: "lightGreen"
-			handleBorderColor: "black"
+			color: "lightGreen"
 		}
 
 		CustomSliderStyle {
@@ -54,9 +50,6 @@ Item {
 			width: parent.width * 0.9
 			value: 1.0
 			anchors.horizontalCenter: parent.horizontalCenter
-			sliderColor: "lightBlue"
-			handleColor: "lightBlue"
-			handleBorderColor: "black"
 		}
 	}
 }

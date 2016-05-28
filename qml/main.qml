@@ -106,9 +106,22 @@ ApplicationWindow {
 			Behavior on x { NumberAnimation{ easing.type: Easing.OutCubic} }
 			Behavior on font.pixelSize { NumberAnimation{ easing.type: Easing.OutCubic} }
 			x: backButton.x + backButton.width + 20
-			property bool r: false
 			anchors.verticalCenter: parent.verticalCenter
 			color: "white"
+			text: ""
+		}
+
+		Text {
+			id: subtitle
+			font.bold: true
+			font.pixelSize: 12
+			opacity: visible ? 1.0 : 0.0
+			Behavior on opacity { NumberAnimation{ easing.type: Easing.OutCubic} }
+			Behavior on x { NumberAnimation{ easing.type: Easing.OutCubic} }
+			Behavior on font.pixelSize { NumberAnimation{ easing.type: Easing.OutCubic} }
+			x: backButton.x + backButton.width + 20
+			anchors.top: title.bottom
+			color: "orange"
 			text: ""
 		}
 	}

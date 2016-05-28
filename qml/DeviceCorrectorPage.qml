@@ -25,9 +25,7 @@ Item {
 			width: parent.width * 0.9
 			value: 0.5
 			anchors.horizontalCenter: parent.horizontalCenter
-			sliderColor: "white"
-			handleColor: "white"
-			handleBorderColor: "black"
+			color: "white"
 			stepSize: 0.01
 			onValueChanged: {
 				if (pressed)
@@ -42,9 +40,7 @@ Item {
 			width: parent.width * 0.9
 			value: 0.5
 			anchors.horizontalCenter: parent.horizontalCenter
-			sliderColor: "tomato"
-			handleColor: "tomato"
-			handleBorderColor: "black"
+			color: "tomato"
 			stepSize: 0.01
 			onValueChanged: {
 				if (pressed)
@@ -58,9 +54,7 @@ Item {
 			width: parent.width * 0.9
 			value: 0.5
 			anchors.horizontalCenter: parent.horizontalCenter
-			sliderColor: "lightGreen"
-			handleColor: "lightGreen"
-			handleBorderColor: "black"
+			color: "lightGreen"
 			stepSize: 0.01
 			onValueChanged: {
 				if (pressed)
@@ -74,9 +68,7 @@ Item {
 			width: parent.width * 0.9
 			value: 0.5
 			anchors.horizontalCenter: parent.horizontalCenter
-			sliderColor: "lightBlue"
-			handleColor: "lightBlue"
-			handleBorderColor: "black"
+			color: "lightBlue"
 			stepSize: 0.01
 			onValueChanged: {
 				if (pressed)

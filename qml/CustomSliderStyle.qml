@@ -3,34 +3,48 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 
 Slider {
-	property color sliderColor: "darkOrange"
-	property color handleColor: "black"
-	property color handleColorPressed: "orange"
-	property color handleBorderColor: "#101020"
+	id: slider
+	property color color: "orange"
 
 	style: SliderStyle {
 		groove: Rectangle {
-			implicitWidth: 200
-			implicitHeight: 6
-			radius: 6
+			opacity: 1.0
+			id: control
+			anchors.centerIn: parent
+			implicitWidth: 300
+			implicitHeight: 16
+			color: "transparent"
 
-			gradient: Gradient {
-				GradientStop { position: 0.0; color: sliderColor }
-				GradientStop { position: 1.0; color: Qt.darker(sliderColor, 3.0) }
+			Rectangle {
+				anchors.fill: parent
+				anchors.margins: 5
+				color: Qt.darker(slider.color, 4.0)
+				radius: 3
+			}
+
+			Rectangle {
+				id: grooveFill
+				anchors.verticalCenter: parent.verticalCenter
+				anchors.left: parent.left
+				width: styleData.handlePosition
+				anchors.margins: 5
+				height:6
+				color: Qt.darker(slider.color, 2.0)
+				radius: 3
 			}
 		}
 
 		handle: Rectangle {
 			anchors.centerIn: parent
-			border.color: handleBorderColor
-			border.width: 2
-			implicitWidth: 42
-			implicitHeight: 42
+			border.color: hovered || pressed ? slider.color : Qt.darker(slider.color, 2.0)
+			color: Qt.darker(slider.color, 4.0)
+			border.width: 3
+			implicitWidth: 32
+			implicitHeight: 32
 			radius: implicitWidth / 2
 
-			gradient: Gradient {
-				GradientStop { position: 0.0; color: control.pressed ? handleColorPressed : handleColor }
-				GradientStop { position: 1.0; color: Qt.darker(control.pressed ? handleColorPressed : handleColor, 3.0) }
+			Behavior on border.color {
+				ColorAnimation { duration: 200 }
 			}
 		}
 	}
