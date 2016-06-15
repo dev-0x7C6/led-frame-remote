@@ -22,11 +22,12 @@ ApplicationWindow {
 		onTextMessageReceived: configuration.recv(message)
 
 		onStatusChanged: {
-			if (webSocket.status == WebSocket.Error)
+			if (webSocket.status == WebSocket.Error) {
 				mainStackView.pop(deviceListPage)
+				url = ""
+			}
 
-			if (webSocket.status == WebSocket.Open)
-			{
+			if (webSocket.status == WebSocket.Open) {
 				mainStackView.push(deviceControlPage)
 				emitterModel.clear()
 			}

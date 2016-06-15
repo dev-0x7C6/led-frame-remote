@@ -1,6 +1,5 @@
 import QtQuick 2.6
 import QtQuick.Layouts 1.3
-import Qt.labs.controls 1.0
 import QtQuick.Controls.Styles 1.4
 import QtGraphicalEffects 1.0
 
