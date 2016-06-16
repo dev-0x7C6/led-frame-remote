@@ -130,10 +130,9 @@ ApplicationWindow {
 	StackView {
 		id: mainStackView
 		anchors.fill: parent
-		initialItem: deviceWaitPage
-
-		DeviceWaitPage {
+		initialItem: DeviceWaitPage {
 			id: deviceWaitPage
+			text: "Searching for devices..."
 		}
 
 		DeviceListPage {
@@ -170,9 +169,13 @@ ApplicationWindow {
 
 	}
 
-	function broadcastClientAdded(arg) {
-		if (mainStackView.currentItem == deviceWaitPage)
-			mainStackView.push(deviceListPage)
-		deviceListPage.insert(arg)
+	Connections {
+		target: broadcast
+
+		onDeviceDetected: {
+			if (mainStackView.currentItem == deviceWaitPage)
+				mainStackView.push(deviceListPage)
+			deviceListPage.insert(arg)
+		}
 	}
 }

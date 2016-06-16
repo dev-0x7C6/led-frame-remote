@@ -21,6 +21,6 @@ private:
 	QList<QVariant> m_devices;
 
 signals:
-	void signalDeviceAvailable(const QVariant &arg);
+	void deviceDetected(const QVariant &arg);
 };
 }

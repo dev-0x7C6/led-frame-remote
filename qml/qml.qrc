@@ -4,7 +4,6 @@
         <file>DeviceListPage.qml</file>
         <file>DeviceWaitPage.qml</file>
         <file>DeviceControlPage.qml</file>
-        <file>qtlabscontrols.conf</file>
         <file>DeviceCorrectorPage.qml</file>
         <file>CustomSliderStyle.qml</file>
         <file>Configuration.qml</file>
@@ -14,5 +13,6 @@
         <file>delegates/DeviceDelegate.qml</file>
         <file>delegates/EmitterDelegate.qml</file>
         <file>delegates/BaseDelegate.qml</file>
+        <file>qtquickcontrols2.conf</file>
     </qresource>
 </RCC>

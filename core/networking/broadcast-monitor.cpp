@@ -20,7 +20,7 @@ void BroadcastMonitor::readPendingDatagrams() {
 		auto device = QJsonDocument::fromJson(datagram).toVariant();
 
 		if (!m_devices.contains(device)) {
-			emit signalDeviceAvailable(device);
+			emit deviceDetected(device);
 			m_devices.append(device);
 		}
 	}

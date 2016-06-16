@@ -1,8 +1,11 @@
-import QtQuick 2.6
-import Qt.labs.controls 1.0
+import QtQuick 2.7
+import QtQuick.Controls 2.0
+import QtQuick.Controls.Material 2.0
+import QtQuick.Controls.Universal 2.0
 
 Item {
 	id: canvas
+	property string text
 
 	Column {
 		spacing: 40
@@ -18,8 +21,8 @@ Item {
 		Label {
 			width: parent.width
 			horizontalAlignment: Qt.AlignHCenter
-			text: "Searching for devices..."
-			font.pixelSize: 12
+			text: canvas.text
+			font.pixelSize: 16
 		}
 
 	}

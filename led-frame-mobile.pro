@@ -1,6 +1,7 @@
 TEMPLATE = app
+TARGET = LedFrame
 
-QT += qml quick widgets websockets
+QT += quick quickcontrols2 websockets widgets
 
 CONFIG += c++14
 
@@ -9,7 +10,6 @@ SOURCES += main.cpp \
 
 RESOURCES += qml/qml.qrc \
     resources/resources.qrc
-
 
 OTHER_FILES += \
 	qml/CustomSliderStyle.qml
