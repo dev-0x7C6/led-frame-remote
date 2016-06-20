@@ -6,53 +6,38 @@ import QtGraphicalEffects 1.0
 import "../components"
 
 BaseDelegate {
-
-	color: selected ? selectedBackgroundColor : backgroundColor
-	height: selected ? implicitHeight * 2 : implicitHeight
-
-	Behavior on height { NumberAnimation{ duration: 200; } }
-
-
 	ColumnLayout {
-		anchors.left: iconObject.icon.right
-		anchors.leftMargin: 30
-		anchors.verticalCenter: parent.verticalCenter
-
-		Item {
-			width: deviceLabel.width
-			height: deviceLabel.height
-			Text {
-				id: deviceLabel
-				font.pixelSize: 24
-				font.bold: true
-				color: firstLabelColor
-				text: name
-			}
-
-			DropShadow {
-				 anchors.fill: deviceLabel
-				 horizontalOffset: 2
-				 verticalOffset: 2
-				 radius: 8.0
-				 samples: 17
-				 color: Qt.darker(firstLabelColor, 3)
-				 source: deviceLabel
-			}
+		anchors.fill: parent
+		DefaultLabel {
+			text: name
+			font.pixelSize: 16
 		}
 
-		Text {
-			font.pixelSize: 14
-			font.bold: true
+		DefaultLabel {
 			text: description
+			font.pixelSize: 12
 			color: secondLabelColor
 		}
 
-		Text {
-			font.pixelSize: 10
-			font.italic: true
+		DefaultLabel {
 			text: parameters
+			font.pixelSize: 10
 			color: thirdLabelColor
-			visible: selected
 		}
+
+//		Text {
+//			font.pixelSize: 14
+//			font.bold: true
+//			text: description
+//			color: secondLabelColor
+//		}
+
+//		Text {
+//			font.pixelSize: 10
+//			font.italic: true
+//			text: parameters
+//			color: thirdLabelColor
+//			visible: selected
+//		}
 	}
 }

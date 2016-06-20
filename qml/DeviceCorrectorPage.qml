@@ -75,6 +75,15 @@ Item {
 				icon.color.b = value;
 			}
 		}
+
+		CheckBox {
+			text: "Color correction"
+		}
+
+
+		CheckBox {
+			text: "Flickr"
+		}
 	}
 
 

@@ -1,4 +1,4 @@
-import QtQuick 2.6
+import QtQuick 2.7
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.0
 import QtQuick.Controls.Styles 1.4
@@ -8,46 +8,50 @@ import "../components"
 
 BaseDelegate {
 	id: delegate
-	ColumnLayout {
-		anchors.left: iconObject.right
-		anchors.leftMargin: 30
-		anchors.verticalCenter: parent.verticalCenter
 
+	RowLayout {
+		anchors.fill: delegate
+		anchors.leftMargin: 10
+		anchors.rightMargin: 10
+		spacing: 20
 
-		Item {
-			width: deviceLabel.width
-			height: deviceLabel.height
-			Text {
-				id: deviceLabel
-				font.pixelSize: 32
-				font.bold: true
-				color: delegate.firstLabelColor
-				text: device
+		DisplayIcon {
+			id: icon
+			borderColor: "orange"
+			ambientRadius: 6
+			height: parent.height;
+			width: parent.height;
+
+			SequentialAnimation {
+				loops: Animation.Infinite
+				running: icon.visible
+				ColorAnimation { target: icon; property: "color"; to: "#ff4444"; duration: 3000 }
+				ColorAnimation { target: icon; property: "color"; to: "#44ff44"; duration: 3000 }
+				ColorAnimation { target: icon; property: "color"; to: "#4444ff"; duration: 3000 }
 			}
 
-			DropShadow {
-				 anchors.fill: deviceLabel
-				 horizontalOffset: 2
-				 verticalOffset: 2
-				 radius: 8.0
-				 samples: 17
-				 color: Qt.darker(firstLabelColor, 3)
-				 source: deviceLabel
+		}
+
+		ColumnLayout {
+			DefaultLabel {
+				width: Layout.maximumWidth
+				text: device;
+				font.bold: true;
+				font.pixelSize: 22
 			}
-		}
 
-		Text {
-			font.pixelSize: 16
-			font.bold: true
-			text: "host: " + computer
-			color: delegate.secondLabelColor
-		}
+			DefaultLabel {
+				text: computer;
+				color: secondLabelColor
+				font.pixelSize: 16
+			}
 
-		Text {
-			font.pixelSize: 10
-			font.italic: true
-			text: host + ":" + port
-			color: delegate.thirdLabelColor
+			DefaultLabel {
+				text: host + ":" + port;
+				font.italic:  true;
+				color: thirdLabelColor
+				font.pixelSize: 10
+			}
 		}
 	}
 }

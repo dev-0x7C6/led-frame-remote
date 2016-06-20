@@ -116,8 +116,8 @@ ApplicationWindow {
 			id: subtitle
 			font.bold: true
 			font.pixelSize: 12
-			opacity: visible ? 1.0 : 0.0
-			Behavior on opacity { NumberAnimation{ easing.type: Easing.OutCubic} }
+
+			Behavior on opacity { NumberAnimation{ easing.type: Easing.InOutCubic} }
 			Behavior on x { NumberAnimation{ easing.type: Easing.OutCubic} }
 			Behavior on font.pixelSize { NumberAnimation{ easing.type: Easing.OutCubic} }
 			x: backButton.x + backButton.width + 20
@@ -148,17 +148,19 @@ ApplicationWindow {
 		onCurrentItemChanged: {
 			if (currentItem == deviceListPage) {
 				title.text = "Devices"
+				subtitle.opacity = 0
 				title.font.pixelSize = 20
 			}
 
 			if (currentItem == deviceControlPage) {
-				title.text = "Control Panel: " + configuration.device
 				title.font.pixelSize = 20
+				subtitle.opacity = 100
 			}
 
 			if (currentItem == deviceWaitPage) {
 				title.text = "Searching..."
 				title.font.pixelSize = 20
+				subtitle.opacity = 0
 			}
 
 			if (currentItem == deviceListPage) {

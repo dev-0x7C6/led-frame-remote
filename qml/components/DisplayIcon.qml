@@ -32,7 +32,6 @@ Item {
 		spread: 0.1
 		color: parent.borderColor
 		source: lcd
-		cached: true
 	}
 
 	Image {

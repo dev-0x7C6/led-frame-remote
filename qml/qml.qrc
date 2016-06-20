@@ -14,5 +14,7 @@
         <file>delegates/EmitterDelegate.qml</file>
         <file>delegates/BaseDelegate.qml</file>
         <file>qtquickcontrols2.conf</file>
+        <file>components/DefaultLabel.qml</file>
+        <file>components/DefaultRectangle.qml</file>
     </qresource>
 </RCC>

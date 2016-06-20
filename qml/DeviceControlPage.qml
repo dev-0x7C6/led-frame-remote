@@ -23,7 +23,6 @@ Item {
 					id: delegate
 					width: parent.width
 					implicitHeight: 80
-					iconVisible: false
 
 					MouseArea {
 						anchors.fill: parent
@@ -47,7 +46,7 @@ Item {
 		}
 
 
-		onCurrentIndexChanged: {
+		function indexChanged() {
 			subtitle.text = configuration.device
 			if (currentItem == deviceCorrectorPage)
 				title.text = "Color correction"
@@ -55,6 +54,8 @@ Item {
 			if (currentItem == emitterManager)
 				title.text = "Emitters"
 		}
+
+		onCurrentIndexChanged: indexChanged()
 	}
 
 	PageIndicator {
@@ -69,6 +70,7 @@ Item {
 
 	function update() {
 		deviceCorrectorPage.update();
+		emitterView.indexChanged()
 	}
 
 }
