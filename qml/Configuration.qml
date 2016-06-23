@@ -2,7 +2,7 @@ import QtQuick 2.6
 import QtQml.Models 2.2
 
 Item {
-	property string device: "led#2";
+	property string device: "";
 	property string emitter: ""
 	property string corrector: ""
 	property double globalBrightness : 0.5

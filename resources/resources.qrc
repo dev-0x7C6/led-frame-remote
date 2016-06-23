@@ -12,6 +12,10 @@
         <file>images/toolbar.png</file>
         <file>lcd256-without-glow.png</file>
         <file>lcd.png</file>
-        <file>autocorrection.svg</file>
+        <file>animation.png</file>
+        <file>color.png</file>
+        <file>desktop.png</file>
+        <file>image.png</file>
+        <file>config.png</file>
     </qresource>
 </RCC>

@@ -9,6 +9,7 @@ Label {
 	property bool dropEffectEnabled : true
 
 	font.bold: true
+	minimumPointSize: 4
 	fontSizeMode: Text.Fit
 	elide: Text.ElideRight
 

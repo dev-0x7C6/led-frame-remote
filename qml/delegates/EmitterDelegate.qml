@@ -6,38 +6,68 @@ import QtGraphicalEffects 1.0
 import "../components"
 
 BaseDelegate {
-	ColumnLayout {
-		anchors.fill: parent
-		DefaultLabel {
-			text: name
-			font.pixelSize: 16
+	id: base
+	property double iconOpacity : 1.0
+	property bool iconRotation : false
+	property string iconSource
+
+	RowLayout {
+		anchors.fill: delegate
+		anchors.leftMargin: 20
+		anchors.rightMargin: 20
+		spacing: 10
+
+		Item {
+			height: parent.height / 1.1
+			width: parent.height / 1.1
+			opacity: iconOpacity
+			Image {
+				id: lcd
+				anchors.fill: parent
+				fillMode: Image.PreserveAspectFit
+				source: iconSource
+				smooth: true
+				cache: true
+
+				RotationAnimator {
+					target: lcd;
+					from: 0;
+					to: 360;
+					loops: Animation.Infinite
+					duration: 10000
+					running: iconRotation
+				}
+
+			}
+
+			Behavior on opacity { NumberAnimation { duration: 200 } }
 		}
 
-		DefaultLabel {
-			text: description
-			font.pixelSize: 12
-			color: secondLabelColor
+		ColumnLayout {
+			DefaultLabel {
+				Layout.fillWidth: true
+				Layout.minimumWidth: 0
+				text: name;
+				font.bold: true;
+				font.pixelSize: 22
+			}
+
+			DefaultLabel {
+				Layout.fillWidth: true
+				Layout.minimumWidth: 0
+				text: description;
+				color: secondLabelColor
+				font.pixelSize: 16
+			}
+
+			DefaultLabel {
+				Layout.fillWidth: true
+				Layout.minimumWidth: 0
+				text: parameters;
+				font.italic:  true;
+				color: thirdLabelColor
+				font.pixelSize: 10
+			}
 		}
-
-		DefaultLabel {
-			text: parameters
-			font.pixelSize: 10
-			color: thirdLabelColor
-		}
-
-//		Text {
-//			font.pixelSize: 14
-//			font.bold: true
-//			text: description
-//			color: secondLabelColor
-//		}
-
-//		Text {
-//			font.pixelSize: 10
-//			font.italic: true
-//			text: parameters
-//			color: thirdLabelColor
-//			visible: selected
-//		}
 	}
 }

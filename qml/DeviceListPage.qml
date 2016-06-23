@@ -17,10 +17,15 @@ Item {
 		delegate: DeviceDelegate {
 			width: parent.width
 			height: 128
+			//iconOpacity: emitterListView.currentIndex === index ? 1.0 : 0.25
+			color: broadcastClientView.currentIndex === index ? sg : bg
+			opacity: 1.0
 
 			MouseArea {
 				anchors.fill: parent
 				onClicked: {
+					webSocket.url = ""
+					broadcastClientView.currentIndex = index;
 					var address = "ws://"
 					address = address.concat(host, ":", port);
 					webSocket.url = address

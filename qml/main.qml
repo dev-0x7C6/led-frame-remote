@@ -5,6 +5,8 @@ import QtQuick.Layouts 1.3
 import QtWebSockets 1.0
 import QtGraphicalEffects 1.0
 
+import "components"
+
 ApplicationWindow {
 	id: window
 	height: 520
@@ -36,6 +38,7 @@ ApplicationWindow {
 
 	ListModel {
 		id: emitterModel
+		signal selectEmitter(int index)
 	}
 
 
@@ -51,10 +54,14 @@ ApplicationWindow {
 			var values = {
 				"name": arg.name,
 				"description": arg.description,
-				"parameters": arg.parameters,
-				"selected": false
+				"parameters": arg.parameters
 			}
+
 			emitterModel.append(values)
+
+			for (var i = 0; i < emitterModel.count; ++i)
+				if (emitterModel.get(i).name  === configuration.emitter)
+					emitterModel.selectEmitter(i)
 		}
 
 		function emitterDetached(arg) {
@@ -62,7 +69,6 @@ ApplicationWindow {
 
 		function recv(arg) {
 			fetch(arg)
-			deviceControlPage.update();
 		}
 	}
 
@@ -72,64 +78,73 @@ ApplicationWindow {
 		width: parent.width
 		height: 80
 
-		Rectangle {
-			id: backButton
-			width: opacity ? image.width : 0
-			anchors.left: parent.left
+		RowLayout {
+			anchors.fill: parent
 			anchors.leftMargin: 20
-			opacity: mainStackView.depth > 2 ? 1 : 0
-			anchors.verticalCenter: parent.verticalCenter
-			antialiasing: true
-			height: 60
-			radius: 4
-			color: backmouse.pressed ? "#222" : "transparent"
-			Behavior on opacity { NumberAnimation{} }
-			Image {
-				id: image
-				anchors.verticalCenter: parent.verticalCenter
+			anchors.rightMargin: 20
+			spacing: 10
+
+			MenuButton {
+				opacity: mainStackView.depth > 2 ? 1 : 0
+				visible: opacity != 0
 				source: "qrc:/images/navigation_previous_item.png"
-			}
-			MouseArea {
-				id: backmouse
-				anchors.fill: parent
-				anchors.margins: -10
-				onClicked: {
-					webSocket.url = ""
-					mainStackView.pop(deviceListPage)
+
+				MouseArea {
+					anchors.fill: parent
+					onClicked: mainStackView.pop(-1);
 				}
 			}
-		}
 
-		Text {
-			id: title
-			font.bold: true
-			font.pixelSize: 28
-			Behavior on x { NumberAnimation{ easing.type: Easing.OutCubic} }
-			Behavior on font.pixelSize { NumberAnimation{ easing.type: Easing.OutCubic} }
-			x: backButton.x + backButton.width + 20
-			anchors.verticalCenter: parent.verticalCenter
-			color: "white"
-			text: ""
-		}
+			Item {
+				id: main
+				Layout.fillWidth: true
+				Layout.fillHeight: true
 
-		Text {
-			id: subtitle
-			font.bold: true
-			font.pixelSize: 12
+				ColumnLayout {
+					anchors.fill: parent
+					anchors.topMargin: 20
+					anchors.bottomMargin: 20
 
-			Behavior on opacity { NumberAnimation{ easing.type: Easing.InOutCubic} }
-			Behavior on x { NumberAnimation{ easing.type: Easing.OutCubic} }
-			Behavior on font.pixelSize { NumberAnimation{ easing.type: Easing.OutCubic} }
-			x: backButton.x + backButton.width + 20
-			anchors.top: title.bottom
-			color: "orange"
-			text: ""
+					DefaultLabel {
+						Layout.fillWidth: true
+						Layout.minimumWidth: 0
+						minimumPointSize: 16
+						id: title
+						font.bold: true
+
+						color: "white"
+						text: ""
+					}
+
+					DefaultLabel {
+						Layout.fillWidth: true
+						Layout.minimumWidth: 0
+						id: subtitle
+						visible: configuration.device.length != 0
+						font.bold: true
+						color: "orange"
+						text: configuration.device
+					}
+				}
+			}
+
+			MenuButton {
+				opacity: webSocket.status == WebSocket.Open ? 1 : 0
+				visible: opacity != 0
+				source: "qrc:/config.png"
+
+				MouseArea {
+					anchors.fill: parent
+					onClicked: mainStackView.push(correctorPage);
+				}
+			}
 		}
 	}
 
 	StackView {
 		id: mainStackView
 		anchors.fill: parent
+
 		initialItem: DeviceWaitPage {
 			id: deviceWaitPage
 			text: "Searching for devices..."
@@ -140,28 +155,21 @@ ApplicationWindow {
 			visible: false
 		}
 
-		DeviceControlPage {
+		Component {
 			id: deviceControlPage
-			visible: false
+			DeviceControlPage {}
 		}
 
+		Component {
+			id: correctorPage
+			DeviceCorrectorPage {}
+		}
+
+
 		onCurrentItemChanged: {
-			if (currentItem == deviceListPage) {
-				title.text = "Devices"
-				subtitle.opacity = 0
-				title.font.pixelSize = 20
-			}
-
-			if (currentItem == deviceControlPage) {
-				title.font.pixelSize = 20
-				subtitle.opacity = 100
-			}
-
-			if (currentItem == deviceWaitPage) {
-				title.text = "Searching..."
-				title.font.pixelSize = 20
-				subtitle.opacity = 0
-			}
+			if (currentItem == deviceListPage) title.text = "Devices"
+			if (currentItem == deviceWaitPage) title.text = "Searching..."
+			if (currentItem == correctorPage) title.text = "Correction"
 
 			if (currentItem == deviceListPage) {
 				if (webSocket.status == WebSocket.Open)

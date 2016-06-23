@@ -5,6 +5,7 @@
 #include <QQmlComponent>
 #include <QQmlContext>
 #include <QQuickStyle>
+#include <QSplashScreen>
 
 #include <core/networking/broadcast-monitor.h>
 
@@ -13,6 +14,10 @@ int main(int argc, char *argv[]) {
 	QGuiApplication::setOrganizationName("LedFrame");
 	QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 	QApplication application(argc, argv);
+
+	QSplashScreen splash({":/device.png"});
+	splash.show();
+	application.processEvents();
 
 	QQmlApplicationEngine engine;
 	Network::BroadcastMonitor monitor;
@@ -25,5 +30,6 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 
+	splash.hide();
 	return application.exec();
 }

@@ -11,16 +11,16 @@ BaseDelegate {
 
 	RowLayout {
 		anchors.fill: delegate
-		anchors.leftMargin: 10
-		anchors.rightMargin: 10
-		spacing: 20
+		anchors.leftMargin: 20
+		anchors.rightMargin: 20
+		spacing: 25
 
 		DisplayIcon {
 			id: icon
 			borderColor: "orange"
 			ambientRadius: 6
-			height: parent.height;
-			width: parent.height;
+			height: parent.height / 1.2;
+			width: parent.height / 1.2;
 
 			SequentialAnimation {
 				loops: Animation.Infinite
@@ -29,24 +29,28 @@ BaseDelegate {
 				ColorAnimation { target: icon; property: "color"; to: "#44ff44"; duration: 3000 }
 				ColorAnimation { target: icon; property: "color"; to: "#4444ff"; duration: 3000 }
 			}
-
 		}
 
 		ColumnLayout {
 			DefaultLabel {
-				width: Layout.maximumWidth
+				Layout.fillWidth: true
+				Layout.minimumWidth: 0
 				text: device;
 				font.bold: true;
 				font.pixelSize: 22
 			}
 
 			DefaultLabel {
+				Layout.fillWidth: true
+				Layout.minimumWidth: 0
 				text: computer;
 				color: secondLabelColor
 				font.pixelSize: 16
 			}
 
 			DefaultLabel {
+				Layout.fillWidth: true
+				Layout.minimumWidth: 0
 				text: host + ":" + port;
 				font.italic:  true;
 				color: thirdLabelColor

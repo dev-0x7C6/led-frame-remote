@@ -7,70 +7,53 @@ import "delegates"
 Item {
 	id: canvas
 
-	SwipeView {
-		id: emitterView
-
-		currentIndex: 0
+	ListView {
+		id: emitterListView
 		anchors.fill: parent
+		model: emitterModel
+		currentIndex: -1
 
-		Item {
-			id: emitterManager
-			ListView {
-				id: emitterListView
+		delegate: EmitterDelegate {
+
+			function iconFromType(arg) {
+				if (arg === "Animation")
+					return "qrc:/animation.png"
+
+				if (arg === "Screen capture")
+					return "qrc:/desktop.png"
+
+				if (arg === "Image")
+					return "qrc:/image.png"
+
+				return "qrc:/color.png"
+			}
+
+			id: delegate
+			width: parent.width
+			implicitHeight: 80
+			iconSource: iconFromType(description)
+			iconRotation: emitterListView.currentIndex === index && description == "Animation"
+			color: emitterListView.currentIndex === index ? sg : bg
+			opacity: emitterListView.currentIndex === index ? 1.0 : 0.4
+
+
+			MouseArea {
 				anchors.fill: parent
-				model: emitterModel
-				delegate: EmitterDelegate {
-					id: delegate
-					width: parent.width
-					implicitHeight: 80
-
-					MouseArea {
-						anchors.fill: parent
-						onClicked: {
-							if (emitterListView.currentIndex == -1)
-								return
-
-							emitterModel.setProperty(emitterListView.currentIndex, "selected", false)
-							emitterModel.setProperty(index, "selected", true)
-							emitterListView.currentIndex = index
-						}
-					}
+				onClicked: {
+					emitterListView.currentIndex = index
+					configuration.emitter = emitterModel.get(index).name
 				}
-
-				onCurrentIndexChanged: configuration.emitter = emitterModel.get(currentIndex).name
 			}
 		}
 
-		DeviceCorrectorPage {
-			id: deviceCorrectorPage
+		Component.onCompleted: {
+			emitterModel.selectEmitter.connect(select)
 		}
 
-
-		function indexChanged() {
-			subtitle.text = configuration.device
-			if (currentItem == deviceCorrectorPage)
-				title.text = "Color correction"
-
-			if (currentItem == emitterManager)
-				title.text = "Emitters"
+		function select(arg) {
+			emitterListView.currentIndex = arg
 		}
 
-		onCurrentIndexChanged: indexChanged()
+		focus: true
 	}
-
-	PageIndicator {
-		id: indicator
-
-		count: emitterView.count
-		currentIndex: emitterView.currentIndex
-
-		anchors.bottom: emitterView.bottom
-		anchors.horizontalCenter: parent.horizontalCenter
-	}
-
-	function update() {
-		deviceCorrectorPage.update();
-		emitterView.indexChanged()
-	}
-
 }

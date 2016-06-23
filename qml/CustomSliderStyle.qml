@@ -5,6 +5,7 @@ import QtQuick.Controls.Styles 1.4
 Slider {
 	id: slider
 	property color color: "orange"
+	stepSize: 0.01
 
 	style: SliderStyle {
 		groove: Rectangle {

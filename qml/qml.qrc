@@ -16,5 +16,6 @@
         <file>qtquickcontrols2.conf</file>
         <file>components/DefaultLabel.qml</file>
         <file>components/DefaultRectangle.qml</file>
+        <file>components/MenuButton.qml</file>
     </qresource>
 </RCC>
