@@ -23,6 +23,13 @@ Item {
 
 		disableUpdate = true
 
+		if (json.command === "receiver_modified") {
+			console.log(JSON.stringify(json));
+			for (var i = 0; i < emitterModel.count; ++i)
+				if (emitterModel.get(i).name  === json.connected)
+					emitterModel.selectEmitter(i)
+		}
+
 		if (json.command === "set_global_correction") {
 			globalBrightness = json.l
 			globalRedCorrection = json.r
