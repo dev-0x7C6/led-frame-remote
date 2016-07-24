@@ -4,7 +4,6 @@ import QtQml.Models 2.2
 Item {
 	property string device: "";
 	property string emitter: ""
-	property string corrector: ""
 	property double globalBrightness : 0.5
 	property double globalRedCorrection : 0.5
 	property double globalGreenCorrection : 0.5
@@ -16,10 +15,11 @@ Item {
 	onGlobalGreenCorrectionChanged: changeCorrection()
 	onGlobalBlueCorrectionChanged: changeCorrection()
 	onEmitterChanged: changeEmitter()
-	onCorrectorChanged: changeCorrector()
 
 	function fetch(arg) {
 		var json = JSON.parse(arg)
+
+		console.log(JSON.stringify(json))
 
 		disableUpdate = true
 
@@ -37,11 +37,15 @@ Item {
 			globalBlueCorrection = json.b
 		}
 
-		if (json.command === "emitter_attached")
-			emitterAttached(json)
-
-		if (json.command === "emitter_detached")
-			emitterDetached(json)
+		if (json.parent === device && json.command === "corrector_attached") correctorAttached(json)
+		if (json.parent === device && json.command === "corrector_detached") correctorDetached(json)
+		if (json.parent === device && json.command === "corrector_motified") correctorMotified(json)
+		if (json.command === "receiver_attached") receiverAttached(json)
+		if (json.command === "receiver_detached") receiverDetached(json)
+		if (json.command === "receiver_motified") receiverMotified(json)
+		if (json.command === "emitter_attached") emitterAttached(json)
+		if (json.command === "emitter_detached") emitterDetached(json)
+		if (json.command === "emitter_motified") emitterMotified(json)
 
 		disableUpdate = false
 	}
@@ -67,11 +71,12 @@ Item {
 		precommit(command)
 	}
 
-	function changeCorrector() {
+	function changeCorrector(corrector, factor) {
 		var command = {
 			'command' : 'set_corrector',
 			'device' : device,
-			'corrector' : corrector
+			'corrector' : corrector,
+			'factor' : factor
 		}
 
 		precommit(command)
@@ -86,6 +91,5 @@ Item {
 
 	function emitterAttached(arg) {}
 	function emitterDetached(arg) {}
-
 	function commit(command) {}
 }

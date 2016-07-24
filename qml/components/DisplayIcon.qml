@@ -21,7 +21,7 @@ Item {
 		spread: 0.1
 		color: parent.color
 		cornerRadius: glowRadius * 1.5
-		cached: true
+		cached: false
 	}
 
 	Glow {
@@ -40,7 +40,7 @@ Item {
 		fillMode: Image.PreserveAspectFit
 		source: parent.source
 		smooth: true
-		cache: true
+		cache: false
 	}
 
 }

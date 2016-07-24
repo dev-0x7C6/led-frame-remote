@@ -32,6 +32,7 @@ ApplicationWindow {
 			if (webSocket.status == WebSocket.Open) {
 				mainStackView.push(deviceControlPage)
 				emitterModel.clear()
+				correctorModel.clear()
 			}
 		}
 	}
@@ -39,6 +40,10 @@ ApplicationWindow {
 	ListModel {
 		id: emitterModel
 		signal selectEmitter(int index)
+	}
+
+	ListModel {
+		id: correctorModel
 	}
 
 
@@ -49,6 +54,8 @@ ApplicationWindow {
 			if (webSocket.status == WebSocket.Open)
 				webSocket.sendTextMessage(JSON.stringify(command))
 		}
+
+		function correctorAttached(arg) { correctorModel.append(arg) }
 
 		function emitterAttached(arg) {
 			var values = {
@@ -64,8 +71,7 @@ ApplicationWindow {
 					emitterModel.selectEmitter(i)
 		}
 
-		function emitterDetached(arg) {
-		}
+		function emitterDetached(arg) {}
 
 		function recv(arg) {
 			fetch(arg)
@@ -177,6 +183,27 @@ ApplicationWindow {
 			}
 		}
 
+		delegate: StackViewDelegate {
+			   function transitionFinished(properties)
+			   {
+				   properties.exitItem.opacity = 1
+			   }
+
+			   pushTransition: StackViewTransition {
+				   PropertyAnimation {
+					   target: enterItem
+					   property: "opacity"
+					   from: 0
+					   to: 1
+				   }
+				   PropertyAnimation {
+					   target: exitItem
+					   property: "opacity"
+					   from: 1
+					   to: 0
+				   }
+			   }
+		   }
 	}
 
 	Connections {
