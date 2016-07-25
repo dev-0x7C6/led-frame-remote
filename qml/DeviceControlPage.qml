@@ -32,7 +32,7 @@ Item {
 
 				id: delegate
 				width: parent.width
-				implicitHeight: 80
+				implicitHeight: 100
 				iconSource: iconFromType(description)
 				iconRotation: emitterListView.currentIndex === index && description == "Animation"
 				color: emitterListView.currentIndex === index ? sg : bg
@@ -66,11 +66,11 @@ Item {
 
 			delegate: CorrectorDelegate {
 				id: delegate
+				value: factor
 				min: minimumFactor
 				max: maximumFactor
-				value: factor
 				width: parent.width
-				implicitHeight: 180
+				implicitHeight: 100
 				iconSource: "qrc:/color.png"
 				iconRotation: true
 				color: bg
@@ -81,6 +81,7 @@ Item {
 			}
 
 			Component.onCompleted: {
+				delegate.value = factor;
 				emitterModel.selectEmitter.connect(select)
 			}
 
