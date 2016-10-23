@@ -19,7 +19,6 @@ Item {
 			width: parent.height
 		}
 
-
 		Label {
 			text: "Color emitter"
 			color: "white"

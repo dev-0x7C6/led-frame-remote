@@ -33,7 +33,7 @@ BaseDelegate {
 		DefaultLabel {
 			Layout.fillWidth: true
 			Layout.minimumWidth: 0
-			text: correctorType(type);
+			text: correctorType(corrector_type);
 			font.bold: true;
 			font.pixelSize: 22
 		}

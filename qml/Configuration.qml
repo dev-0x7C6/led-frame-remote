@@ -2,7 +2,7 @@ import QtQuick 2.6
 import QtQml.Models 2.2
 
 Item {
-	property string device: "";
+	property int device: -1;
 	property string emitter: ""
 	property double globalBrightness : 0.5
 	property double globalRedCorrection : 0.5
@@ -20,7 +20,6 @@ Item {
 		var json = JSON.parse(arg)
 
 		console.log(JSON.stringify(json))
-
 		disableUpdate = true
 
 		if (json.command === "receiver_modified") {
@@ -37,9 +36,9 @@ Item {
 			globalBlueCorrection = json.b
 		}
 
-		if (json.parent === device && json.command === "corrector_attached") correctorAttached(json)
-		if (json.parent === device && json.command === "corrector_detached") correctorDetached(json)
-		if (json.parent === device && json.command === "corrector_motified") correctorMotified(json)
+		if (json.corrector_owner === device && json.command === "corrector_attached") correctorAttached(json)
+		if (json.corrector_owner === device && json.command === "corrector_detached") correctorDetached(json)
+		if (json.corrector_owner === device && json.command === "corrector_motified") correctorMotified(json)
 		if (json.command === "receiver_attached") receiverAttached(json)
 		if (json.command === "receiver_detached") receiverDetached(json)
 		if (json.command === "receiver_motified") receiverMotified(json)
@@ -71,11 +70,11 @@ Item {
 		precommit(command)
 	}
 
-	function changeCorrector(corrector, factor) {
+	function changeCorrector(id, factor) {
 		var command = {
 			'command' : 'set_corrector',
 			'device' : device,
-			'corrector' : corrector,
+			'id' : id,
 			'factor' : factor
 		}
 

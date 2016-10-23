@@ -65,10 +65,9 @@ Item {
 			currentIndex: -1
 
 			delegate: CorrectorDelegate {
-				id: delegate
-				value: factor
-				min: minimumFactor
-				max: maximumFactor
+				value: corrector_factor_current
+				min: corrector_factor_min
+				max: corrector_factor_max
 				width: parent.width
 				implicitHeight: 100
 				iconSource: "qrc:/color.png"
@@ -76,12 +75,12 @@ Item {
 				color: bg
 				opacity: 1.0
 				onValueChanged: {
-					configuration.changeCorrector(type, value)
+					configuration.changeCorrector(corrector_id, value)
 				}
 			}
 
 			Component.onCompleted: {
-				delegate.value = factor;
+				//delegate.value = corrector_factor_current;
 				emitterModel.selectEmitter.connect(select)
 			}
 
