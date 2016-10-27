@@ -3,7 +3,8 @@ import QtQml.Models 2.2
 
 Item {
 	property int device: -1;
-	property string emitter: ""
+	property string name: "";
+	property int emitter: -1;
 	property double globalBrightness : 0.5
 	property double globalRedCorrection : 0.5
 	property double globalGreenCorrection : 0.5
@@ -36,15 +37,20 @@ Item {
 			globalBlueCorrection = json.b
 		}
 
+		if (json.message === "notification" && json.source === "emitter") {
+			switch (json.event) {
+			case "attached": emitterAttached(json); break;
+			case "detached": emitterDetached(json); break;
+			case "modified": emitterMotified(json); break;
+			}
+		}
+
 		if (json.corrector_owner === device && json.command === "corrector_attached") correctorAttached(json)
 		if (json.corrector_owner === device && json.command === "corrector_detached") correctorDetached(json)
 		if (json.corrector_owner === device && json.command === "corrector_motified") correctorMotified(json)
 		if (json.command === "receiver_attached") receiverAttached(json)
 		if (json.command === "receiver_detached") receiverDetached(json)
 		if (json.command === "receiver_motified") receiverMotified(json)
-		if (json.command === "emitter_attached") emitterAttached(json)
-		if (json.command === "emitter_detached") emitterDetached(json)
-		if (json.command === "emitter_motified") emitterMotified(json)
 
 		disableUpdate = false
 	}

@@ -29,7 +29,7 @@ Item {
 					var address = "ws://"
 					address = address.concat(host, ":", port);
 					webSocket.url = address
-					configuration.device = device
+					configuration.device = id
 				}
 			}
 		}

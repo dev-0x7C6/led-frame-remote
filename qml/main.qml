@@ -58,16 +58,10 @@ ApplicationWindow {
 		function correctorAttached(arg) { correctorModel.append(arg) }
 
 		function emitterAttached(arg) {
-			var values = {
-				"name": arg.name,
-				"description": arg.description,
-				"parameters": arg.parameters
-			}
-
-			emitterModel.append(values)
+			emitterModel.append(arg)
 
 			for (var i = 0; i < emitterModel.count; ++i)
-				if (emitterModel.get(i).name  === configuration.emitter)
+				if (emitterModel.get(i).emitter_id  === configuration.emitter)
 					emitterModel.selectEmitter(i)
 		}
 

@@ -47,7 +47,7 @@ BaseDelegate {
 			DefaultLabel {
 				Layout.fillWidth: true
 				Layout.minimumWidth: 0
-				text: name;
+				text: datagram.name;
 				font.bold: true;
 				font.pixelSize: 22
 			}
@@ -55,7 +55,7 @@ BaseDelegate {
 			DefaultLabel {
 				Layout.fillWidth: true
 				Layout.minimumWidth: 0
-				text: description;
+				text: datagram.description;
 				color: secondLabelColor
 				font.pixelSize: 16
 			}
@@ -63,7 +63,7 @@ BaseDelegate {
 			DefaultLabel {
 				Layout.fillWidth: true
 				Layout.minimumWidth: 0
-				text: parameters;
+				text: "";
 				font.italic:  true;
 				color: thirdLabelColor
 				font.pixelSize: 10

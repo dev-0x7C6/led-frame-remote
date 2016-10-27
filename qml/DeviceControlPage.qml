@@ -18,13 +18,13 @@ Item {
 			delegate: EmitterDelegate {
 
 				function iconFromType(arg) {
-					if (arg === "Animation")
+					if (arg === "animation")
 						return "qrc:/animation.png"
 
-					if (arg === "Screen capture")
+					if (arg === "display")
 						return "qrc:/desktop.png"
 
-					if (arg === "Image")
+					if (arg === "image")
 						return "qrc:/image.png"
 
 					return "qrc:/color.png"
@@ -33,8 +33,8 @@ Item {
 				id: delegate
 				width: parent.width
 				implicitHeight: 100
-				iconSource: iconFromType(description)
-				iconRotation: emitterListView.currentIndex === index && description == "Animation"
+				iconSource: iconFromType(datagram.type)
+				iconRotation: emitterListView.currentIndex === index && datagram.type === "animation"
 				color: emitterListView.currentIndex === index ? sg : bg
 				opacity: emitterListView.currentIndex === index ? 1.0 : 0.4
 
@@ -43,7 +43,7 @@ Item {
 					anchors.fill: parent
 					onClicked: {
 						emitterListView.currentIndex = index
-						configuration.emitter = emitterModel.get(index).name
+						configuration.emitter = emitterModel.get(index).datagram.id
 					}
 				}
 			}
