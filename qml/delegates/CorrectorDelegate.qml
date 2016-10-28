@@ -17,10 +17,10 @@ BaseDelegate {
 	property string iconSource
 
 	function correctorType(arg) {
-		if (arg === 0) return "Color enhancer"
-		if (arg === 1) return "Brightness"
-		if (arg === 2) return "RGB Correction"
-		if (arg === 3) return "Flickr effect"
+		if (arg === "color_enhancer") return "Color enhancer"
+		if (arg === "brightness") return "Brightness"
+		if (arg === "rgbchannel") return "RGB Correction"
+		if (arg === "flickr_effect") return "Flickr effect"
 		return "Unknown"
 	}
 
@@ -33,7 +33,7 @@ BaseDelegate {
 		DefaultLabel {
 			Layout.fillWidth: true
 			Layout.minimumWidth: 0
-			text: correctorType(corrector_type);
+			text: correctorType(datagram.type);
 			font.bold: true;
 			font.pixelSize: 22
 		}

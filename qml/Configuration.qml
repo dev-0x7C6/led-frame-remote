@@ -23,13 +23,6 @@ Item {
 		console.log(JSON.stringify(json))
 		disableUpdate = true
 
-		if (json.command === "receiver_modified") {
-			console.log(JSON.stringify(json));
-			for (var i = 0; i < emitterModel.count; ++i)
-				if (emitterModel.get(i).name  === json.connected)
-					emitterModel.selectEmitter(i)
-		}
-
 		if (json.command === "set_global_correction") {
 			globalBrightness = json.l
 			globalRedCorrection = json.r
@@ -41,16 +34,32 @@ Item {
 			switch (json.event) {
 			case "attached": emitterAttached(json); break;
 			case "detached": emitterDetached(json); break;
-			case "modified": emitterMotified(json); break;
+			case "modified": emitterModified(json); break;
 			}
 		}
 
-		if (json.corrector_owner === device && json.command === "corrector_attached") correctorAttached(json)
-		if (json.corrector_owner === device && json.command === "corrector_detached") correctorDetached(json)
-		if (json.corrector_owner === device && json.command === "corrector_motified") correctorMotified(json)
-		if (json.command === "receiver_attached") receiverAttached(json)
-		if (json.command === "receiver_detached") receiverDetached(json)
-		if (json.command === "receiver_motified") receiverMotified(json)
+		if (json.message === "notification" && json.source === "corrector") {
+			switch (json.event) {
+			case "attached": correctorAttached(json); break;
+			case "detached": correctorDetached(json); break;
+			case "modified": correctorModified(json); break;
+			}
+		}
+
+		if (json.message === "notification" && json.source === "receiver") {
+			switch (json.event) {
+			case "attached": receiverAttached(json); break;
+			case "detached": receiverDetached(json); break;
+			case "modified": receiverModified(json); break;
+			}
+		}
+
+		//		if (json.command === "receiver_modified") {
+		//			console.log(JSON.stringify(json));
+		//			for (var i = 0; i < emitterModel.count; ++i)
+		//				if (emitterModel.get(i).name  === json.connected)
+		//					emitterModel.selectEmitter(i)
+		//		}
 
 		disableUpdate = false
 	}
@@ -96,5 +105,13 @@ Item {
 
 	function emitterAttached(arg) {}
 	function emitterDetached(arg) {}
+	function emitterModified(arg) {}
+	function correctorAttached(arg) {}
+	function correctorDetached(arg) {}
+	function correctorModified(arg) {}
+	function receiverAttached(arg) {}
+	function receiverDetached(arg) {}
+	function receiverModified(arg) {}
+
 	function commit(command) {}
 }

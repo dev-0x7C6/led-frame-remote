@@ -75,7 +75,7 @@ Item {
 				color: bg
 				opacity: 1.0
 				onValueChanged: {
-					configuration.changeCorrector(corrector_id, value)
+					configuration.changeCorrector(datagram.id, value)
 				}
 			}
 
