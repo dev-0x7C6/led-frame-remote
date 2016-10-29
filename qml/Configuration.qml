@@ -15,7 +15,7 @@ Item {
 	onGlobalRedCorrectionChanged: changeCorrection()
 	onGlobalGreenCorrectionChanged: changeCorrection()
 	onGlobalBlueCorrectionChanged: changeCorrection()
-	onEmitterChanged: changeEmitter()
+	onEmitterChanged: setEmitter()
 
 	function fetch(arg) {
 		var json = JSON.parse(arg)
@@ -64,6 +64,17 @@ Item {
 		disableUpdate = false
 	}
 
+	function setEmitter() {
+		var json = {
+			'message' : 'command',
+			'version' : '1',
+			'event' : 'set_emitter',
+			'receiver' : device,
+			'emitter' : emitter,
+		}
+		precommit(json)
+	}
+
 	function changeCorrection() {
 		var command = {
 			'command' : 'set_correction',
@@ -72,16 +83,6 @@ Item {
 			'g' : globalGreenCorrection,
 			'b' : globalBlueCorrection
 		}
-		precommit(command)
-	}
-
-	function changeEmitter() {
-		var command = {
-			'command' : 'set_emitter',
-			'device' : device,
-			'emitter' : emitter
-		}
-
 		precommit(command)
 	}
 
