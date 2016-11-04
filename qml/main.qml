@@ -93,7 +93,10 @@ ApplicationWindow {
 
 				MouseArea {
 					anchors.fill: parent
-					onClicked: mainStackView.pop(-1);
+					onClicked: {
+						if (mainStackView.depth > 2)
+							mainStackView.pop(-1);
+					}
 				}
 			}
 
