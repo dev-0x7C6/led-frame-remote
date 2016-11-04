@@ -16,7 +16,6 @@ Item {
 			currentIndex: -1
 
 			delegate: EmitterDelegate {
-
 				function iconFromType(arg) {
 					if (arg === "animation")
 						return "qrc:/animation.png"
@@ -65,22 +64,23 @@ Item {
 			currentIndex: -1
 
 			delegate: CorrectorDelegate {
-				value: corrector_factor_current
-				min: corrector_factor_min
-				max: corrector_factor_max
+				value: datagram.factor
+				min: datagram.min
+				max: datagram.max
+				height: configuration.device === datagram.owner ? 100 : 0
 				width: parent.width
 				implicitHeight: 100
 				iconSource: "qrc:/color.png"
 				iconRotation: true
 				color: bg
 				opacity: 1.0
+				visible: configuration.device === datagram.owner
 				onValueChanged: {
-					configuration.changeCorrector(datagram.id, value)
+					configuration.changeCorrector(datagram.id, value, value > datagram.min)
 				}
 			}
 
 			Component.onCompleted: {
-				//delegate.value = corrector_factor_current;
 				emitterModel.selectEmitter.connect(select)
 			}
 

@@ -30,36 +30,31 @@ Item {
 			globalBlueCorrection = json.b
 		}
 
-		if (json.message === "notification" && json.source === "emitter") {
-			switch (json.event) {
-			case "attached": emitterAttached(json); break;
-			case "detached": emitterDetached(json); break;
-			case "modified": emitterModified(json); break;
+		if (json.message === "notification") {
+			if (json.source === "emitter") {
+				switch (json.event) {
+				case "attached": emitterAttached(json); break;
+				case "detached": emitterDetached(json); break;
+				case "modified": emitterModified(json); break;
+				}
+			}
+
+			if (json.source === "corrector") {
+				switch (json.event) {
+				case "attached": correctorAttached(json); break;
+				case "detached": correctorDetached(json); break;
+				case "modified": correctorModified(json); break;
+				}
+			}
+
+			if (json.source === "receiver") {
+				switch (json.event) {
+				case "attached": receiverAttached(json); break;
+				case "detached": receiverDetached(json); break;
+				case "modified": receiverModified(json); break;
+				}
 			}
 		}
-
-		if (json.message === "notification" && json.source === "corrector") {
-			switch (json.event) {
-			case "attached": correctorAttached(json); break;
-			case "detached": correctorDetached(json); break;
-			case "modified": correctorModified(json); break;
-			}
-		}
-
-		if (json.message === "notification" && json.source === "receiver") {
-			switch (json.event) {
-			case "attached": receiverAttached(json); break;
-			case "detached": receiverDetached(json); break;
-			case "modified": receiverModified(json); break;
-			}
-		}
-
-		//		if (json.command === "receiver_modified") {
-		//			console.log(JSON.stringify(json));
-		//			for (var i = 0; i < emitterModel.count; ++i)
-		//				if (emitterModel.get(i).name  === json.connected)
-		//					emitterModel.selectEmitter(i)
-		//		}
 
 		disableUpdate = false
 	}
@@ -75,6 +70,19 @@ Item {
 		precommit(json)
 	}
 
+	function changeCorrector(id, factor, enabled) {
+		var json = {
+			'message' : 'command',
+			'version' : '1',
+			'event' : 'set_corrector',
+			'receiver' : device,
+			'corrector' : id,
+			'factor' : factor,
+			'enabled' : enabled,
+		}
+		precommit(json)
+	}
+
 	function changeCorrection() {
 		var command = {
 			'command' : 'set_correction',
@@ -83,17 +91,6 @@ Item {
 			'g' : globalGreenCorrection,
 			'b' : globalBlueCorrection
 		}
-		precommit(command)
-	}
-
-	function changeCorrector(id, factor) {
-		var command = {
-			'command' : 'set_corrector',
-			'device' : device,
-			'id' : id,
-			'factor' : factor
-		}
-
 		precommit(command)
 	}
 

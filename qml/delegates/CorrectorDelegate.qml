@@ -25,7 +25,7 @@ BaseDelegate {
 	}
 
 	ColumnLayout {
-		anchors.fill: delegate
+		anchors.fill: base
 		anchors.leftMargin: 20
 		anchors.rightMargin: 20
 		spacing: 0

@@ -55,7 +55,9 @@ ApplicationWindow {
 				webSocket.sendTextMessage(JSON.stringify(command))
 		}
 
-		function correctorAttached(arg) { correctorModel.append(arg) }
+		function correctorAttached(arg) {
+			correctorModel.append(arg)
+		}
 
 		function emitterAttached(arg) {
 			emitterModel.append(arg)
