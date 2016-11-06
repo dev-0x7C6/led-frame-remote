@@ -18,5 +18,6 @@
         <file>components/DefaultRectangle.qml</file>
         <file>components/MenuButton.qml</file>
         <file>delegates/CorrectorDelegate.qml</file>
+        <file>../js/functions.js</file>
     </qresource>
 </RCC>

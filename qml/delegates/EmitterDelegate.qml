@@ -55,7 +55,7 @@ BaseDelegate {
 			DefaultLabel {
 				Layout.fillWidth: true
 				Layout.minimumWidth: 0
-				text: datagram.description;
+				text: datagram.type
 				color: secondLabelColor
 				font.pixelSize: 16
 			}

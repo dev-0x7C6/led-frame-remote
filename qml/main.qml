@@ -61,9 +61,22 @@ ApplicationWindow {
 
 		function emitterAttached(arg) {
 			emitterModel.append(arg)
-
 			for (var i = 0; i < emitterModel.count; ++i)
-				if (emitterModel.get(i).emitter_id  === configuration.emitter)
+				if (emitterModel.get(i).datagram.id  === configuration.emitter)
+					emitterModel.selectEmitter(i)
+		}
+
+		function receiverAttached(arg) {
+			configuration.emitter = arg.datagram.emitter;
+			for (var i = 0; i < emitterModel.count; ++i)
+				if (emitterModel.get(i).datagram.id  === configuration.emitter)
+					emitterModel.selectEmitter(i)
+		}
+
+		function receiverModified(arg) {
+			configuration.emitter = arg.datagram.emitter;
+			for (var i = 0; i < emitterModel.count; ++i)
+				if (emitterModel.get(i).datagram.id  === configuration.emitter)
 					emitterModel.selectEmitter(i)
 		}
 

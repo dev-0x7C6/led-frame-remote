@@ -3,11 +3,13 @@ import QtQuick.Controls 2.0
 
 import "emitters"
 import "delegates"
+import "../js/functions.js" as Logic
 
 Item {
 	id: canvas
 
 	SwipeView {
+		id: view
 		anchors.fill: parent
 
 		ListView {
@@ -16,27 +18,13 @@ Item {
 			currentIndex: -1
 
 			delegate: EmitterDelegate {
-				function iconFromType(arg) {
-					if (arg === "animation")
-						return "qrc:/animation.png"
-
-					if (arg === "display")
-						return "qrc:/desktop.png"
-
-					if (arg === "image")
-						return "qrc:/image.png"
-
-					return "qrc:/color.png"
-				}
-
 				id: delegate
 				width: parent.width
 				implicitHeight: 100
-				iconSource: iconFromType(datagram.type)
+				iconSource: Logic.emitterIconFromType(datagram.type)
 				iconRotation: emitterListView.currentIndex === index && datagram.type === "animation"
 				color: emitterListView.currentIndex === index ? sg : bg
 				opacity: emitterListView.currentIndex === index ? 1.0 : 0.4
-
 
 				MouseArea {
 					anchors.fill: parent
@@ -54,8 +42,6 @@ Item {
 			function select(arg) {
 				emitterListView.currentIndex = arg
 			}
-
-			focus: true
 		}
 
 		ListView {
@@ -79,17 +65,17 @@ Item {
 					configuration.changeCorrector(datagram.id, value, value > datagram.min)
 				}
 			}
-
-			Component.onCompleted: {
-				emitterModel.selectEmitter.connect(select)
-			}
-
-			function select(arg) {
-				emitterListView.currentIndex = arg
-			}
-
-			focus: true
 		}
 
+	}
+
+	PageIndicator {
+		id: indicator
+
+		count: view.count
+		currentIndex: view.currentIndex
+
+		anchors.bottom: view.bottom
+		anchors.horizontalCenter: parent.horizontalCenter
 	}
 }
