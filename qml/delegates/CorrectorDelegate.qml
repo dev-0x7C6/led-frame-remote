@@ -4,6 +4,7 @@ import QtQuick.Controls.Styles 1.4
 import QtGraphicalEffects 1.0
 import QtQuick.Controls 1.4
 
+import "../js/functions.js" as Logic
 import "../components"
 import ".."
 
@@ -16,14 +17,6 @@ BaseDelegate {
 	property bool iconRotation : false
 	property string iconSource
 
-	function correctorType(arg) {
-		if (arg === "color_enhancer") return "Color enhancer"
-		if (arg === "brightness") return "Brightness"
-		if (arg === "rgbchannel") return "RGB Correction"
-		if (arg === "flickr_effect") return "Flickr effect"
-		return "Unknown"
-	}
-
 	ColumnLayout {
 		anchors.fill: base
 		anchors.leftMargin: 20
@@ -33,7 +26,7 @@ BaseDelegate {
 		DefaultLabel {
 			Layout.fillWidth: true
 			Layout.minimumWidth: 0
-			text: correctorType(datagram.type);
+			text: Logic.correctorTextFromType(datagram.type);
 			font.bold: true;
 			font.pixelSize: 22
 		}

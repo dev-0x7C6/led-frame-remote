@@ -59,7 +59,8 @@ Item {
 				iconSource: "qrc:/color.png"
 				iconRotation: true
 				color: bg
-				opacity: 1.0
+				opacity: (value > datagram.min) ? 1.0 : 0.3
+				Behavior on opacity { NumberAnimation{} }
 				visible: configuration.device === datagram.owner
 				onValueChanged: {
 					configuration.changeCorrector(datagram.id, value, value > datagram.min)
