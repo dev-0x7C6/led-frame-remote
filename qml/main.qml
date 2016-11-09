@@ -82,6 +82,10 @@ ApplicationWindow {
 		}
 
 		function correctorModified(arg) {
+			for (var i = 0; i < correctorModel.count; ++i)
+				if (correctorModel.get(i).datagram.id  === arg.datagram.id)
+					correctorModel.set(i, arg)
+
 			if (arg.datagram.owner !== -1)
 				return;
 
@@ -113,14 +117,14 @@ ApplicationWindow {
 		}
 
 		function receiverAttached(arg) {
-			configuration.emitter = arg.datagram.emitter;
+			emitter = arg.datagram.emitter;
 			for (var i = 0; i < emitterModel.count; ++i)
 				if (emitterModel.get(i).datagram.id  === configuration.emitter)
 					emitterModel.selectEmitter(i)
 		}
 
 		function receiverModified(arg) {
-			configuration.emitter = arg.datagram.emitter;
+			emitter = arg.datagram.emitter;
 			for (var i = 0; i < emitterModel.count; ++i)
 				if (emitterModel.get(i).datagram.id  === configuration.emitter)
 					emitterModel.selectEmitter(i)
