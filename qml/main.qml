@@ -57,6 +57,52 @@ ApplicationWindow {
 
 		function correctorAttached(arg) {
 			correctorModel.append(arg)
+
+			if (arg.datagram.owner !== -1)
+				return;
+
+			switch (arg.datagram.type) {
+				case "brightness":
+					globalLValue = arg.datagram.factor;
+					globalLId = arg.datagram.id;
+					break;
+				case "red_channel":
+					globalRValue = arg.datagram.factor;
+					globalRId = arg.datagram.id;
+					break;
+				case "green_channel":
+					globalGValue = arg.datagram.factor;
+					globalGId = arg.datagram.id;
+					break;
+				case "blue_channel":
+					globalBValue = arg.datagram.factor;
+					globalBId = arg.datagram.id;
+					break;
+			}
+		}
+
+		function correctorModified(arg) {
+			if (arg.datagram.owner !== -1)
+				return;
+
+			switch (arg.datagram.type) {
+				case "brightness":
+					globalLValue = arg.datagram.factor;
+					globalLId = arg.datagram.id;
+					break;
+				case "red_channel":
+					globalRValue = arg.datagram.factor;
+					globalRId = arg.datagram.id;
+					break;
+				case "green_channel":
+					globalGValue = arg.datagram.factor;
+					globalGId = arg.datagram.id;
+					break;
+				case "blue_channel":
+					globalBValue = arg.datagram.factor;
+					globalBId = arg.datagram.id;
+					break;
+			}
 		}
 
 		function emitterAttached(arg) {

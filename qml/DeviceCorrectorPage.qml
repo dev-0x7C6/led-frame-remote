@@ -37,7 +37,7 @@ Item {
 					id: lSlider
 					color: "white"
 					onValueChanged: {
-						if (pressed) configuration.globalBrightness = value
+						if (pressed) configuration.globalLValue = value
 						icon.color.a = value;
 					}
 				}
@@ -47,7 +47,7 @@ Item {
 					Layout.fillWidth: true
 					color: "tomato"
 					onValueChanged: {
-						if (pressed) configuration.globalRedCorrection = value
+						if (pressed) configuration.globalRValue = value
 						icon.color.r = value;
 					}
 				}
@@ -57,7 +57,7 @@ Item {
 					Layout.fillWidth: true
 					color: "lightGreen"
 					onValueChanged: {
-						if (pressed) configuration.globalGreenCorrection = value
+						if (pressed) configuration.globalGValue = value
 						icon.color.g = value;
 					}
 				}
@@ -67,7 +67,7 @@ Item {
 					Layout.fillWidth: true
 					color: "lightBlue"
 					onValueChanged: {
-						if (pressed) configuration.globalBlueCorrection = value
+						if (pressed) configuration.globalBValue = value
 						icon.color.b = value;
 					}
 				}
@@ -75,10 +75,10 @@ Item {
 		}
 	}
 
-	readonly property double l: configuration.globalBrightness
-	readonly property double r: configuration.globalRedCorrection
-	readonly property double g: configuration.globalGreenCorrection
-	readonly property double b: configuration.globalBlueCorrection
+	readonly property double l: configuration.globalLValue
+	readonly property double r: configuration.globalRValue
+	readonly property double g: configuration.globalGValue
+	readonly property double b: configuration.globalBValue
 
 	onLChanged: if (!lSlider.pressed) lSlider.value = l
 	onRChanged: if (!rSlider.pressed) rSlider.value = r
@@ -86,10 +86,10 @@ Item {
 	onBChanged: if (!bSlider.pressed) bSlider.value = b
 
 	Component.onCompleted: {
-		lSlider.value = configuration.globalBrightness;
-		rSlider.value = configuration.globalRedCorrection;
-		gSlider.value = configuration.globalGreenCorrection;
-		bSlider.value = configuration.globalBlueCorrection;
+		lSlider.value = configuration.globalLValue;
+		rSlider.value = configuration.globalRValue;
+		gSlider.value = configuration.globalGValue;
+		bSlider.value = configuration.globalBValue;
 	}
 }
 

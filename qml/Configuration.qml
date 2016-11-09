@@ -5,16 +5,22 @@ Item {
 	property int device: -1;
 	property string name: "";
 	property int emitter: -1;
-	property double globalBrightness : 0.5
-	property double globalRedCorrection : 0.5
-	property double globalGreenCorrection : 0.5
-	property double globalBlueCorrection: 0.5
+
+	property double globalLValue: 0.0
+	property double globalRValue: 0.0
+	property double globalGValue: 0.0
+	property double globalBValue: 0.0
+	property int globalLId: -1
+	property int globalRId: -1
+	property int globalGId: -1
+	property int globalBId: -1
+
 	property bool disableUpdate : false
 
-	onGlobalBrightnessChanged: changeCorrection()
-	onGlobalRedCorrectionChanged: changeCorrection()
-	onGlobalGreenCorrectionChanged: changeCorrection()
-	onGlobalBlueCorrectionChanged: changeCorrection()
+	onGlobalLValueChanged: changeCorrector(globalLId, globalLValue, true);
+	onGlobalRValueChanged: changeCorrector(globalRId, globalRValue, true);
+	onGlobalGValueChanged: changeCorrector(globalGId, globalGValue, true);
+	onGlobalBValueChanged: changeCorrector(globalBId, globalBValue, true);
 	onEmitterChanged: setEmitter()
 
 	function fetch(arg) {
@@ -22,13 +28,6 @@ Item {
 
 		console.log(JSON.stringify(json))
 		disableUpdate = true
-
-		if (json.command === "set_global_correction") {
-			globalBrightness = json.l
-			globalRedCorrection = json.r
-			globalGreenCorrection = json.g
-			globalBlueCorrection = json.b
-		}
 
 		if (json.message === "notification") {
 			if (json.source === "emitter") {
@@ -81,17 +80,6 @@ Item {
 			'enabled' : enabled,
 		}
 		precommit(json)
-	}
-
-	function changeCorrection() {
-		var command = {
-			'command' : 'set_correction',
-			'l' : globalBrightness,
-			'r' : globalRedCorrection,
-			'g' : globalGreenCorrection,
-			'b' : globalBlueCorrection
-		}
-		precommit(command)
 	}
 
 	function precommit(command) {
