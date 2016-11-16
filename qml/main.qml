@@ -1,6 +1,7 @@
-import QtQuick 2.6
-import QtQuick.Controls 1.4
-import QtQuick.Controls.Styles 1.4
+import QtQuick 2.7
+import QtQuick.Controls 2.1
+import QtQuick.Controls.Material 2.1
+
 import QtQuick.Layouts 1.3
 import QtWebSockets 1.0
 import QtGraphicalEffects 1.0
@@ -13,10 +14,13 @@ ApplicationWindow {
 	width: 360
 	visible: true
 
-	Rectangle {
-		color: Qt.darker("#101020", 2)
-		anchors.fill: parent
-	}
+	Material.theme: Material.Dark
+	Material.accent: Material.Orange
+
+//	Rectangle {
+//		color: Qt.darker("#101020", 2)
+//		anchors.fill: parent
+//	}
 
 	WebSocket {
 		id: webSocket
@@ -137,7 +141,27 @@ ApplicationWindow {
 		}
 	}
 
-	toolBar: BorderImage {
+	Drawer {
+		id: drawer
+		width: 0.66 * window.width
+		height: window.height
+	}
+
+//	Label {
+//		id: content
+
+//		text: "Aa"
+//		font.pixelSize: 96
+//		anchors.fill: parent
+//		verticalAlignment: Label.AlignVCenter
+//		horizontalAlignment: Label.AlignHCenter
+
+//		transform: Translate {
+//			x: drawer.position * content.width * 0.33
+//		}
+//	}
+
+	header: BorderImage {
 		border.bottom: 8
 		source: "qrc:/images/toolbar.png"
 		width: parent.width
@@ -213,8 +237,8 @@ ApplicationWindow {
 		id: mainStackView
 		anchors.fill: parent
 
-		initialItem: DeviceWaitPage {
-			id: deviceWaitPage
+		initialItem: WaitPage {
+			id: waitingForConnectionPage
 			text: "Searching for devices..."
 		}
 
@@ -236,7 +260,7 @@ ApplicationWindow {
 
 		onCurrentItemChanged: {
 			if (currentItem == deviceListPage) title.text = "Devices"
-			if (currentItem == deviceWaitPage) title.text = "Searching..."
+			if (currentItem == waitingForConnectionPage) title.text = "Searching..."
 			if (currentItem == correctorPage) title.text = "Correction"
 
 			if (currentItem == deviceListPage) {
@@ -245,34 +269,34 @@ ApplicationWindow {
 			}
 		}
 
-		delegate: StackViewDelegate {
-			   function transitionFinished(properties)
-			   {
-				   properties.exitItem.opacity = 1
-			   }
+//		delegate: StackViewDelegate {
+//			   function transitionFinished(properties)
+//			   {
+//				   properties.exitItem.opacity = 1
+//			   }
 
-			   pushTransition: StackViewTransition {
-				   PropertyAnimation {
-					   target: enterItem
-					   property: "opacity"
-					   from: 0
-					   to: 1
-				   }
-				   PropertyAnimation {
-					   target: exitItem
-					   property: "opacity"
-					   from: 1
-					   to: 0
-				   }
-			   }
-		   }
+//			   pushTransition: StackViewTransition {
+//				   PropertyAnimation {
+//					   target: enterItem
+//					   property: "opacity"
+//					   from: 0
+//					   to: 1
+//				   }
+//				   PropertyAnimation {
+//					   target: exitItem
+//					   property: "opacity"
+//					   from: 1
+//					   to: 0
+//				   }
+//			   }
+//		   }
 	}
 
 	Connections {
 		target: broadcast
 
 		onDeviceDetected: {
-			if (mainStackView.currentItem == deviceWaitPage)
+			if (mainStackView.currentItem == waitingForConnectionPage)
 				mainStackView.push(deviceListPage)
 			deviceListPage.insert(arg)
 		}

@@ -2,7 +2,7 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>DeviceListPage.qml</file>
-        <file>DeviceWaitPage.qml</file>
+        <file>WaitPage.qml</file>
         <file>DeviceControlPage.qml</file>
         <file>DeviceCorrectorPage.qml</file>
         <file>CustomSliderStyle.qml</file>

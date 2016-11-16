@@ -12,7 +12,7 @@ Item {
 		anchors.centerIn: parent
 
 		BusyIndicator {
-			readonly property int size: Math.min(canvas.width, canvas.height) / 3
+			readonly property int size: Math.min(canvas.width, canvas.height) / 4
 			width: size
 			height: size
 			anchors.horizontalCenter: parent.horizontalCenter

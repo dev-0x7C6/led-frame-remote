@@ -4,7 +4,6 @@
 #include <QQmlApplicationEngine>
 #include <QQmlComponent>
 #include <QQmlContext>
-#include <QQuickStyle>
 #include <QSplashScreen>
 
 #include <core/networking/broadcast-monitor.h>
