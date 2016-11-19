@@ -17,5 +17,6 @@
         <file>desktop.png</file>
         <file>image.png</file>
         <file>config.png</file>
+        <file>splash.png</file>
     </qresource>
 </RCC>

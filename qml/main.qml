@@ -16,6 +16,7 @@ ApplicationWindow {
 
 	Material.background: Qt.darker("#101020", 2)
 
+
 	WebSocket {
 		id: webSocket
 
