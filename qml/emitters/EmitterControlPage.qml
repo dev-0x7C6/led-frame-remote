@@ -7,9 +7,9 @@ import "../components"
 
 Item {
 	Column {
-//		spacing: 10
-//		anchors.topMargin: 10
-//		width: parent.width
+		//		spacing: 10
+		//		anchors.topMargin: 10
+		//		width: parent.width
 
 		DisplayIcon {
 			id: icon

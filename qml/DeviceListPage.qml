@@ -5,40 +5,28 @@ import "delegates"
 
 Item {
 	ListView {
-		id: broadcastClientView
+		id: clientListView
 		anchors.fill: parent
-		model: broadcastClientList
+		model: clientModel
 		delegate: DeviceDelegate {
 			width: parent.width
-			height: 96
-			color: broadcastClientView.currentIndex === index ? sg : bg
+			height: 112
+			color: clientListView.currentIndex === index ? sg : bg
 			opacity: 1.0
 
 			MouseArea {
 				anchors.fill: parent
 				onClicked: {
-					webSocket.url = ""
-					broadcastClientView.currentIndex = index;
-					var address = "ws://"
-					address = address.concat(host, ":", port);
-					webSocket.url = address
-					configuration.device = id
+					clientListView.currentIndex = index
+					onClientSelected(host, port, id)
 				}
 			}
 		}
 	}
 
-
-	function reset() {
-		broadcastClientView.reset()
-	}
-
-	function count() {
-		return broadcastClientList.count()
-	}
+	function onClientSelected(host, port, id) {}
 
 	function insert(arg) {
-		broadcastClientList.append(arg)
+		clientModel.append(arg)
 	}
-
 }

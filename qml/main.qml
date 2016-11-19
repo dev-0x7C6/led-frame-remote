@@ -16,7 +16,6 @@ ApplicationWindow {
 
 	Material.background: Qt.darker("#101020", 2)
 
-
 	WebSocket {
 		id: webSocket
 
@@ -34,22 +33,18 @@ ApplicationWindow {
 				correctorModel.clear()
 			}
 		}
+
+		function connect(host, port) {
+			webSocket.url = ""
+			var address = "ws://"
+			address = address.concat(host, ":", port);
+			webSocket.url = address
+		}
 	}
 
-	ListModel {
-		id: broadcastClientList
-		property bool progressVisible : false
-	}
-
-	ListModel {
-		id: emitterModel
-		signal selectEmitter(int index)
-	}
-
-	ListModel {
-		id: correctorModel
-	}
-
+	ListModel { id: clientModel }
+	ListModel { id: emitterModel; signal selectEmitter(int index); }
+	ListModel { id: correctorModel; }
 
 	Configuration {
 		id: configuration
@@ -66,22 +61,22 @@ ApplicationWindow {
 				return;
 
 			switch (arg.datagram.type) {
-				case "brightness":
-					globalLValue = arg.datagram.factor;
-					globalLId = arg.datagram.id;
-					break;
-				case "red_channel":
-					globalRValue = arg.datagram.factor;
-					globalRId = arg.datagram.id;
-					break;
-				case "green_channel":
-					globalGValue = arg.datagram.factor;
-					globalGId = arg.datagram.id;
-					break;
-				case "blue_channel":
-					globalBValue = arg.datagram.factor;
-					globalBId = arg.datagram.id;
-					break;
+			case "brightness":
+				globalLValue = arg.datagram.factor;
+				globalLId = arg.datagram.id;
+				break;
+			case "red_channel":
+				globalRValue = arg.datagram.factor;
+				globalRId = arg.datagram.id;
+				break;
+			case "green_channel":
+				globalGValue = arg.datagram.factor;
+				globalGId = arg.datagram.id;
+				break;
+			case "blue_channel":
+				globalBValue = arg.datagram.factor;
+				globalBId = arg.datagram.id;
+				break;
 			}
 		}
 
@@ -94,22 +89,22 @@ ApplicationWindow {
 				return;
 
 			switch (arg.datagram.type) {
-				case "brightness":
-					globalLValue = arg.datagram.factor;
-					globalLId = arg.datagram.id;
-					break;
-				case "red_channel":
-					globalRValue = arg.datagram.factor;
-					globalRId = arg.datagram.id;
-					break;
-				case "green_channel":
-					globalGValue = arg.datagram.factor;
-					globalGId = arg.datagram.id;
-					break;
-				case "blue_channel":
-					globalBValue = arg.datagram.factor;
-					globalBId = arg.datagram.id;
-					break;
+			case "brightness":
+				globalLValue = arg.datagram.factor;
+				globalLId = arg.datagram.id;
+				break;
+			case "red_channel":
+				globalRValue = arg.datagram.factor;
+				globalRId = arg.datagram.id;
+				break;
+			case "green_channel":
+				globalGValue = arg.datagram.factor;
+				globalGId = arg.datagram.id;
+				break;
+			case "blue_channel":
+				globalBValue = arg.datagram.factor;
+				globalBId = arg.datagram.id;
+				break;
 			}
 		}
 
@@ -143,9 +138,9 @@ ApplicationWindow {
 
 	ApplicationDrawer {
 		id: applicationDrawer
-		isCorrectorPageActivated: broadcastClientList.count !== 0 && webSocket.status === WebSocket.Open
-		isDevicePageActivated: broadcastClientList.count !== 0
-		availableClientModel: broadcastClientList
+		isCorrectorPageActivated: clientModel.count !== 0 && webSocket.status === WebSocket.Open
+		isDevicePageActivated: clientModel.count !== 0
+		availableClientModel: clientModel
 
 		function onDevicePageClicked() {
 			console.log(mainStackView.depth)
@@ -156,6 +151,11 @@ ApplicationWindow {
 		function onCorrectorPageClicked() {
 			if (mainStackView.currentItem !== correctorPage)
 				mainStackView.push(correctorPage)
+		}
+
+		function onClientSelected(host, port, id) {
+			configuration.device = id
+			webSocket.connect(host, port)
 		}
 	}
 
@@ -175,6 +175,12 @@ ApplicationWindow {
 		DeviceListPage {
 			id: deviceListPage
 			visible: false
+
+			function onClientSelected(host, port, id) {
+				configuration.device = id
+				webSocket.connect(host, port)
+			}
+
 		}
 
 		Component {

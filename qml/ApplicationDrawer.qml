@@ -14,6 +14,7 @@ Drawer {
 
 	function onDevicePageClicked() {}
 	function onCorrectorPageClicked() {}
+	function onClientSelected(host, port, id) {}
 
 	Material.background: "#101020"
 
@@ -29,7 +30,7 @@ Drawer {
 
 		ItemDelegate {
 			Layout.fillWidth: true
-			font.pointSize: 12
+			font.pixelSize: 22
 			font.bold: true
 			text: "Devices"
 			enabled: applicationDrawer.isDevicePageActivated
@@ -41,10 +42,10 @@ Drawer {
 
 		ColumnLayout {
 			Layout.fillWidth: true
-			Layout.preferredHeight: listView3.contentHeight
+			Layout.preferredHeight: list.contentHeight
 
 			ListView {
-				id: listView3
+				id: list
 				currentIndex: -1
 				interactive: false
 				Layout.fillWidth: true
@@ -52,14 +53,11 @@ Drawer {
 
 				delegate: ItemDelegate {
 					width: parent.width
+					font.pixelSize: 16
 					text: " -> " + model.device + " on " + model.computer
 					highlighted: ListView.isCurrentItem
 					onClicked: {
-						if (listView.currentIndex != index) {
-							listView.currentIndex = index
-							titleLabel.text = model.title
-							stackView.replace(model.source)
-						}
+						onClientSelected(model.host, model.port, model.id)
 						applicationDrawer.close()
 					}
 				}
@@ -72,7 +70,7 @@ Drawer {
 
 		ItemDelegate {
 			Layout.fillWidth: true
-			font.pointSize: 12
+			font.pixelSize: 22
 			font.bold: true
 			text: "Correction"
 			enabled: applicationDrawer.isCorrectorPageActivated

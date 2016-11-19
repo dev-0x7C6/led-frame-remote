@@ -7,7 +7,6 @@
         <file>DeviceCorrectorPage.qml</file>
         <file>Configuration.qml</file>
         <file>emitters/EmitterControlPage.qml</file>
-        <file>style/StyleSettings.qml</file>
         <file>components/DisplayIcon.qml</file>
         <file>delegates/DeviceDelegate.qml</file>
         <file>delegates/EmitterDelegate.qml</file>
