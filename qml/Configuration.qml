@@ -1,5 +1,4 @@
-import QtQuick 2.6
-import QtQml.Models 2.2
+import QtQuick 2.8
 
 Item {
 	property int device: -1;

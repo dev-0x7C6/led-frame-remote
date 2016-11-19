@@ -1,10 +1,9 @@
-import QtQuick 2.7
-import QtQuick.Controls 2.0
-import QtQuick.Controls.Material 2.0
-
+import QtQuick 2.8
+import QtGraphicalEffects 1.0
+import QtQuick.Controls 2.1
+import QtQuick.Controls.Material 2.1
 import QtQuick.Layouts 1.3
 import QtWebSockets 1.0
-import QtGraphicalEffects 1.0
 
 import "components"
 
@@ -15,6 +14,23 @@ ApplicationWindow {
 	visible: true
 
 	Material.background: Qt.darker("#101020", 2)
+
+	Image {
+		id: background
+		anchors.centerIn: parent
+		source: "qrc:/splash.png"
+		fillMode: Image.PreserveAspectFit
+		opacity: 0.1
+		cache: true
+	}
+
+	FastBlur {
+		anchors.fill: background
+		source: background
+		radius: 16
+		cached: true
+		opacity: background.opacity
+	}
 
 	WebSocket {
 		id: webSocket
