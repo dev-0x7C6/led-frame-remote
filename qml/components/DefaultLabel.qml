@@ -12,14 +12,5 @@ Label {
 	minimumPointSize: 4
 	fontSizeMode: Text.Fit
 	elide: Text.ElideRight
-
-//	layer.enabled: dropEffectEnabled
-//	layer.effect: DropShadow {
-//		horizontalOffset: 2
-//		verticalOffset: 2
-//		radius: 8.0
-//		samples: radius * 2
-//		color: Qt.darker(base.color, 4.0)
-//	}
 }
 

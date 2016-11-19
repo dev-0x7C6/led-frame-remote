@@ -28,7 +28,7 @@ Item {
 			font.pixelSize: 16
 		}
 
-		CustomSliderStyle {
+		Slider {
 			id: redSlider
 			width: parent.width * 0.9
 			value: 1.0
@@ -36,7 +36,7 @@ Item {
 			color: "tomato"
 		}
 
-		CustomSliderStyle {
+		Slider {
 			id: greenSlider
 			width: parent.width * 0.9
 			value: 1.0
@@ -44,7 +44,7 @@ Item {
 			color: "lightGreen"
 		}
 
-		CustomSliderStyle {
+		Slider {
 			id: blueSlider
 			width: parent.width * 0.9
 			value: 1.0

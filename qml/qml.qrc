@@ -5,7 +5,6 @@
         <file>WaitPage.qml</file>
         <file>DeviceControlPage.qml</file>
         <file>DeviceCorrectorPage.qml</file>
-        <file>CustomSliderStyle.qml</file>
         <file>Configuration.qml</file>
         <file>emitters/EmitterControlPage.qml</file>
         <file>style/StyleSettings.qml</file>
@@ -19,5 +18,7 @@
         <file>components/MenuButton.qml</file>
         <file>delegates/CorrectorDelegate.qml</file>
         <file>../js/functions.js</file>
+        <file>ApplicationDrawer.qml</file>
+        <file>ApplicationHeader.qml</file>
     </qresource>
 </RCC>

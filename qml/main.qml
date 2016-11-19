@@ -1,6 +1,6 @@
 import QtQuick 2.7
-import QtQuick.Controls 2.1
-import QtQuick.Controls.Material 2.1
+import QtQuick.Controls 2.0
+import QtQuick.Controls.Material 2.0
 
 import QtQuick.Layouts 1.3
 import QtWebSockets 1.0
@@ -14,13 +14,7 @@ ApplicationWindow {
 	width: 360
 	visible: true
 
-	Material.theme: Material.Dark
-	Material.accent: Material.Orange
-
-//	Rectangle {
-//		color: Qt.darker("#101020", 2)
-//		anchors.fill: parent
-//	}
+	Material.background: Qt.darker("#101020", 2)
 
 	WebSocket {
 		id: webSocket
@@ -39,6 +33,11 @@ ApplicationWindow {
 				correctorModel.clear()
 			}
 		}
+	}
+
+	ListModel {
+		id: broadcastClientList
+		property bool progressVisible : false
 	}
 
 	ListModel {
@@ -85,7 +84,7 @@ ApplicationWindow {
 			}
 		}
 
-		function correctorModified(arg) {
+		function correctorMoemitterModeldified(arg) {
 			for (var i = 0; i < correctorModel.count; ++i)
 				if (correctorModel.get(i).datagram.id  === arg.datagram.id)
 					correctorModel.set(i, arg)
@@ -141,96 +140,26 @@ ApplicationWindow {
 		}
 	}
 
-	Drawer {
-		id: drawer
-		width: 0.66 * window.width
-		height: window.height
+	ApplicationDrawer {
+		id: applicationDrawer
+		isCorrectorPageActivated: broadcastClientList.count !== 0 && webSocket.status === WebSocket.Open
+		isDevicePageActivated: broadcastClientList.count !== 0
+		availableClientModel: broadcastClientList
+
+		function onDevicePageClicked() {
+			console.log(mainStackView.depth)
+			if (mainStackView.currentItem !== deviceListPage)
+				mainStackView.push(deviceListPage)
+		}
+
+		function onCorrectorPageClicked() {
+			if (mainStackView.currentItem !== correctorPage)
+				mainStackView.push(correctorPage)
+		}
 	}
 
-//	Label {
-//		id: content
-
-//		text: "Aa"
-//		font.pixelSize: 96
-//		anchors.fill: parent
-//		verticalAlignment: Label.AlignVCenter
-//		horizontalAlignment: Label.AlignHCenter
-
-//		transform: Translate {
-//			x: drawer.position * content.width * 0.33
-//		}
-//	}
-
-	header: BorderImage {
-		border.bottom: 8
-		source: "qrc:/images/toolbar.png"
-		width: parent.width
-		height: 80
-
-		RowLayout {
-			anchors.fill: parent
-			anchors.leftMargin: 20
-			anchors.rightMargin: 20
-			spacing: 10
-
-			MenuButton {
-				opacity: mainStackView.depth > 2 ? 1 : 0
-				visible: opacity != 0
-				source: "qrc:/images/navigation_previous_item.png"
-
-				MouseArea {
-					anchors.fill: parent
-					onClicked: {
-						if (mainStackView.depth > 2)
-							mainStackView.pop(-1);
-					}
-				}
-			}
-
-			Item {
-				id: main
-				Layout.fillWidth: true
-				Layout.fillHeight: true
-
-				ColumnLayout {
-					anchors.fill: parent
-					anchors.topMargin: 20
-					anchors.bottomMargin: 20
-
-					DefaultLabel {
-						Layout.fillWidth: true
-						Layout.minimumWidth: 0
-						minimumPointSize: 16
-						id: title
-						font.bold: true
-
-						color: "white"
-						text: ""
-					}
-
-					DefaultLabel {
-						Layout.fillWidth: true
-						Layout.minimumWidth: 0
-						id: subtitle
-						visible: configuration.device.length != 0
-						font.bold: true
-						color: "orange"
-						text: configuration.device
-					}
-				}
-			}
-
-			MenuButton {
-				opacity: webSocket.status == WebSocket.Open ? 1 : 0
-				visible: opacity != 0
-				source: "qrc:/config.png"
-
-				MouseArea {
-					anchors.fill: parent
-					onClicked: mainStackView.push(correctorPage);
-				}
-			}
-		}
+	header: ApplicationHeader {
+		id: applicationHeader
 	}
 
 	StackView {
@@ -259,37 +188,15 @@ ApplicationWindow {
 
 
 		onCurrentItemChanged: {
-			if (currentItem == deviceListPage) title.text = "Devices"
-			if (currentItem == waitingForConnectionPage) title.text = "Searching..."
-			if (currentItem == correctorPage) title.text = "Correction"
+			if (currentItem == deviceListPage) applicationHeader.title = "Devices"
+			if (currentItem == waitingForConnectionPage) applicationHeader.title = "Searching..."
+			if (currentItem == correctorPage) applicationHeader.title = "Correction"
 
 			if (currentItem == deviceListPage) {
 				if (webSocket.status == WebSocket.Open)
 					webSocket.active = false;
 			}
 		}
-
-//		delegate: StackViewDelegate {
-//			   function transitionFinished(properties)
-//			   {
-//				   properties.exitItem.opacity = 1
-//			   }
-
-//			   pushTransition: StackViewTransition {
-//				   PropertyAnimation {
-//					   target: enterItem
-//					   property: "opacity"
-//					   from: 0
-//					   to: 1
-//				   }
-//				   PropertyAnimation {
-//					   target: exitItem
-//					   property: "opacity"
-//					   from: 1
-//					   to: 0
-//				   }
-//			   }
-//		   }
 	}
 
 	Connections {

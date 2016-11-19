@@ -42,6 +42,8 @@ Item {
 			function select(arg) {
 				emitterListView.currentIndex = arg
 			}
+
+			ScrollIndicator.vertical: ScrollIndicator { }
 		}
 
 		ListView {
@@ -66,6 +68,7 @@ Item {
 					configuration.changeCorrector(datagram.id, value, value > datagram.min)
 				}
 			}
+			ScrollIndicator.vertical: ScrollIndicator { }
 		}
 
 	}

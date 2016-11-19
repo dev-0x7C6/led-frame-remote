@@ -1,5 +1,6 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.0
+import QtQuick.Controls.Material 2.0
 import QtQuick.Layouts 1.3
 
 import "components"
@@ -32,40 +33,40 @@ Item {
 				anchors.leftMargin: 20
 				anchors.rightMargin: 20
 
-				CustomSliderStyle {
+				Slider {
 					Layout.fillWidth: true
 					id: lSlider
-					color: "white"
+					Material.accent: "white"
 					onValueChanged: {
 						if (pressed) configuration.globalLValue = value
 						icon.color.a = value;
 					}
 				}
 
-				CustomSliderStyle {
+				Slider {
 					id: rSlider
 					Layout.fillWidth: true
-					color: "tomato"
+					Material.accent: "tomato"
 					onValueChanged: {
 						if (pressed) configuration.globalRValue = value
 						icon.color.r = value;
 					}
 				}
 
-				CustomSliderStyle {
+				Slider {
 					id: gSlider
 					Layout.fillWidth: true
-					color: "lightGreen"
+					Material.accent: "lightGreen"
 					onValueChanged: {
 						if (pressed) configuration.globalGValue = value
 						icon.color.g = value;
 					}
 				}
 
-				CustomSliderStyle {
+				Slider {
 					id: bSlider
 					Layout.fillWidth: true
-					color: "lightBlue"
+					Material.accent: "lightBlue"
 					onValueChanged: {
 						if (pressed) configuration.globalBValue = value
 						icon.color.b = value;

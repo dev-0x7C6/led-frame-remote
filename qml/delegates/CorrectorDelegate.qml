@@ -1,8 +1,8 @@
 import QtQuick 2.6
-import QtQuick.Layouts 1.3
-import QtQuick.Controls.Styles 1.4
+import QtQuick.Layouts 1.1
+import QtQuick.Controls 2.0
+import QtQuick.Controls.Material 2.0
 import QtGraphicalEffects 1.0
-import QtQuick.Controls 1.4
 
 import "../js/functions.js" as Logic
 import "../components"
@@ -31,12 +31,12 @@ BaseDelegate {
 			font.pixelSize: 22
 		}
 
-		CustomSliderStyle {
-			color: Qt.lighter(base.color, 8)
+		Slider {
+			Material.accent: Qt.lighter(base.color, 8)
 			Layout.fillWidth: true
 			Layout.minimumWidth: 0
-			minimumValue: base.min
-			maximumValue: base.max
+			from: base.min
+			to: base.max
 			Component.onCompleted: value = base.value
 			onValueChanged: base.value = value
 		}
