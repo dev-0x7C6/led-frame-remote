@@ -13,7 +13,7 @@ BorderImage {
 
 	Rectangle {
 		anchors.fill: parent
-		color: "#05ffffff"
+		color: "#10ffffff"
 	}
 
 	RowLayout {

@@ -42,8 +42,9 @@ Drawer {
 
 				Label {
 					Layout.fillWidth: true
-					text: "LedFrame Mobile"
-					font.pixelSize: 22
+					text: "Led Frame"
+					font.pixelSize: 20
+					font.bold: true
 				}
 			}
 		}
