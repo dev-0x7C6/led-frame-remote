@@ -14,17 +14,38 @@ Drawer {
 	function onDevicePageClicked() {}
 	function onCorrectorPageClicked() {}
 	function onClientSelected(host, port, id) {}
+	opacity: 0.95
 
 	Material.background: "#101020"
 
 	ColumnLayout {
 		anchors.fill: parent
 
-		BorderImage {
+		Rectangle {
 			Layout.fillWidth: true
 			Layout.preferredHeight: 80
-			border.bottom: 8
-			source: "qrc:/images/toolbar.png"
+			color: "#10ffffff"
+
+			RowLayout {
+				anchors.fill: parent
+				spacing: 20
+				anchors.leftMargin: 20
+
+				Image {
+					id: img
+					Layout.fillHeight: true
+					Layout.preferredHeight: parent.height
+					Layout.preferredWidth: parent.height
+					source:  "qrc:/splash.png"
+					fillMode: Image.PreserveAspectFit
+				}
+
+				Label {
+					Layout.fillWidth: true
+					text: "LedFrame Mobile"
+					font.pixelSize: 22
+				}
+			}
 		}
 
 		ItemDelegate {

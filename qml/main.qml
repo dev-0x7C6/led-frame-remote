@@ -15,21 +15,26 @@ ApplicationWindow {
 
 	Material.background: Qt.darker("#101020", 2)
 
-	Image {
-		id: background
-		anchors.centerIn: parent
-		source: "qrc:/splash.png"
-		fillMode: Image.PreserveAspectFit
-		opacity: 0.1
-		cache: true
-	}
+	Item {
+		anchors.fill: parent
+		anchors.topMargin: 40
 
-	FastBlur {
-		anchors.fill: background
-		source: background
-		radius: 16
-		cached: true
-		opacity: background.opacity
+		Image {
+			id: background
+			anchors.centerIn: parent
+			source: "qrc:/splash.png"
+			fillMode: Image.PreserveAspectFit
+			opacity: 0.1
+			cache: true
+		}
+
+		FastBlur {
+			anchors.fill: background
+			source: background
+			radius: 16
+			cached: true
+			opacity: background.opacity
+		}
 	}
 
 	WebSocket {

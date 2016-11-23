@@ -1,14 +1,20 @@
 import QtQuick 2.8
 import QtQuick.Controls 2.1
+import QtQuick.Controls.Material 2.1
 import QtQuick.Layouts 1.3
 
 BorderImage {
 	border.bottom: 8
-	source: "qrc:/images/toolbar.png"
+	//source: "qrc:/splash.png"
 	width: parent.width
 	height: 80
 
 	property string title: ""
+
+	Rectangle {
+		anchors.fill: parent
+		color: "#05ffffff"
+	}
 
 	RowLayout {
 		anchors.fill: parent
@@ -35,9 +41,8 @@ BorderImage {
 			fontSizeMode: Text.Fit
 			elide: Text.ElideRight
 			font.bold: true
-			font.pointSize: 14
+			font.pointSize: 16
 			text: title
-			color: Qt.lighter("#101020", 8)
 			verticalAlignment: Text.AlignVCenter
 		}
 	}
