@@ -5,7 +5,7 @@ import QtQuick.Layouts 1.3
 
 Drawer {
 	id: applicationDrawer
-	width: 0.66 * window.width
+	width: 0.80 * window.width
 	height: window.height
 	property bool isDevicePageActivated
 	property bool isCorrectorPageActivated
@@ -14,7 +14,6 @@ Drawer {
 	function onDevicePageClicked() {}
 	function onCorrectorPageClicked() {}
 	function onClientSelected(host, port, id) {}
-	opacity: 0.95
 
 	Material.background: "#101020"
 
@@ -28,8 +27,8 @@ Drawer {
 
 			RowLayout {
 				anchors.fill: parent
-				spacing: 20
-				anchors.leftMargin: 20
+				spacing: 10
+				anchors.leftMargin: 5
 
 				Image {
 					id: img

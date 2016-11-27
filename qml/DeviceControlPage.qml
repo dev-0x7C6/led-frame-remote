@@ -1,6 +1,7 @@
 import QtQuick 2.8
 import QtQuick.Controls 2.1
 
+
 import "emitters"
 import "delegates"
 import "../js/functions.js" as Logic
@@ -45,6 +46,40 @@ Item {
 
 			ScrollIndicator.vertical: ScrollIndicator { }
 		}
+
+		ListModel {
+			id: colorListModel
+
+			Component.onCompleted: {
+				for (var i = 0; i < 720; i++) {
+					var colorValue = Qt.hsla(i/720, 0.5, 0.5, 1);
+
+					append({"colorValue":  colorValue.toString()})
+					console.log(colorValue)
+
+				}
+				console.log(count)
+			}
+		}
+
+		GridView {
+			id: grid
+			cellHeight: 36
+			cellWidth: 36
+			delegate: Rectangle {
+					height: grid.cellHeight
+					width: grid.cellWidth
+					border.width: 4
+					border.color: Qt.darker(colorValue, 2);
+					color: colorValue;
+					opacity: 0.2
+				}
+
+
+			model: colorListModel
+		}
+
+
 
 		ListView {
 			id: correctorListView
