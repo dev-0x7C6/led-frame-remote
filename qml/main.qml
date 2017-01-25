@@ -3,7 +3,7 @@ import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.1
 import QtQuick.Controls.Material 2.1
 import QtQuick.Layouts 1.3
-import QtWebSockets 1.0
+import QtWebSockets 1.1
 
 import "components"
 
@@ -157,29 +157,6 @@ ApplicationWindow {
 		}
 	}
 
-	ApplicationDrawer {
-		id: applicationDrawer
-		isCorrectorPageActivated: clientModel.count !== 0 && webSocket.status === WebSocket.Open
-		isDevicePageActivated: clientModel.count !== 0
-		availableClientModel: clientModel
-
-		function onDevicePageClicked() {
-			console.log(mainStackView.depth)
-			if (mainStackView.currentItem !== deviceListPage)
-				mainStackView.push(deviceListPage)
-		}
-
-		function onCorrectorPageClicked() {
-			if (mainStackView.currentItem !== correctorPage)
-				mainStackView.push(correctorPage)
-		}
-
-		function onClientSelected(host, port, id) {
-			configuration.device = id
-			webSocket.connect(host, port)
-		}
-	}
-
 	header: ApplicationHeader {
 		id: applicationHeader
 	}
@@ -209,16 +186,9 @@ ApplicationWindow {
 			DeviceControlPage {}
 		}
 
-		Component {
-			id: correctorPage
-			DeviceCorrectorPage {}
-		}
-
-
 		onCurrentItemChanged: {
 			if (currentItem == deviceListPage) applicationHeader.title = "Devices"
 			if (currentItem == waitingForConnectionPage) applicationHeader.title = "Searching..."
-			if (currentItem == correctorPage) applicationHeader.title = "Correction"
 
 			if (currentItem == deviceListPage) {
 				if (webSocket.status == WebSocket.Open)

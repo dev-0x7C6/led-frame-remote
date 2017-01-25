@@ -11,9 +11,29 @@ import "../js/functions.js" as Logic
 Item {
 	id: canvas
 
+	TabBar {
+		id: tabBar
+		width: parent.width
+		currentIndex: view.currentIndex
+
+		TabButton {
+			text: qsTr("Emitters")
+		}
+		TabButton {
+			text: qsTr("Correctors")
+		}
+		TabButton {
+			text: qsTr("Output")
+		}
+	}
+
 	SwipeView {
 		id: view
-		anchors.fill: parent
+		width: parent.width
+		height: parent.height - tabBar.height
+		anchors.top: tabBar.bottom
+		currentIndex: tabBar.currentIndex
+		z: parent.z -1
 
 		ListView {
 			id: emitterListView
@@ -49,56 +69,55 @@ Item {
 			ScrollIndicator.vertical: ScrollIndicator { }
 		}
 
-		ListModel {
-			id: colorListModel
+//		ListModel {
+//			id: colorListModel
 
-			Component.onCompleted: {
-				for (var i = 0; i < 240; i++) {
-					var colorValue = Qt.hsla(i/240, 0.5, 0.5, 1);
+//			Component.onCompleted: {
+//				for (var i = 0; i < 240; i++) {
+//					var colorValue = Qt.hsla(i/240, 0.5, 0.5, 1);
 
-					append({"colorValue":  colorValue.toString()})
-					console.log(colorValue)
+//					append({"colorValue":  colorValue.toString()})
+//					console.log(colorValue)
 
-				}
-				console.log(count)
-			}
-		}
+//				}
+//				console.log(count)
+//			}
+//		}
 
-		ColumnLayout {
-			GridView {
-				Layout.fillHeight: true
-				Layout.fillWidth: true
-				id: grid
-				cellHeight: 36*2
-				cellWidth: 36*2
-				delegate: Rectangle {
-					height: grid.cellHeight
-					width: grid.cellWidth
-					border.width: 4
-					border.color: Qt.darker(colorValue, 2);
-					color: colorValue;
-					Behavior on opacity { NumberAnimation{} }
-					opacity: GridView.isCurrentItem ? 1.0 : 0.33
+//		ColumnLayout {
+//			GridView {
+//				Layout.fillHeight: true
+//				Layout.fillWidth: true
+//				id: grid
+//				cellHeight: 36*2
+//				cellWidth: 36*2
+//				delegate: Rectangle {
+//					height: grid.cellHeight
+//					width: grid.cellWidth
+//					border.width: 4
+//					border.color: Qt.darker(colorValue, 2);
+//					color: colorValue;
+//					Behavior on opacity { NumberAnimation{} }
+//					opacity: GridView.isCurrentItem ? 1.0 : 0.33
 
-					MouseArea {
-						anchors.fill: parent
-						onClicked: grid.currentIndex = index
-					}
-				}
+//					MouseArea {
+//						anchors.fill: parent
+//						onClicked: grid.currentIndex = index
+//					}
+//				}
 
-				model: colorListModel
+//				model: colorListModel
 
-				ScrollIndicator.vertical: ScrollIndicator { }
-			}
+//				ScrollIndicator.vertical: ScrollIndicator { }
+//			}
 
 
-			Slider {
-				Layout.fillWidth: true
-				Layout.preferredHeight: 80
-				Material.accent: "white"
-			}
-		}
-
+//			Slider {
+//				Layout.fillWidth: true
+//				Layout.preferredHeight: 80
+//				Material.accent: "white"
+//			}
+//		}
 
 		ListView {
 			id: correctorListView
@@ -111,7 +130,7 @@ Item {
 				max: datagram.max
 				height: configuration.device === datagram.owner ? 100 : 0
 				width: parent.width
-				implicitHeight: 100
+				implicitHeight: 80
 				iconSource: "qrc:/color.png"
 				iconRotation: true
 				color: bg
@@ -125,15 +144,8 @@ Item {
 			ScrollIndicator.vertical: ScrollIndicator { }
 		}
 
-	}
-
-	PageIndicator {
-		id: indicator
-
-		count: view.count
-		currentIndex: view.currentIndex
-
-		anchors.bottom: view.bottom
-		anchors.horizontalCenter: parent.horizontalCenter
+		DeviceCorrectorPage {
+			id: correction
+		}
 	}
 }

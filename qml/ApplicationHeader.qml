@@ -22,19 +22,6 @@ BorderImage {
 		anchors.rightMargin: 20
 		spacing: 25
 
-		Image {
-			Layout.preferredHeight: 48
-			Layout.preferredWidth: 48
-			source: "qrc:/config.png"
-			fillMode: Image.PreserveAspectFit
-
-			MouseArea {
-				anchors.fill: parent
-				onClicked: applicationDrawer.open()
-			}
-		}
-
-
 		Label {
 			Layout.fillWidth: true
 			Layout.fillHeight: true

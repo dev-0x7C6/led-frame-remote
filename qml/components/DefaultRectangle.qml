@@ -1,7 +1,7 @@
 import QtQuick 2.8
 
 Rectangle {
-	readonly property color bg: "#101020"
+	readonly property color bg: "#af101020"
 	readonly property color sg: Qt.lighter(bg, 2.0)
 	property bool selected: false
 	color: selected ? sg: bg

@@ -17,7 +17,6 @@
         <file>components/MenuButton.qml</file>
         <file>delegates/CorrectorDelegate.qml</file>
         <file>../js/functions.js</file>
-        <file>ApplicationDrawer.qml</file>
         <file>ApplicationHeader.qml</file>
     </qresource>
 </RCC>
