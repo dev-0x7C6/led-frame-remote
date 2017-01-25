@@ -36,7 +36,12 @@ Item {
 				Slider {
 					Layout.fillWidth: true
 					id: lSlider
+					value: 1
+					from: 0
+					to: 255
+					stepSize: 1
 					Material.accent: "white"
+
 					onValueChanged: {
 						if (pressed) configuration.globalLValue = value
 						icon.color.a = value;
@@ -45,6 +50,10 @@ Item {
 
 				Slider {
 					id: rSlider
+					value: 1
+					from: 0
+					to: 255
+					stepSize: 1
 					Layout.fillWidth: true
 					Material.accent: "tomato"
 					onValueChanged: {
@@ -55,6 +64,10 @@ Item {
 
 				Slider {
 					id: gSlider
+					value: 1
+					from: 0
+					to: 255
+					stepSize: 1
 					Layout.fillWidth: true
 					Material.accent: "lightGreen"
 					onValueChanged: {
@@ -65,6 +78,10 @@ Item {
 
 				Slider {
 					id: bSlider
+					value: 1
+					from: 0
+					to: 255
+					stepSize: 1
 					Layout.fillWidth: true
 					Material.accent: "lightBlue"
 					onValueChanged: {

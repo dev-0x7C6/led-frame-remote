@@ -37,6 +37,7 @@ BaseDelegate {
 			Layout.minimumWidth: 0
 			from: base.min
 			to: base.max
+			stepSize: 1
 			Component.onCompleted: value = base.value
 			onValueChanged: base.value = value
 		}

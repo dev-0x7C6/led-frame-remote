@@ -5,10 +5,10 @@ Item {
 	property string name: "";
 	property int emitter: -1;
 
-	property double globalLValue: 0.0
-	property double globalRValue: 0.0
-	property double globalGValue: 0.0
-	property double globalBValue: 0.0
+	property double globalLValue: 0
+	property double globalRValue: 0
+	property double globalGValue: 0
+	property double globalBValue: 0
 	property int globalLId: -1
 	property int globalRId: -1
 	property int globalGId: -1
