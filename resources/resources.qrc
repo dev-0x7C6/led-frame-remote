@@ -1,22 +1,17 @@
 <RCC>
     <qresource prefix="/">
         <file>resources.qrc</file>
-        <file>device.png</file>
-        <file>images/button_default.png</file>
-        <file>images/button_pressed.png</file>
-        <file>images/navigation_next_item.png</file>
-        <file>images/navigation_previous_item.png</file>
-        <file>images/tab_selected.png</file>
-        <file>images/tabs_standard.png</file>
-        <file>images/textinput.png</file>
-        <file>images/toolbar.png</file>
         <file>lcd256-without-glow.png</file>
         <file>lcd.png</file>
-        <file>animation.png</file>
-        <file>color.png</file>
-        <file>desktop.png</file>
-        <file>image.png</file>
         <file>config.png</file>
-        <file>splash.png</file>
+        <file>background/background-blured.png</file>
+        <file>background/background.png</file>
+        <file>background/background.svg</file>
+        <file>splash/splash.png</file>
+        <file>splash/splash.svg</file>
+        <file>emitters/display.png</file>
+        <file>emitters/animation.png</file>
+        <file>emitters/color.png</file>
+        <file>emitters/landscape.png</file>
     </qresource>
 </RCC>

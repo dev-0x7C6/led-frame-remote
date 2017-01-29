@@ -1,10 +1,10 @@
 
 function emitterIconFromType(arg) {
 	switch (arg) {
-		case "animation": return "qrc:/animation.png"
-		case "display": return "qrc:/desktop.png"
-		case "image": return "qrc:/image.png"
-		case "color": return "qrc:/color.png"
+		case "animation": return "qrc:/emitters/animation.png"
+		case "display": return "qrc:/emitters/display.png"
+		case "image": return "qrc:/emitters/landscape.png"
+		case "color": return "qrc:/emitters/color.png"
 	}
 }
 

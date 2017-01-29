@@ -7,13 +7,13 @@ Item {
 	property string text
 
 	Column {
-		spacing: 40
+		spacing: 20
 		anchors.centerIn: parent
 
 		BusyIndicator {
 			readonly property int size: Math.min(canvas.width, canvas.height) / 4
-			width: size
-			height: size
+			width: (size > 64) ? 64 : size;
+			height: (size > 64) ? 64 : size;
 			anchors.horizontalCenter: parent.horizontalCenter
 		}
 
@@ -22,7 +22,7 @@ Item {
 			horizontalAlignment: Qt.AlignHCenter
 			text: canvas.text
 			font.bold: true
-			font.pixelSize: 20
+			font.pixelSize: 14
 		}
 
 	}

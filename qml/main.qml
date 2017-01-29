@@ -1,5 +1,4 @@
 import QtQuick 2.8
-import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.1
 import QtQuick.Controls.Material 2.1
 import QtQuick.Layouts 1.3
@@ -15,26 +14,14 @@ ApplicationWindow {
 
 	Material.background: Qt.darker("#101020", 2)
 
-	Item {
-		anchors.fill: parent
-		anchors.topMargin: 40
-
-		Image {
-			id: background
-			anchors.centerIn: parent
-			source: "qrc:/splash.png"
-			fillMode: Image.PreserveAspectFit
-			opacity: 0.1
-			cache: true
-		}
-
-		FastBlur {
-			anchors.fill: background
-			source: background
-			radius: 16
-			cached: true
-			opacity: background.opacity
-		}
+	Image {
+		id: background
+		anchors.centerIn: parent
+		width: parent.width
+		source: "qrc:/background/background-blured.png"
+		fillMode: Image.PreserveAspectFit
+		cache: true
+		opacity: 0.025
 	}
 
 	WebSocket {
@@ -183,7 +170,9 @@ ApplicationWindow {
 
 		Component {
 			id: deviceControlPage
-			DeviceControlPage {}
+			DeviceControlPage {
+				Component.onCompleted: applicationHeader.visible = false
+			}
 		}
 
 		onCurrentItemChanged: {

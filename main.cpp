@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
 	QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 	QApplication application(argc, argv);
 
-	QSplashScreen splash({":/splash.png"});
+	QSplashScreen splash({":/splash/splash.png"});
 	splash.show();
 	application.processEvents();
 

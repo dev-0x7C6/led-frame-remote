@@ -5,7 +5,6 @@ import QtQuick.Layouts 1.3
 
 BorderImage {
 	border.bottom: 8
-	//source: "qrc:/splash.png"
 	width: parent.width
 	height: 80
 
