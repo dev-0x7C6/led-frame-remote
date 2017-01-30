@@ -18,6 +18,7 @@ Item {
 				anchors.fill: parent
 				onClicked: {
 					clientListView.currentIndex = index
+					configuration.name = device
 					onClientSelected(host, port, id)
 				}
 			}

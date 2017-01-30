@@ -15,19 +15,31 @@ BorderImage {
 		color: "#101020"
 	}
 
-	RowLayout {
+	Item {
 		anchors.fill: parent
-		anchors.leftMargin: 20
-		anchors.rightMargin: 20
-		spacing: 25
+		anchors.topMargin: 4
+		anchors.bottomMargin: 8
+		anchors.leftMargin: 8
+		anchors.rightMargin: 8
+
+		property double widthFactor: label.contentWidth * 3
+
+		Image {
+			source: "qrc:/devices/title.png"
+			anchors.centerIn: parent
+			height: parent.height
+			width: (parent.widthFactor > 200) ? parent.widthFactor : 200
+			fillMode: Image.Stretch
+			opacity: parent.opacity * 0.5
+		}
 
 		Label {
-			Layout.fillWidth: true
-			Layout.fillHeight: true
+			id: label
+			anchors.centerIn: parent
 			fontSizeMode: Text.Fit
 			elide: Text.ElideRight
 			font.bold: true
-			font.pointSize: 16
+			font.pointSize: 20
 			text: title
 			verticalAlignment: Text.AlignVCenter
 		}

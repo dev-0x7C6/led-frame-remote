@@ -1,7 +1,6 @@
 import QtQuick 2.8
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.1
-import QtGraphicalEffects 1.0
 
 import "../components"
 
@@ -9,51 +8,45 @@ BaseDelegate {
 	id: delegate
 
 	RowLayout {
-		anchors.fill: delegate
-		anchors.leftMargin: 20
-		anchors.rightMargin: 20
-		spacing: 25
+		id: rowLayout
+		anchors.fill: parent
+		anchors.leftMargin: 10
+		anchors.rightMargin: 10
+		spacing: 10
 
-		DisplayIcon {
-			id: icon
-			borderColor: "orange"
-			ambientRadius: 6
-			height: parent.height / 1.2;
-			width: parent.height / 1.2;
-
-			SequentialAnimation {
-				loops: Animation.Infinite
-				running: icon.visible
-				ColorAnimation { target: icon; property: "color"; to: "#ff4444"; duration: 3000 }
-				ColorAnimation { target: icon; property: "color"; to: "#44ff44"; duration: 3000 }
-				ColorAnimation { target: icon; property: "color"; to: "#4444ff"; duration: 3000 }
-			}
+		Image {
+			source: "qrc:/devices/usb.png"
+			Layout.fillHeight: true
+			fillMode: Image.PreserveAspectFit
 		}
 
-		ColumnLayout {
-			DefaultLabel {
-				Layout.fillWidth: true
-				Layout.minimumWidth: 0
-				text: device;
-				font.bold: true;
-				font.pixelSize: 22
-			}
+		Item {
+			Layout.fillWidth: true
+			Layout.fillHeight: true
 
-			DefaultLabel {
-				Layout.fillWidth: true
-				Layout.minimumWidth: 0
-				text: computer;
-				color: secondLabelColor
-				font.pixelSize: 16
-			}
+			ColumnLayout {
+				anchors.fill: parent
+				anchors.topMargin: 24
+				anchors.bottomMargin: 24
 
-			DefaultLabel {
-				Layout.fillWidth: true
-				Layout.minimumWidth: 0
-				text: host + ":" + port;
-				font.italic:  true;
-				color: thirdLabelColor
-				font.pixelSize: 10
+				DefaultLabel {
+					text: device;
+					font.bold: true;
+					font.pixelSize: 22
+				}
+
+				DefaultLabel {
+					text: "computer: " + computer;
+					color: secondLabelColor
+					font.pixelSize: 16
+				}
+
+				DefaultLabel {
+					text: "hostname: " + host + ":" + port;
+					font.italic:  true;
+					color: thirdLabelColor
+					font.pixelSize: 10
+				}
 			}
 		}
 	}

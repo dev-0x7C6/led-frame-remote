@@ -1,17 +1,20 @@
 <RCC>
     <qresource prefix="/">
-        <file>resources.qrc</file>
-        <file>lcd256-without-glow.png</file>
-        <file>lcd.png</file>
-        <file>config.png</file>
         <file>background/background-blured.png</file>
         <file>background/background.png</file>
         <file>background/background.svg</file>
-        <file>splash/splash.png</file>
-        <file>splash/splash.svg</file>
-        <file>emitters/display.png</file>
+        <file>config.png</file>
+        <file>devices/usb.png</file>
+        <file>devices/usbs.png</file>
+        <file>devices/usbs.svg</file>
         <file>emitters/animation.png</file>
         <file>emitters/color.png</file>
+        <file>emitters/display.png</file>
         <file>emitters/landscape.png</file>
+        <file>lcd256-without-glow.png</file>
+        <file>lcd.png</file>
+        <file>splash/splash.png</file>
+        <file>splash/splash.svg</file>
+        <file>devices/title.png</file>
     </qresource>
 </RCC>

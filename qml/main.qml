@@ -171,12 +171,12 @@ ApplicationWindow {
 		Component {
 			id: deviceControlPage
 			DeviceControlPage {
-				Component.onCompleted: applicationHeader.visible = false
 			}
 		}
 
 		onCurrentItemChanged: {
-			if (currentItem == deviceListPage) applicationHeader.title = "Devices"
+			applicationHeader.title = configuration.name
+			if (currentItem == deviceListPage) applicationHeader.title = "Available devices"
 			if (currentItem == waitingForConnectionPage) applicationHeader.title = "Searching..."
 
 			if (currentItem == deviceListPage) {
