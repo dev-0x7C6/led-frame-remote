@@ -17,8 +17,24 @@ BaseDelegate {
 	property bool iconRotation : false
 	property string iconSource
 
+	anchors.leftMargin: 20
+	anchors.rightMargin: 20
+
+	Image {
+		id: image
+		source: Logic.correctorIconFromType(datagram.type);
+		anchors.left: parent.left
+		height: parent.height
+		width: parent.height
+		fillMode: Image.PreserveAspectFit
+		opacity: parent.opacity
+	}
+
+
 	ColumnLayout {
-		anchors.fill: base
+		anchors.left: image.right
+		width: parent.width - image.paintedWidth
+		height: parent.height
 		anchors.leftMargin: 20
 		anchors.rightMargin: 20
 		spacing: 0
@@ -28,7 +44,7 @@ BaseDelegate {
 			Layout.minimumWidth: 0
 			text: Logic.correctorTextFromType(datagram.type);
 			font.bold: true;
-			font.pixelSize: 22
+			font.pixelSize: 20
 		}
 
 		Slider {

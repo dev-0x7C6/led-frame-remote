@@ -22,3 +22,17 @@ function correctorTextFromType(arg) {
 
 	return arg;
 }
+
+function correctorIconFromType(arg) {
+	switch (arg) {
+		case "color_enhancer": return "qrc:/correctors/color-enhancer.png"
+		case "brightness": return "qrc:/correctors/brightness.png"
+		case "red_channel": return "qrc:/correctors/red.png"
+		case "green_channel": return "qrc:/correctors/green.png"
+		case "blue_channel": return "qrc:/correctors/blue.png"
+		case "flickr_effect": return "qrc:/correctors/flickr.png"
+		case "backlight": return "qrc:/correctors/backlight.png"
+	}
+
+	return arg;
+}

@@ -16,5 +16,19 @@
         <file>splash/splash.png</file>
         <file>splash/splash.svg</file>
         <file>devices/title.png</file>
+        <file>correctors/brightness.svg</file>
+        <file>correctors/color-enhancer.svg</file>
+        <file>correctors/brightness.png</file>
+        <file>correctors/color-enhancer.png</file>
+        <file>correctors/backlight.png</file>
+        <file>correctors/backlight.svg</file>
+        <file>correctors/blue.png</file>
+        <file>correctors/blue.svg</file>
+        <file>correctors/green.png</file>
+        <file>correctors/green.svg</file>
+        <file>correctors/red.png</file>
+        <file>correctors/red.svg</file>
+        <file>correctors/flickr.png</file>
+        <file>correctors/flickr.svg</file>
     </qresource>
 </RCC>

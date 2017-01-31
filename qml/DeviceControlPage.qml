@@ -131,7 +131,7 @@ Item {
 				height: configuration.device === datagram.owner ? 100 : 0
 				width: parent.width
 				implicitHeight: 80
-				iconSource: "qrc:/color.png"
+				iconSource: correctorIconFromType()
 				iconRotation: true
 				color: bg
 				opacity: (value > datagram.min) ? 1.0 : 0.3
