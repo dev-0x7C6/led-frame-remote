@@ -10,7 +10,7 @@ Item {
 		model: clientModel
 		delegate: DeviceDelegate {
 			width: parent.width
-			height: 112
+			height: 100
 			color: clientListView.currentIndex === index ? sg : bg
 			opacity: 1.0
 

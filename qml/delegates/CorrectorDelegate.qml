@@ -17,45 +17,60 @@ BaseDelegate {
 	property bool iconRotation : false
 	property string iconSource
 
-	anchors.leftMargin: 20
-	anchors.rightMargin: 20
+	readonly property int nameSize : 22
+	readonly property int leftMarginForIcon : 20
+	readonly property int leftMarginForLabels : 25
+	readonly property double factor : (slider.value / slider.to) + 0.3
+	readonly property double factorOpacity: parent.opacity * 0.75 * factor
+	readonly property double minOpacityFactor : 0.1
+
+	onFactorChanged: {
+		console.log(factor)
+	}
 
 	Image {
 		id: image
 		source: Logic.correctorIconFromType(datagram.type);
 		anchors.left: parent.left
+		anchors.leftMargin: leftMarginForIcon
 		height: parent.height
 		width: parent.height
 		fillMode: Image.PreserveAspectFit
+		opacity: (factorOpacity < minOpacityFactor) ? minOpacityFactor : factorOpacity
+		Behavior on opacity { NumberAnimation{} }
+	}
+
+	DefaultLabel {
+		id: name
+		anchors.leftMargin: leftMarginForLabels
+		anchors.topMargin: 18
+		anchors.left: image.right
+		anchors.top: parent.top
+		text: Logic.correctorTextFromType(datagram.type);
+		font.bold: true;
+		font.pixelSize: nameSize
+		color: "orange"
 		opacity: parent.opacity
 	}
 
-
-	ColumnLayout {
-		anchors.left: image.right
-		width: parent.width - image.paintedWidth
-		height: parent.height
-		anchors.leftMargin: 20
+	Slider {
+		id: slider
+		Material.accent: "yellow"
+		Material.primary: "white"
+		//anchors.centerIn: parent
+		anchors.leftMargin: 18
 		anchors.rightMargin: 20
-		spacing: 0
+		anchors.topMargin: parent.height/3
+		anchors.top: parent.top
+		anchors.left: image.right
+		anchors.right: parent.right
 
-		DefaultLabel {
-			Layout.fillWidth: true
-			Layout.minimumWidth: 0
-			text: Logic.correctorTextFromType(datagram.type);
-			font.bold: true;
-			font.pixelSize: 20
-		}
-
-		Slider {
-			Material.accent: Qt.lighter(base.color, 8)
-			Layout.fillWidth: true
-			Layout.minimumWidth: 0
-			from: base.min
-			to: base.max
-			stepSize: 1
-			Component.onCompleted: value = base.value
-			onValueChanged: base.value = value
-		}
+		from: base.min
+		to: base.max
+		stepSize: 1
+		Component.onCompleted: value = base.value
+		onValueChanged: base.value = value
+		opacity: (factorOpacity < minOpacityFactor) ? minOpacityFactor : factorOpacity
+		Behavior on opacity { NumberAnimation{} }
 	}
 }

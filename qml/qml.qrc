@@ -18,5 +18,6 @@
         <file>delegates/CorrectorDelegate.qml</file>
         <file>../js/functions.js</file>
         <file>ApplicationHeader.qml</file>
+        <file>components/PrettyLabel.qml</file>
     </qresource>
 </RCC>

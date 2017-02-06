@@ -10,63 +10,66 @@ BaseDelegate {
 	property bool iconRotation : false
 	property string iconSource
 
-	RowLayout {
-		anchors.fill: delegate
-		anchors.leftMargin: 20
-		anchors.rightMargin: 20
-		spacing: 10
+	readonly property int nameSize : 24
+	readonly property int typeSize : 12
+	readonly property int detailSize : 10
+	readonly property int leftMarginForIcon : 20
+	readonly property int leftMarginForLabels : 30
 
-		Item {
-			height: parent.height / 1.1
-			width: parent.height / 1.1
-			opacity: iconOpacity
-			Image {
-				id: lcd
-				anchors.fill: parent
-				fillMode: Image.PreserveAspectFit
-				source: iconSource
-				smooth: true
-				cache: true
+	Image {
+		id: image
+		anchors.leftMargin: leftMarginForIcon
+		anchors.left: parent.left
+		anchors.top: parent.top
+		height: parent.height
+		width: parent.height
 
-				RotationAnimator {
-					target: lcd;
-					from: 0;
-					to: 360;
-					loops: Animation.Infinite
-					duration: 10000
-					running: iconRotation
-				}
+		opacity: iconOpacity
+		fillMode: Image.PreserveAspectFit
+		source: iconSource
+		smooth: true
+		cache: true
 
-			}
-
-			Behavior on opacity { NumberAnimation { duration: 200 } }
+		RotationAnimator {
+			target: image;
+			from: 0;
+			to: 360;
+			loops: Animation.Infinite
+			duration: 10000
+			running: iconRotation
 		}
+	}
 
-		ColumnLayout {
-			DefaultLabel {
-				Layout.fillWidth: true
-				Layout.minimumWidth: 0
-				text: datagram.name;
-				font.bold: true;
-				font.pixelSize: 22
-			}
+	DefaultLabel {
+		id: name
+		anchors.leftMargin: leftMarginForLabels
+		anchors.topMargin: 18
+		anchors.left: image.right
+		anchors.top: parent.top
+		text: datagram.name;
+		font.bold: true;
+		font.pixelSize: nameSize
+		color: firstLabelColor
+	}
 
-			DefaultLabel {
-				Layout.fillWidth: true
-				Layout.minimumWidth: 0
-				text: datagram.type
-				color: secondLabelColor
-				font.pixelSize: 16
-			}
+	DefaultLabel {
+		id: type
+		anchors.leftMargin: leftMarginForLabels
+		anchors.top: name.bottom
+		anchors.left: image.right
+		text: datagram.type;
+		font.bold: true;
+		font.pixelSize: typeSize
+		color: secondLabelColor
+	}
 
-			DefaultLabel {
-				Layout.fillWidth: true
-				Layout.minimumWidth: 0
-				text: "";
-				font.italic:  true;
-				color: thirdLabelColor
-				font.pixelSize: 10
-			}
-		}
+	DefaultLabel {
+		anchors.leftMargin: leftMarginForLabels
+		anchors.top: type.bottom
+		anchors.left: image.right
+		text: datagram.name;
+		font.bold: true;
+		font.pixelSize: detailSize
+		color: thirdLabelColor
 	}
 }

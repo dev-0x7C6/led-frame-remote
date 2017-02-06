@@ -17,7 +17,6 @@ Item {
 			id: icon
 			width: 224
 			height: 224
-			borderColor: "white"
 			anchors.horizontalCenter: parent.horizontalCenter
 
 			borderRadius: 4
@@ -30,8 +29,8 @@ Item {
 
 			ColumnLayout {
 				anchors.fill: parent
-				anchors.leftMargin: 20
-				anchors.rightMargin: 20
+				anchors.leftMargin: 40
+				anchors.rightMargin: 40
 
 				Slider {
 					Layout.fillWidth: true
@@ -44,7 +43,7 @@ Item {
 
 					onValueChanged: {
 						if (pressed) configuration.globalLValue = value
-						icon.color.a = value;
+						icon.color.a = value / 255.0;
 					}
 				}
 
@@ -58,7 +57,7 @@ Item {
 					Material.accent: "tomato"
 					onValueChanged: {
 						if (pressed) configuration.globalRValue = value
-						icon.color.r = value;
+						icon.color.r = value / 255.0;
 					}
 				}
 
@@ -72,7 +71,7 @@ Item {
 					Material.accent: "lightGreen"
 					onValueChanged: {
 						if (pressed) configuration.globalGValue = value
-						icon.color.g = value;
+						icon.color.g = value / 255.0;
 					}
 				}
 
@@ -86,7 +85,7 @@ Item {
 					Material.accent: "lightBlue"
 					onValueChanged: {
 						if (pressed) configuration.globalBValue = value
-						icon.color.b = value;
+						icon.color.b = value / 255.0;
 					}
 				}
 			}

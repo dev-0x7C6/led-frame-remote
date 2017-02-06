@@ -30,5 +30,8 @@
         <file>correctors/red.svg</file>
         <file>correctors/flickr.png</file>
         <file>correctors/flickr.svg</file>
+        <file>devices/bar.png</file>
+        <file>splash/desktop.png</file>
+        <file>splash/desktop.svg</file>
     </qresource>
 </RCC>

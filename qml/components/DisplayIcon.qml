@@ -2,21 +2,17 @@ import QtQuick 2.8
 import QtGraphicalEffects 1.0
 
 Item {
-	width: 256
-	height: 256
-
-	property string source: "qrc:/lcd.png"
 	property color color: "orange"
-	property color borderColor: "gray"
 	property double borderRadius: 4
 	property double ambientRadius: 16
 
 	RectangularGlow {
 		id: effect
-		x: lcd.x
-		y: lcd.y + lcd.paintedHeight * 0.1
-		width: lcd.paintedWidth
-		height: lcd.paintedHeight * 0.86
+		anchors.topMargin: 52
+		anchors.bottomMargin: 64
+		anchors.leftMargin: 32
+		anchors.rightMargin: 32
+		anchors.fill: parent
 		glowRadius: ambientRadius
 		spread: 0.1
 		color: parent.color
@@ -24,23 +20,12 @@ Item {
 		cached: false
 	}
 
-	Glow {
-		id: glow
-		anchors.fill: lcd
-		radius: parent.borderRadius
-		samples: parent.borderRadius * 2
-		spread: 0.1
-		color: parent.borderColor
-		source: lcd
-	}
-
 	Image {
-		id: lcd
+		id: image
 		anchors.fill: parent
 		fillMode: Image.PreserveAspectFit
-		source: parent.source
+		source: "qrc:/splash/desktop.png"
 		smooth: true
 		cache: false
 	}
-
 }

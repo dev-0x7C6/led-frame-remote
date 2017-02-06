@@ -7,47 +7,55 @@ import "../components"
 BaseDelegate {
 	id: delegate
 
-	RowLayout {
-		id: rowLayout
-		anchors.fill: parent
-		anchors.leftMargin: 10
-		anchors.rightMargin: 10
-		spacing: 10
+	readonly property int nameSize : 24
+	readonly property int typeSize : 12
+	readonly property int detailSize : 10
+	readonly property int leftMarginForIcon : 20
+	readonly property int leftMarginForLabels : 30
 
-		Image {
-			source: "qrc:/devices/usb.png"
-			Layout.fillHeight: true
-			fillMode: Image.PreserveAspectFit
-		}
+	Image {
+		id: image
+		anchors.leftMargin: leftMarginForIcon
+		anchors.left: parent.left
+		anchors.top: parent.top
+		height: parent.height
+		width: parent.height
+		fillMode: Image.PreserveAspectFit
+		source: "qrc:/devices/usb.png"
+		smooth: true
+		cache: true
+	}
 
-		Item {
-			Layout.fillWidth: true
-			Layout.fillHeight: true
+	DefaultLabel {
+		id: name
+		anchors.leftMargin: leftMarginForLabels
+		anchors.topMargin: 18
+		anchors.left: image.right
+		anchors.top: parent.top
+		text: device;
+		font.bold: true;
+		font.pixelSize: nameSize
+		color: firstLabelColor
+	}
 
-			ColumnLayout {
-				anchors.fill: parent
-				anchors.topMargin: 24
-				anchors.bottomMargin: 24
+	DefaultLabel {
+		id: type
+		anchors.leftMargin: leftMarginForLabels
+		anchors.top: name.bottom
+		anchors.left: image.right
+		text: "computer: " + computer;
+		font.bold: true;
+		font.pixelSize: typeSize
+		color: secondLabelColor
+	}
 
-				DefaultLabel {
-					text: device;
-					font.bold: true;
-					font.pixelSize: 22
-				}
-
-				DefaultLabel {
-					text: "computer: " + computer;
-					color: secondLabelColor
-					font.pixelSize: 16
-				}
-
-				DefaultLabel {
-					text: "hostname: " + host + ":" + port;
-					font.italic:  true;
-					color: thirdLabelColor
-					font.pixelSize: 10
-				}
-			}
-		}
+	DefaultLabel {
+		anchors.leftMargin: leftMarginForLabels
+		anchors.top: type.bottom
+		anchors.left: image.right
+		text: "hostname: " + host + ":" + port;
+		font.bold: true;
+		font.pixelSize: detailSize
+		color: thirdLabelColor
 	}
 }
