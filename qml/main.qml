@@ -148,6 +148,10 @@ ApplicationWindow {
 		id: applicationHeader
 	}
 
+	ApplicationDrawer {
+
+	}
+
 	StackView {
 		id: mainStackView
 		anchors.fill: parent

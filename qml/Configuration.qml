@@ -15,6 +15,7 @@ Item {
 	property int globalBId: -1
 
 	property bool disableUpdate : false
+	property string selectedEmitter
 
 	onGlobalLValueChanged: changeCorrector(globalLId, globalLValue, true);
 	onGlobalRValueChanged: changeCorrector(globalRId, globalRValue, true);

@@ -53,6 +53,7 @@ Item {
 					anchors.fill: parent
 					onClicked: {
 						emitterListView.currentIndex = index
+						configuration.selectedEmitter = JSON.stringify(datagram)
 						configuration.emitter = emitterModel.get(index).datagram.id
 					}
 				}
@@ -128,9 +129,8 @@ Item {
 				value: datagram.factor
 				min: datagram.min
 				max: datagram.max
-				height: configuration.device === datagram.owner ? 100 : 0
+				height: configuration.device === datagram.owner ? 80 : 0
 				width: parent.width
-				implicitHeight: 80
 				iconSource: correctorIconFromType()
 				iconRotation: true
 				color: bg
