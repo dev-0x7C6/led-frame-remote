@@ -5,11 +5,22 @@ import "delegates/"
 
 Drawer {
 	id: drawer
-	width: parent.width * 0.66
+	width: parent.width * 0.85
 	height: parent.height
 
-	EmitterDelegate {
+	ColorGrid {
+		anchors.top: title.bottom
+		anchors.left: title.left
+		anchors.right: parent.right
+		anchors.bottom: parent.bottom
 
+		onColorChanged: {
+			configuration.setEmitterData(color);
+		}
+	}
+
+	EmitterDelegate {
+		id: title
 		width: parent.width
 		height: 80
 	}

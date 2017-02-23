@@ -5,10 +5,10 @@ Item {
 	property string name: "";
 	property int emitter: -1;
 
-	property double globalLValue: 0
-	property double globalRValue: 0
-	property double globalGValue: 0
-	property double globalBValue: 0
+	property int globalLValue: 0
+	property int globalRValue: 0
+	property int globalGValue: 0
+	property int globalBValue: 0
 	property int globalLId: -1
 	property int globalRId: -1
 	property int globalGId: -1
@@ -69,6 +69,17 @@ Item {
 		precommit(json)
 	}
 
+	function setEmitterData(data) {
+		var json = {
+			'message' : 'command',
+			'version' : '1',
+			'event' : 'set_emitter_data',
+			'emitter' : emitter,
+			'data' : data,
+		}
+		precommit(json)
+	}
+
 	function changeCorrector(id, factor, enabled) {
 		var json = {
 			'message' : 'command',
@@ -99,5 +110,5 @@ Item {
 	function receiverDetached(arg) {}
 	function receiverModified(arg) {}
 
-	function commit(command) {}
+	function commit(command) { console.log("empty command?") }
 }

@@ -20,5 +20,6 @@
         <file>ApplicationHeader.qml</file>
         <file>components/PrettyLabel.qml</file>
         <file>ApplicationDrawer.qml</file>
+        <file>ColorGrid.qml</file>
     </qresource>
 </RCC>

@@ -88,7 +88,7 @@ ApplicationWindow {
 			}
 		}
 
-		function correctorMoemitterModeldified(arg) {
+		function correctorModified(arg) {
 			for (var i = 0; i < correctorModel.count; ++i)
 				if (correctorModel.get(i).datagram.id  === arg.datagram.id)
 					correctorModel.set(i, arg)
