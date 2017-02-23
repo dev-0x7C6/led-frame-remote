@@ -10,9 +10,10 @@ import ".."
 
 BaseDelegate {
 	id: base
-	property double min: 0
-	property double max: 1
-	property double value: 0.5
+	property int min: 0
+	property int max: 1
+	property int value: 0
+	property int type : -1;
 	property double iconOpacity : 1.0
 	property bool iconRotation : false
 	property string iconSource

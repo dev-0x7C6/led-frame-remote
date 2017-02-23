@@ -92,6 +92,14 @@ Item {
 				}
 			}
 			ScrollIndicator.vertical: ScrollIndicator { }
+
+			Component.onCompleted: {
+				correctorModel.updateItem.connect(select)
+			}
+
+			function select(arg) {
+				console.log("test!")
+			}
 		}
 
 		DeviceCorrectorPage {

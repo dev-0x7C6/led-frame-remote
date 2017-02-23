@@ -52,7 +52,7 @@ ApplicationWindow {
 
 	ListModel { id: clientModel }
 	ListModel { id: emitterModel; signal selectEmitter(int index); }
-	ListModel { id: correctorModel; }
+	ListModel { id: correctorModel; signal updateItem(int index); }
 
 	Configuration {
 		id: configuration
