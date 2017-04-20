@@ -3,6 +3,7 @@ import QtQuick.Layouts 1.3
 import QtGraphicalEffects 1.0
 
 import "../components"
+import "../js/functions.js" as Logic
 
 BaseDelegate {
 	id: base

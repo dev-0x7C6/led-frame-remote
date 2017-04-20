@@ -1,10 +1,12 @@
 
 function emitterIconFromType(arg) {
+	console.log(arg)
 	switch (arg) {
 		case "animation": return "qrc:/emitters/animation.png"
 		case "display": return "qrc:/emitters/display.png"
 		case "image": return "qrc:/emitters/landscape.png"
 		case "color": return "qrc:/emitters/color.png"
+		case "off": return "qrc:/emitters/off.png"
 	}
 }
 
@@ -17,7 +19,6 @@ function correctorTextFromType(arg) {
 		case "green_channel": return "Green"
 		case "blue_channel": return "Blue"
 		case "flickr_effect": return "Flickr effect"
-
 	}
 
 	return arg;
