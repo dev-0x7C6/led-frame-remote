@@ -1,6 +1,5 @@
 
 function emitterIconFromType(arg) {
-	console.log(arg)
 	switch (arg) {
 		case "animation": return "qrc:/emitters/animation.png"
 		case "display": return "qrc:/emitters/display.png"

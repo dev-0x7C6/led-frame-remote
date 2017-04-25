@@ -81,7 +81,7 @@ Item {
 				max: datagram.max
 				height: configuration.device === datagram.owner ? 80 : 0
 				width: parent.width
-				iconSource: correctorIconFromType()
+//				iconSource: correctorIconFromType()
 				iconRotation: true
 				color: bg
 				opacity: (value > datagram.min) ? 1.0 : 0.3

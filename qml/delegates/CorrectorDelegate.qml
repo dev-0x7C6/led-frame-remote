@@ -25,9 +25,7 @@ BaseDelegate {
 	readonly property double factorOpacity: parent.opacity * 0.75 * factor
 	readonly property double minOpacityFactor : 0.1
 
-	onFactorChanged: {
-		console.log(factor)
-	}
+	onFactorChanged: {}
 
 	Image {
 		id: image

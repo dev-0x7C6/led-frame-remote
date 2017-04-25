@@ -13,6 +13,7 @@ Item {
 	property int globalRId: -1
 	property int globalGId: -1
 	property int globalBId: -1
+	readonly property bool debugMode : false;
 
 	property bool disableUpdate : false
 	property string selectedEmitter
@@ -26,7 +27,9 @@ Item {
 	function fetch(arg) {
 		var json = JSON.parse(arg)
 
-		console.log(JSON.stringify(json))
+		if (debugMode === true)
+			console.log(JSON.stringify(json))
+
 		disableUpdate = true
 
 		if (json.message === "notification") {
