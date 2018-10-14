@@ -23,4 +23,4 @@ private:
 signals:
 	void deviceDetected(const QVariant &arg);
 };
-}
+} // namespace Network

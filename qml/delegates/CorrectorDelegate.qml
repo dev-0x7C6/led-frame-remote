@@ -1,8 +1,7 @@
-import QtQuick 2.8
+import QtQuick 2.11
 import QtGraphicalEffects 1.0
-import QtQuick.Controls 2.1
-import QtQuick.Controls.Material 2.1
-import QtQuick.Layouts 1.3
+import QtQuick.Controls 2.4
+import QtQuick.Controls.Material 2.4
 
 import "../js/functions.js" as Logic
 import "../components"
@@ -10,9 +9,9 @@ import ".."
 
 BaseDelegate {
 	id: base
-	property int min: 0
-	property int max: 1
-	property int value: 0
+	property int min: datagram.min
+	property int max: datagram.max
+	property int value: datagram.factor
 	property int type : -1;
 	property double iconOpacity : 1.0
 	property bool iconRotation : false
@@ -25,7 +24,13 @@ BaseDelegate {
 	readonly property double factorOpacity: parent.opacity * 0.75 * factor
 	readonly property double minOpacityFactor : 0.1
 
-	onFactorChanged: {}
+	onValueChanged: {
+		console.log("value changed")
+	}
+
+	onFactorChanged: {
+		console.log("changed");
+	}
 
 	Image {
 		id: image

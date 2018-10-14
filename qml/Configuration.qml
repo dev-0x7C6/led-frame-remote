@@ -1,4 +1,4 @@
-import QtQuick 2.8
+import QtQuick 2.11
 
 Item {
 	property int device: -1;

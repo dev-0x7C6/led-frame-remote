@@ -1,8 +1,6 @@
-import QtQuick 2.8
-import QtQuick.Controls 2.1
-import QtQuick.Controls.Material 2.1
-import QtQuick.Layouts 1.3
-
+import QtQuick 2.11
+import QtQuick.Controls 2.4
+import QtQuick.Controls.Material 2.4
 
 import "emitters"
 import "delegates"
@@ -76,12 +74,11 @@ Item {
 			currentIndex: -1
 
 			delegate: CorrectorDelegate {
-				value: datagram.factor
-				min: datagram.min
-				max: datagram.max
+				//property int value: datagram.factor
+				//min: datagram.min
+				//max: datagram.max
 				height: configuration.device === datagram.owner ? 80 : 0
 				width: parent.width
-//				iconSource: correctorIconFromType()
 				iconRotation: true
 				color: bg
 				opacity: (value > datagram.min) ? 1.0 : 0.3

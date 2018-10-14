@@ -1,5 +1,5 @@
-import QtQuick 2.8
-import QtQuick.Controls 2.1
+import QtQuick 2.11
+import QtQuick.Controls 2.4
 
 import "delegates/"
 
@@ -19,9 +19,5 @@ Drawer {
 		}
 	}
 
-	EmitterDelegate {
-		id: title
-		width: parent.width
-		height: 80
-	}
+
 }

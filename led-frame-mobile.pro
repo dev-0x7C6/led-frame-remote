@@ -1,7 +1,7 @@
 TEMPLATE = app
 TARGET = LedFrame
 
-QT += quick quickcontrols2 websockets widgets
+QT += quick websockets widgets
 
 CONFIG += c++14
 
@@ -11,24 +11,19 @@ SOURCES += main.cpp \
 RESOURCES += qml/qml.qrc \
     resources/resources.qrc
 
-
-# Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH =
-
-# Default rules for deployment.
 include(deployment.pri)
 
 HEADERS += \
     core/networking/broadcast-monitor.h
 
 DISTFILES += \
-    android/AndroidManifest.xml \
-    android/gradle/wrapper/gradle-wrapper.jar \
-    android/gradlew \
-    android/res/values/libs.xml \
-    android/build.gradle \
-    android/gradle/wrapper/gradle-wrapper.properties \
-    android/gradlew.bat \
-    js/functions.js
+	android/AndroidManifest.xml \
+	android/gradle/wrapper/gradle-wrapper.jar \
+	android/gradlew \
+	android/res/values/libs.xml \
+	android/build.gradle \
+	android/gradle/wrapper/gradle-wrapper.properties \
+	android/gradlew.bat \
+	js/functions.js
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android

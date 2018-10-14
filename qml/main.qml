@@ -1,7 +1,6 @@
-import QtQuick 2.8
-import QtQuick.Controls 2.1
-import QtQuick.Controls.Material 2.1
-import QtQuick.Layouts 1.3
+import QtQuick 2.11
+import QtQuick.Controls 2.4
+import QtQuick.Controls.Material 2.4
 import QtWebSockets 1.1
 
 import "components"
@@ -47,12 +46,13 @@ ApplicationWindow {
 			var address = "ws://"
 			address = address.concat(host, ":", port);
 			webSocket.url = address
+			webSocket.active = true
 		}
 	}
 
 	ListModel { id: clientModel }
 	ListModel { id: emitterModel; signal selectEmitter(int index); }
-	ListModel { id: correctorModel; signal updateItem(int index); }
+	ListModel { id: correctorModel; }
 
 	Configuration {
 		id: configuration
@@ -90,8 +90,23 @@ ApplicationWindow {
 
 		function correctorModified(arg) {
 			for (var i = 0; i < correctorModel.count; ++i)
-				if (correctorModel.get(i).datagram.id  === arg.datagram.id)
-					correctorModel.set(i, arg)
+			{
+				if (correctorModel.get(i).datagram.id === arg.datagram.id) {
+					console.log("there")
+					console.log(JSON.stringify(arg))
+					console.log("end")
+					correctorModel.set(i, JSON.parse(JSON.stringify(arg)))
+
+					correctorModel.get(i).value = arg.datagram.factor;
+					console.log(correctorModel.get(i).datagram.factor)
+
+//					correctorModel.set(i, arg)
+//					correctorModel.set(i, "test")
+					console.log("there")
+					console.log(JSON.stringify(arg))
+					console.log("end")
+				}
+			}
 
 			if (arg.datagram.owner !== -1)
 				return;
@@ -168,6 +183,7 @@ ApplicationWindow {
 			function onClientSelected(host, port, id) {
 				configuration.device = id
 				webSocket.connect(host, port)
+				console.log("there")
 			}
 
 		}
