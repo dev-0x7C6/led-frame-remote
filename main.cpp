@@ -1,18 +1,18 @@
 #include <iostream>
 
 #include <QApplication>
-#include <QQmlApplicationEngine>
-#include <QQmlComponent>
-#include <QQmlContext>
+#include <QtQml/QQmlApplicationEngine>
+#include <QtQml/QQmlComponent>
+#include <QtQml/QQmlContext>
 
 #include <core/networking/broadcast-monitor.h>
 
 int main(int argc, char *argv[]) {
 	QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 	QGuiApplication application(argc, argv);
-	application.setApplicationName("LedFrameMobile");
-	application.setOrganizationName("LedFrameMobile");
-	application.setAttribute(Qt::AA_EnableHighDpiScaling);
+	QGuiApplication::setApplicationName("LedFrameMobile");
+	QGuiApplication::setOrganizationName("LedFrameMobile");
+	QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
 	QQmlApplicationEngine engine;
 	Network::BroadcastMonitor monitor;
@@ -25,5 +25,5 @@ int main(int argc, char *argv[]) {
 		return 1;
 	}
 
-	return application.exec();
+	return QGuiApplication::exec();
 }

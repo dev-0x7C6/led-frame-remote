@@ -11,7 +11,6 @@ class BroadcastMonitor final : public QObject {
 	Q_OBJECT
 public:
 	explicit BroadcastMonitor(QObject *parent = nullptr);
-	virtual ~BroadcastMonitor() = default;
 
 protected:
 	void readPendingDatagrams();

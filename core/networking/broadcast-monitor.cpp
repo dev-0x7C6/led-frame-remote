@@ -19,6 +19,9 @@ void BroadcastMonitor::readPendingDatagrams() {
 		m_socket->readDatagram(datagram.data(), datagram.size());
 		auto device = QJsonDocument::fromJson(datagram).toVariant();
 
+		if (!device.isValid())
+			continue;
+
 		if (!m_devices.contains(device)) {
 			emit deviceDetected(device);
 			m_devices.append(device);
