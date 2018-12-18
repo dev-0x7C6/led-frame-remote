@@ -2,7 +2,6 @@ import QtQuick 2.11
 import QtQuick.Controls 2.4
 import QtQuick.Controls.Material 2.4
 
-import "emitters"
 import "delegates"
 import "../js/functions.js" as Logic
 
@@ -13,6 +12,7 @@ Item {
 		id: tabBar
 		width: parent.width
 		currentIndex: view.currentIndex
+		font.pixelSize: 12
 
 		TabButton {
 			text: qsTr("Emitters")
@@ -74,9 +74,6 @@ Item {
 			currentIndex: -1
 
 			delegate: CorrectorDelegate {
-				//property int value: datagram.factor
-				//min: datagram.min
-				//max: datagram.max
 				height: configuration.device === datagram.owner ? 80 : 0
 				width: parent.width
 				iconRotation: true
@@ -91,11 +88,10 @@ Item {
 			ScrollIndicator.vertical: ScrollIndicator { }
 
 			Component.onCompleted: {
-				correctorModel.updateItem.connect(select)
+				//correctorModel.updateItem.connect(select)
 			}
 
 			function select(arg) {
-				console.log("test!")
 			}
 		}
 

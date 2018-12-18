@@ -5,13 +5,14 @@ Item {
 	property color color: "orange"
 	property double borderRadius: 4
 	property double ambientRadius: 16
+	readonly property double marginSize: 32
 
 	RectangularGlow {
 		id: effect
-		anchors.topMargin: 52
-		anchors.bottomMargin: 64
-		anchors.leftMargin: 32
-		anchors.rightMargin: 32
+		anchors.topMargin: marginSize
+		anchors.bottomMargin: marginSize
+		anchors.leftMargin: marginSize
+		anchors.rightMargin: marginSize
 		anchors.fill: parent
 		glowRadius: ambientRadius
 		spread: 0.1

@@ -92,19 +92,8 @@ ApplicationWindow {
 			for (var i = 0; i < correctorModel.count; ++i)
 			{
 				if (correctorModel.get(i).datagram.id === arg.datagram.id) {
-					console.log("there")
-					console.log(JSON.stringify(arg))
-					console.log("end")
 					correctorModel.set(i, JSON.parse(JSON.stringify(arg)))
-
 					correctorModel.get(i).value = arg.datagram.factor;
-					console.log(correctorModel.get(i).datagram.factor)
-
-//					correctorModel.set(i, arg)
-//					correctorModel.set(i, "test")
-					console.log("there")
-					console.log(JSON.stringify(arg))
-					console.log("end")
 				}
 			}
 
@@ -183,7 +172,6 @@ ApplicationWindow {
 			function onClientSelected(host, port, id) {
 				configuration.device = id
 				webSocket.connect(host, port)
-				console.log("there")
 			}
 
 		}

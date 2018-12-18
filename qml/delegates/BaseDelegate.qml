@@ -10,4 +10,8 @@ DefaultRectangle  {
 	readonly property color firstLabelColor: "orange"
 	readonly property color secondLabelColor: "#808080"
 	readonly property color thirdLabelColor: "#606060"
+
+	readonly property double largeFont: 18
+	readonly property double mediumFont: 12
+	readonly property double smallFont: 10
 }

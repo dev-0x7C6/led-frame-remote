@@ -1,7 +1,6 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.4
 
-
 Label {
 	id: base
 	color: "orange"
@@ -10,4 +9,3 @@ Label {
 	fontSizeMode: Text.Fit
 	elide: Text.ElideRight
 }
-

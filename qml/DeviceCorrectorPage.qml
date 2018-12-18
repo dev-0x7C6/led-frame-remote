@@ -15,10 +15,9 @@ Item {
 
 		DisplayIcon {
 			id: icon
-			width: 224
-			height: 224
-			anchors.horizontalCenter: parent.horizontalCenter
-
+			width: 200
+			height: 200
+			Layout.alignment: Qt.AlignCenter
 			borderRadius: 4
 			ambientRadius: 32
 		}
@@ -29,8 +28,8 @@ Item {
 
 			ColumnLayout {
 				anchors.fill: parent
-				anchors.leftMargin: 40
-				anchors.rightMargin: 40
+				anchors.leftMargin: 30
+				anchors.rightMargin: 30
 
 				Slider {
 					Layout.fillWidth: true

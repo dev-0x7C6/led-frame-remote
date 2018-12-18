@@ -17,20 +17,11 @@ BaseDelegate {
 	property bool iconRotation : false
 	property string iconSource
 
-	readonly property int nameSize : 22
 	readonly property int leftMarginForIcon : 20
 	readonly property int leftMarginForLabels : 25
 	readonly property double factor : (slider.value / slider.to) + 0.3
 	readonly property double factorOpacity: parent.opacity * 0.75 * factor
 	readonly property double minOpacityFactor : 0.1
-
-	onValueChanged: {
-		console.log("value changed")
-	}
-
-	onFactorChanged: {
-		console.log("changed");
-	}
 
 	Image {
 		id: image
@@ -52,7 +43,7 @@ BaseDelegate {
 		anchors.top: parent.top
 		text: Logic.correctorTextFromType(datagram.type);
 		font.bold: true;
-		font.pixelSize: nameSize
+		font.pixelSize: largeFont
 		color: "orange"
 		opacity: parent.opacity
 	}
@@ -61,7 +52,6 @@ BaseDelegate {
 		id: slider
 		Material.accent: "yellow"
 		Material.primary: "white"
-		//anchors.centerIn: parent
 		anchors.leftMargin: 18
 		anchors.rightMargin: 20
 		anchors.topMargin: parent.height/3

@@ -1,60 +1,56 @@
 import QtQuick 2.11
 import QtQuick.Controls 2.4
+import QtQuick.Layouts 1.11
 
 import "../components"
 
 BaseDelegate {
-	id: delegate
+	RowLayout {
+		anchors.fill: parent
 
-	readonly property int nameSize : 24
-	readonly property int typeSize : 12
-	readonly property int detailSize : 10
-	readonly property int leftMarginForIcon : 20
-	readonly property int leftMarginForLabels : 30
+		Image {
+			Layout.fillHeight: true
+			fillMode: Image.PreserveAspectFit
+			source: "qrc:/devices/usb.png"
+		}
 
-	Image {
-		id: image
-		anchors.leftMargin: leftMarginForIcon
-		anchors.left: parent.left
-		anchors.top: parent.top
-		height: parent.height
-		width: parent.height
-		fillMode: Image.PreserveAspectFit
-		source: "qrc:/devices/usb.png"
-		smooth: true
-		cache: true
-	}
+		ColumnLayout {
+			spacing: 0
+			Layout.fillWidth: true
+			Layout.fillHeight: true
 
-	DefaultLabel {
-		id: name
-		anchors.leftMargin: leftMarginForLabels
-		anchors.topMargin: 18
-		anchors.left: image.right
-		anchors.top: parent.top
-		text: device;
-		font.bold: true;
-		font.pixelSize: nameSize
-		color: firstLabelColor
-	}
+			Item {
+				Layout.fillWidth: true
+				Layout.fillHeight: true
+			}
 
-	DefaultLabel {
-		id: type
-		anchors.leftMargin: leftMarginForLabels
-		anchors.top: name.bottom
-		anchors.left: image.right
-		text: "computer: " + computer;
-		font.bold: true;
-		font.pixelSize: typeSize
-		color: secondLabelColor
-	}
+			DefaultLabel {
+				id: name
+				text: device;
+				font.bold: true;
+				font.pixelSize: largeFont
+				color: firstLabelColor
+			}
 
-	DefaultLabel {
-		anchors.leftMargin: leftMarginForLabels
-		anchors.top: type.bottom
-		anchors.left: image.right
-		text: "hostname: " + host + ":" + port;
-		font.bold: true;
-		font.pixelSize: detailSize
-		color: thirdLabelColor
+			DefaultLabel {
+				id: type
+				text: "computer: " + computer;
+				font.bold: true;
+				font.pixelSize: mediumFont
+				color: secondLabelColor
+			}
+
+			DefaultLabel {
+				text: "hostname: " + host + ":" + port;
+				font.bold: true;
+				font.pixelSize: smallFont
+				color: thirdLabelColor
+			}
+
+			Item {
+				Layout.fillWidth: true
+				Layout.fillHeight: true
+			}
+		}
 	}
 }
