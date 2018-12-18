@@ -1,1 +1,5 @@
-*.pro.user
+*.pro.user*
+*.txt.user*
+android/gradle.properties
+android/local.properties
+*.*~
