@@ -5,6 +5,7 @@ import QtQuick.Controls.Material 2.12
 
 import "../js/functions.js" as Logic
 import "../components"
+import "../components/labels"
 import ".."
 
 BaseDelegate {
@@ -35,16 +36,13 @@ BaseDelegate {
 		Behavior on opacity { NumberAnimation{} }
 	}
 
-	DefaultLabel {
+	LargeLabel {
 		id: name
 		anchors.leftMargin: leftMarginForLabels
 		anchors.topMargin: 18
 		anchors.left: image.right
 		anchors.top: parent.top
 		text: Logic.correctorTextFromType(datagram.type);
-		font.bold: true;
-		font.pixelSize: largeFont
-		color: "orange"
 		opacity: parent.opacity
 	}
 

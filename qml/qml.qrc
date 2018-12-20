@@ -11,8 +11,6 @@
         <file>delegates/EmitterDelegate.qml</file>
         <file>delegates/BaseDelegate.qml</file>
         <file>qtquickcontrols2.conf</file>
-        <file>components/DefaultLabel.qml</file>
-        <file>components/DefaultRectangle.qml</file>
         <file>components/MenuButton.qml</file>
         <file>delegates/CorrectorDelegate.qml</file>
         <file>../js/functions.js</file>
@@ -20,5 +18,11 @@
         <file>components/PrettyLabel.qml</file>
         <file>ApplicationDrawer.qml</file>
         <file>ColorGrid.qml</file>
+        <file>components/labels/LargeLabel.qml</file>
+        <file>components/labels/MediumLabel.qml</file>
+        <file>components/labels/SmallLabel.qml</file>
+        <file>components/labels/AbstractLabel.qml</file>
+        <file>components/layouts/LayoutExpander.qml</file>
+        <file>delegates/custom/Description.qml</file>
     </qresource>
 </RCC>

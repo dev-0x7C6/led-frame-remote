@@ -20,7 +20,7 @@ ApplicationWindow {
 		source: "qrc:/background/background-blured.png"
 		fillMode: Image.PreserveAspectFit
 		cache: true
-		opacity: 0.025
+		opacity: 0.05
 	}
 
 	WebSocket {

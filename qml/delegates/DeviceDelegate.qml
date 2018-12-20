@@ -3,54 +3,27 @@ import QtQuick.Controls 2.12
 import QtQuick.Layouts 1.12
 
 import "../components"
+import "../components/labels"
+import "../components/layouts"
+import "custom"
 
 BaseDelegate {
+	id: delegate
+	property string source
+
 	RowLayout {
 		anchors.fill: parent
 
 		Image {
 			Layout.fillHeight: true
 			fillMode: Image.PreserveAspectFit
-			source: "qrc:/devices/usb.png"
+			source: delegate.source
 		}
 
-		ColumnLayout {
-			spacing: 0
-			Layout.fillWidth: true
-			Layout.fillHeight: true
-
-			Item {
-				Layout.fillWidth: true
-				Layout.fillHeight: true
-			}
-
-			DefaultLabel {
-				id: name
-				text: device;
-				font.bold: true;
-				font.pixelSize: largeFont
-				color: firstLabelColor
-			}
-
-			DefaultLabel {
-				id: type
-				text: "computer: " + computer;
-				font.bold: true;
-				font.pixelSize: mediumFont
-				color: secondLabelColor
-			}
-
-			DefaultLabel {
-				text: "hostname: " + host + ":" + port;
-				font.bold: true;
-				font.pixelSize: smallFont
-				color: thirdLabelColor
-			}
-
-			Item {
-				Layout.fillWidth: true
-				Layout.fillHeight: true
-			}
+		Description {
+			name: device;
+			detail: "computer: " + computer;
+			description: "hostname: " + host + ":" + port;
 		}
 	}
 }

@@ -4,14 +4,11 @@ import QtGraphicalEffects 1.12
 
 import "../components"
 
-DefaultRectangle  {
-	id: item
+Rectangle {
+	property bool selected: false
+	readonly property color background_normal: "#ff101020"
+	readonly property color background_selected: "#ff202040"
+	color: selected ? background_selected: background_normal
 
-	readonly property color firstLabelColor: "orange"
-	readonly property color secondLabelColor: "#808080"
-	readonly property color thirdLabelColor: "#606060"
-
-	readonly property double largeFont: 18
-	readonly property double mediumFont: 12
-	readonly property double smallFont: 10
+	Behavior on color { ColorAnimation { duration: 500 } }
 }

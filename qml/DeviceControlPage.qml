@@ -44,7 +44,7 @@ Item {
 				implicitHeight: 100
 				iconSource: Logic.emitterIconFromType(datagram.type)
 				iconRotation: emitterListView.currentIndex === index && datagram.type === "animation"
-				color: emitterListView.currentIndex === index ? sg : bg
+				selected: emitterListView.currentIndex === index
 				opacity: emitterListView.currentIndex === index ? 1.0 : 0.4
 
 				MouseArea {
@@ -77,7 +77,6 @@ Item {
 				height: configuration.device === datagram.owner ? 80 : 0
 				width: parent.width
 				iconRotation: true
-				color: bg
 				opacity: (value > datagram.min) ? 1.0 : 0.3
 				Behavior on opacity { NumberAnimation{} }
 				visible: configuration.device === datagram.owner

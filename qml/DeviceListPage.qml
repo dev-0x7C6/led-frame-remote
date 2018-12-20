@@ -11,8 +11,9 @@ Item {
 		delegate: DeviceDelegate {
 			width: parent.width
 			height: 100
-			color: clientListView.currentIndex === index ? sg : bg
+			selected: clientListView.currentIndex === index
 			opacity: 1.0
+			source: "qrc:/devices/usb.png"
 
 			MouseArea {
 				anchors.fill: parent

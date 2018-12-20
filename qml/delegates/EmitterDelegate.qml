@@ -3,6 +3,9 @@ import QtGraphicalEffects 1.12
 import QtQuick.Layouts 1.12
 
 import "../components"
+import "../components/labels"
+import "../components/layouts"
+import "custom"
 import "../js/functions.js" as Logic
 
 BaseDelegate {
@@ -19,8 +22,6 @@ BaseDelegate {
 			Layout.fillHeight: true
 			fillMode: Image.PreserveAspectFit
 			source: iconSource
-			smooth: true
-			cache: true
 
 			RotationAnimator {
 				target: image;
@@ -32,38 +33,10 @@ BaseDelegate {
 			}
 		}
 
-		ColumnLayout {
-			spacing: 0
-			Layout.fillWidth: true
-			Layout.fillHeight: true
-
-			Item {
-				Layout.fillWidth: true
-				Layout.fillHeight: true
-			}
-
-			DefaultLabel {
-				text: datagram.name;
-				font.pixelSize: largeFont
-				color: firstLabelColor
-			}
-
-			DefaultLabel {
-				text: datagram.type;
-				font.pixelSize: mediumFont
-				color: secondLabelColor
-			}
-
-			DefaultLabel {
-				text: datagram.name;
-				font.pixelSize: smallFont
-				color: thirdLabelColor
-			}
-
-			Item {
-				Layout.fillWidth: true
-				Layout.fillHeight: true
-			}
+		Description {
+			name: datagram.name
+			detail: datagram.type
+			description: datagram.name
 		}
 	}
 }
