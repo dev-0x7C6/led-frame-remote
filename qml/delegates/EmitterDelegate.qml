@@ -1,6 +1,6 @@
-import QtQuick 2.11
-import QtGraphicalEffects 1.0
-import QtQuick.Layouts 1.11
+import QtQuick 2.12
+import QtGraphicalEffects 1.12
+import QtQuick.Layouts 1.12
 
 import "../components"
 import "../js/functions.js" as Logic

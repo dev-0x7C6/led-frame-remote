@@ -1,4 +1,4 @@
-import QtQuick 2.11
+import QtQuick 2.12
 
 Rectangle {
 	readonly property color bg: "#ff101020"
