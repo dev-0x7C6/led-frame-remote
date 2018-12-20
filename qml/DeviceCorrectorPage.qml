@@ -42,12 +42,13 @@ Item {
 
 					onValueChanged: {
 						if (pressed) configuration.globalLValue = value
-						icon.color.a = value / 255.0;
+						icon.color.a = position;
 					}
 				}
 
 				Slider {
 					id: rSlider
+					live: false
 					value: 1
 					from: 0
 					to: 255
@@ -56,12 +57,13 @@ Item {
 					Material.accent: "tomato"
 					onValueChanged: {
 						if (pressed) configuration.globalRValue = value
-						icon.color.r = value / 255.0;
+						icon.color.r = position;
 					}
 				}
 
 				Slider {
 					id: gSlider
+					live: false
 					value: 1
 					from: 0
 					to: 255
@@ -70,12 +72,13 @@ Item {
 					Material.accent: "lightGreen"
 					onValueChanged: {
 						if (pressed) configuration.globalGValue = value
-						icon.color.g = value / 255.0;
+						icon.color.g = position;
 					}
 				}
 
 				Slider {
 					id: bSlider
+					live: false
 					value: 1
 					from: 0
 					to: 255
@@ -84,7 +87,7 @@ Item {
 					Material.accent: "lightBlue"
 					onValueChanged: {
 						if (pressed) configuration.globalBValue = value
-						icon.color.b = value / 255.0;
+						icon.color.b = position;
 					}
 				}
 			}

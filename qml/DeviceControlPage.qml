@@ -1,6 +1,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 import QtQuick.Controls.Material 2.12
+import QtQuick.Layouts 1.12
 
 import "delegates"
 import "../js/functions.js" as Logic
@@ -8,94 +9,96 @@ import "../js/functions.js" as Logic
 Item {
 	id: canvas
 
-	TabBar {
-		id: tabBar
-		width: parent.width
-		currentIndex: view.currentIndex
-		font.pixelSize: 12
+	ColumnLayout {
+		anchors.fill: canvas
 
-		TabButton {
-			text: qsTr("Emitters")
+		TabBar {
+			id: tabBar
+			Layout.fillWidth: true
+
+			currentIndex: view.currentIndex
+			font.pixelSize: 12
+
+			TabButton {
+				text: qsTr("Emitters")
+			}
+			TabButton {
+				text: qsTr("Correctors")
+			}
+			TabButton {
+				text: qsTr("Output")
+			}
 		}
-		TabButton {
-			text: qsTr("Correctors")
-		}
-		TabButton {
-			text: qsTr("Output")
-		}
-	}
 
-	SwipeView {
-		id: view
-		width: parent.width
-		height: parent.height - tabBar.height
-		anchors.top: tabBar.bottom
-		currentIndex: tabBar.currentIndex
-		z: parent.z -1
+		SwipeView {
+			id: view
+			Layout.fillWidth: true
+			Layout.fillHeight: true
+			anchors.top: tabBar.bottom
+			currentIndex: tabBar.currentIndex
+			z: parent.z - 1
 
-		ListView {
-			id: emitterListView
-			model: emitterModel
-			currentIndex: -1
+			ListView {
+				id: emitterListView
+				model: emitterModel
+				currentIndex: -1
 
-			delegate: EmitterDelegate {
-				id: delegate
-				width: parent.width
-				implicitHeight: 100
-				iconSource: Logic.emitterIconFromType(datagram.type)
-				iconRotation: emitterListView.currentIndex === index && datagram.type === "animation"
-				selected: emitterListView.currentIndex === index
-				opacity: emitterListView.currentIndex === index ? 1.0 : 0.4
+				delegate: EmitterDelegate {
+					id: delegate
+					width: parent.width
+					implicitHeight: 120
+					iconSource: Logic.emitterIconFromType(datagram.type)
+					iconRotation: emitterListView.currentIndex === index && datagram.type === "animation"
+					selected: emitterListView.currentIndex === index
+					opacity: emitterListView.currentIndex === index ? 1.0 : 0.4
 
-				MouseArea {
-					anchors.fill: parent
-					onClicked: {
-						emitterListView.currentIndex = index
-						configuration.selectedEmitter = JSON.stringify(datagram)
-						configuration.emitter = emitterModel.get(index).datagram.id
+					MouseArea {
+						anchors.fill: parent
+						onClicked: {
+							emitterListView.currentIndex = index
+							configuration.selectedEmitter = JSON.stringify(datagram)
+							configuration.emitter = emitterModel.get(index).datagram.id
+						}
 					}
 				}
+
+				Component.onCompleted: {
+					emitterModel.selectEmitter.connect(select)
+				}
+
+				function select(arg) {
+					emitterListView.currentIndex = arg
+				}
+
+				ScrollIndicator.vertical: ScrollIndicator { }
 			}
 
-			Component.onCompleted: {
-				emitterModel.selectEmitter.connect(select)
-			}
+			ListView {
+				id: correctorListView
+				model: correctorModel
+				currentIndex: -1
 
-			function select(arg) {
-				emitterListView.currentIndex = arg
-			}
+				delegate: CorrectorDelegate {
+					height: configuration.device === datagram.owner ? 120 : 0
+					visible: configuration.device === datagram.owner
+					width: parent.width
+					onValueChanged: {
+						configuration.changeCorrector(datagram.id, value, value > datagram.min)
+					}
+				}
+				ScrollIndicator.vertical: ScrollIndicator { }
 
-			ScrollIndicator.vertical: ScrollIndicator { }
-		}
+				Component.onCompleted: {
+					//correctorModel.updateItem.connect(select)
+				}
 
-		ListView {
-			id: correctorListView
-			model: correctorModel
-			currentIndex: -1
-
-			delegate: CorrectorDelegate {
-				height: configuration.device === datagram.owner ? 80 : 0
-				width: parent.width
-				iconRotation: true
-				opacity: (value > datagram.min) ? 1.0 : 0.3
-				Behavior on opacity { NumberAnimation{} }
-				visible: configuration.device === datagram.owner
-				onValueChanged: {
-					configuration.changeCorrector(datagram.id, value, value > datagram.min)
+				function select(arg) {
 				}
 			}
-			ScrollIndicator.vertical: ScrollIndicator { }
 
-			Component.onCompleted: {
-				//correctorModel.updateItem.connect(select)
+			DeviceCorrectorPage {
+				id: correction
 			}
-
-			function select(arg) {
-			}
-		}
-
-		DeviceCorrectorPage {
-			id: correction
 		}
 	}
 }
