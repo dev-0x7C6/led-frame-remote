@@ -11,7 +11,6 @@
         <file>delegates/EmitterDelegate.qml</file>
         <file>delegates/BaseDelegate.qml</file>
         <file>qtquickcontrols2.conf</file>
-        <file>components/MenuButton.qml</file>
         <file>delegates/CorrectorDelegate.qml</file>
         <file>../js/functions.js</file>
         <file>ApplicationHeader.qml</file>
