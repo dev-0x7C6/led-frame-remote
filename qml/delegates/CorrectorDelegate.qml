@@ -37,7 +37,7 @@ BaseDelegate {
 			LayoutExpander {}
 
 			LargeLabel {
-				property string title: (selected) ? " (" + parseInt(slider.position * 100) + "%)" : " (no correction)"
+				property string title: (selected) ? " (" + parseInt(slider.position * 100) + "%)" : " (off)"
 				font.pixelSize: 14
 				opacity: base.selected ? 1.0 : 0.3
 				text: Logic.correctorTextFromType(type) + title;

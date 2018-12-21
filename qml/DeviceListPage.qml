@@ -8,6 +8,7 @@ Item {
 		id: clientListView
 		anchors.fill: parent
 		model: clientModel
+		clip: true
 		delegate: DeviceDelegate {
 			width: parent.width
 			height: 100

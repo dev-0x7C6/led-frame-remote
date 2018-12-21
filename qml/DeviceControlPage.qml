@@ -34,19 +34,18 @@ Item {
 			id: view
 			Layout.fillWidth: true
 			Layout.fillHeight: true
-			anchors.top: tabBar.bottom
 			currentIndex: tabBar.currentIndex
-			z: parent.z - 1
 
 			ListView {
 				id: emitterListView
 				model: emitterModel
 				currentIndex: -1
+				clip: true
 
 				delegate: EmitterDelegate {
 					id: delegate
 					width: parent.width
-					implicitHeight: 120
+					height: 120
 					iconSource: Logic.emitterIconFromType(datagram.type)
 					iconRotation: emitterListView.currentIndex === index && datagram.type === "animation"
 					selected: emitterListView.currentIndex === index
@@ -77,6 +76,7 @@ Item {
 				id: correctorListView
 				model: correctorModel
 				currentIndex: -1
+				clip: true
 
 				delegate: CorrectorDelegate {
 					height: configuration.device === datagram.owner ? 120 : 0

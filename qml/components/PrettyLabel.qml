@@ -1,33 +1,21 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
 
+import "../components/labels"
+
 Item {
-	property string text
-	property double min : 200
-	property double factor : 3
-	property int fontSize : 18
-	property bool fontBold : true
-
-	readonly property double widthFactor: label.contentWidth * factor
-
+	property alias text: title.text
+	property alias fontSize : title.font.pixelSize
 
 	Image {
 		source: "qrc:/devices/title.png"
-		anchors.centerIn: parent
-		height: parent.height
-		width: (parent.widthFactor > min) ? parent.widthFactor : min
+		anchors.fill: parent
 		fillMode: Image.Stretch
-		opacity: parent.opacity * 0.5
+		opacity: 0.25
 	}
 
-	Label {
-		id: label
+	LargeLabel {
+		id: title
 		anchors.centerIn: parent
-		fontSizeMode: Text.Fit
-		elide: Text.ElideRight
-		font.bold: fontBold
-		font.pointSize: fontSize
-		text: parent.text
-		verticalAlignment: Text.AlignVCenter
 	}
 }

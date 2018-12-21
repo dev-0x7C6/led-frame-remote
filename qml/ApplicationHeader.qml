@@ -4,19 +4,16 @@ import QtQuick.Controls.Material 2.12
 
 import "components/"
 
-Item {
+Rectangle {
+	color: "#101020"
 	width: parent.width
-	height: 60
+	height: 70
 
-	property string title: ""
-
-	Rectangle {
-		anchors.fill: parent
-		color: "#101020"
-	}
+	property alias title: title.text
 
 	PrettyLabel {
+		id: title
 		anchors.fill: parent
-		text: title
+		fontSize: 20
 	}
 }
