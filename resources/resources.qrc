@@ -34,5 +34,7 @@
         <file>splash/desktop.png</file>
         <file>splash/desktop.svg</file>
         <file>emitters/off.png</file>
+        <file>emitters/camera.png</file>
+        <file>emitters/camera.svg</file>
     </qresource>
 </RCC>

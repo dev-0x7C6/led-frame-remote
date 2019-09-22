@@ -5,6 +5,7 @@ function emitterIconFromType(arg) {
 		case "display": return "qrc:/emitters/display.png"
 		case "image": return "qrc:/emitters/landscape.png"
 		case "color": return "qrc:/emitters/color.png"
+		case "camera": return "qrc:/emitters/camera.png"
 		case "off": return "qrc:/emitters/off.png"
 	}
 }
