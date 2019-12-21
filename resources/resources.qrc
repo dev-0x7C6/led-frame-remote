@@ -36,5 +36,7 @@
         <file>emitters/off.png</file>
         <file>emitters/camera.png</file>
         <file>emitters/camera.svg</file>
+        <file>correctors/gamma.png</file>
+        <file>correctors/gamma.svg</file>
     </qresource>
 </RCC>

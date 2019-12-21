@@ -33,6 +33,7 @@ function correctorIconFromType(arg) {
 		case "blue_channel": return "qrc:/correctors/blue.png"
 		case "flickr_effect": return "qrc:/correctors/flickr.png"
 		case "backlight": return "qrc:/correctors/backlight.png"
+        case "gamma": return "qrc:/correctors/gamma.png"
 	}
 
 	return arg;

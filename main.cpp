@@ -8,11 +8,10 @@
 #include <core/networking/broadcast-monitor.h>
 
 int main(int argc, char *argv[]) {
-	QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+	QApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 	QGuiApplication application(argc, argv);
 	QGuiApplication::setApplicationName("LedFrameMobile");
 	QGuiApplication::setOrganizationName("LedFrameMobile");
-	QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
 	QQmlApplicationEngine engine;
 	Network::BroadcastMonitor monitor;
